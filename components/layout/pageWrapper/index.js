@@ -1,4 +1,4 @@
-import NavigationBar from '~/components/layout/NavigationBar'
+import NavigationBar from '~/components/layout/navigationBar'
 import Footer from '~/components/layout/footer'
 
 export function PageWrapper({ children }) {
