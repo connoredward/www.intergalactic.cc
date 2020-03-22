@@ -1,0 +1,25 @@
+.main {
+  height: 75vh;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  .content {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    >h1 {
+      color: white;
+      font-size: 65px;
+      font-family: 'Gotham';
+      font-weight: 600;
+    }
+  }
+  video {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);  
+  }
+}
