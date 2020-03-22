@@ -1,0 +1,61 @@
+.main {
+  position: absolute;
+  display: flex;
+  min-width: 100%;
+  overflow: hidden;
+  z-index: 98;
+  >img {
+    z-index: 999;
+    height: 50px;
+    margin: 0 10px;
+  }
+  button {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    z-index: 102;
+    transform: translateY(-50%) scale(.8);
+    background: transparent;
+    border: none;
+    span, span:before, span:after {
+      background-color: rgba(255,255,255,0.5);
+      color: rgba(255,255,255,0.5);
+    }
+    &:focus {
+      outline: none;
+    }
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  .menu_bar {
+    background: black;
+    color: white;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform: translateY(-100%);
+    transition-duration: .3s;
+    z-index: 101;
+    >ul {
+      position: absolute;
+      right: 100px;
+      display: flex;
+      list-style: none;
+      margin: 0;
+      li {
+        font-size: 12px;
+        margin: 0 20px;
+        &:hover {
+          cursor: pointer;
+          opacity: .5;
+        }
+      }
+    }
+    &.active {
+      transform: translateY(0%);
+    }
+  }
+}
