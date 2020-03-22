@@ -70,7 +70,7 @@ export function VideoCarousel () {
               <div className={styles['slide_wrapper']} key={index}>
                 <div className={styles['slide_content']}>
                   <h1>{title}</h1>
-                  <h1>{desc}</h1>
+                  <h2>{desc}</h2>
                 </div>
                 <div className={styles['video_container']}>
                   <video
