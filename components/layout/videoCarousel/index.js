@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 
 import classNames from 'classnames'
 
@@ -21,46 +21,52 @@ let videoArray = [
 export function VideoCarousel () {
   const [currentVideo, setCurrentVideo] = useState()
 
+  const videoArrayRefs = useRef(videoArray.map(() => React.createRef()))
+
   useEffect(() => {
     setCurrentVideo(0)
   }, [])
+
+  function previousVideo() {
+    let index = currentVideo <= 0 ? 3 : currentVideo - 1
+    videoArrayRefs.current[index].current.currentTime = 0
+    videoArrayRefs.current[index].current.pause()
+    videoArrayRefs.current[index].current.load()
+    setCurrentVideo(index)
+  }
+
+  function nextVideo() {
+    let index = currentVideo >= videoArray.length - 1 ? 0 : currentVideo + 1
+    videoArrayRefs.current[index].current.pause()
+    videoArrayRefs.current[index].current.currentTime = 0
+    videoArrayRefs.current[index].current.load()
+    setTimeout(() => {
+      setCurrentVideo(index)
+    }, 10)
+  }
 
   return (
     <div className={styles.main}> 
       <button 
         className={styles.prev} 
-        onClick={() => setCurrentVideo(currentVideo <= 0 ? 3 : currentVideo - 1)}
+        onClick={() => previousVideo()}
       >
         <MdKeyboardArrowLeft />
       </button>
       <button 
         className={styles.next} 
-        onClick={() => setCurrentVideo(currentVideo >= 3 ? 0 : currentVideo + 1)}
+        onClick={() => nextVideo()}
       >
         <MdKeyboardArrowRight />
       </button>
 
       {currentVideo >= 0 && (
-        // <div className={styles['video_wrapper']}>
-        //   <div>
-        //     <div className={styles['video_desc']}>
-        //       <h1>{videoArray[currentVideo].title}</h1>
-        //       <h2>{videoArray[currentVideo].desc}</h2>
-        //     </div>
-        //     <video 
-        //       src={videoArray[currentVideo].src} 
-        //       autoPlay 
-        //       muted 
-        //       onEnded={() => setCurrentVideo(currentVideo >= 3 ? 0 : currentVideo + 1)} 
-        //     />
-        //   </div>
-        // </div>
         <div className={styles['video_slider_wrapper']}>
           <div 
             className={styles['current_slide']} 
             style={{ transform: `translateX(-${100/videoArray.length*currentVideo}%)`, width: `${videoArray.length}00%` }}
           >
-            {videoArray.map(({src, title, desc}) => 
+            {videoArray.map(({src, title, desc}, index) => 
               <div className={styles['slide_wrapper']}>
                 <div className={styles['slide_content']}>
                   <h1>{title}</h1>
@@ -71,7 +77,8 @@ export function VideoCarousel () {
                     src={src}
                     autoPlay
                     muted
-                    // onEnded={() => setCurrentVideo(currentVideo >= 3 ? 0 : currentVideo + 1)} 
+                    ref={videoArrayRefs.current[index]}
+                    onEnded={() => nextVideo()} 
                   />
                 </div>
               </div>

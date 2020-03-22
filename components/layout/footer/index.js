@@ -19,7 +19,7 @@ export function Footer () {
   return (
     <div className={styles.main}>
       <div className={styles['footer_top_row']}>
-        <span>INTERGALACTIC IS {wordArray[count]}</span>
+        <span>INTERGALACTIC IS A {wordArray[count]}</span>
         <p>Based in London, available beyond.</p>
 
         <div className={styles['icon_wrapper']}>
