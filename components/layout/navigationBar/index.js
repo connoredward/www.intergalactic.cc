@@ -42,9 +42,7 @@ export function NavigationBar () {
           <li><a>CONTACT</a></li>
         </ul>
       </div>
-      {/* <button onClick={() => setMenuActive(!menuActive)}> */}
-        <HamburgerElastic isActive={menuActive} onClick={() => setMenuActive(!menuActive)} />
-      {/* </button> */}
+      <HamburgerElastic isActive={menuActive} onClick={() => setMenuActive(!menuActive)} />
     </div>
   )
 }

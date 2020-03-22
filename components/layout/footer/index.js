@@ -4,6 +4,7 @@ import styles from './styles.scss'
 
 import FB_ICON from '~/static/images/icons/FB_ICON.png'
 import IG_ICON from '~/static/images/icons/IG_ICON.png'
+import VM_ICOM from '~/static/images/icons/VIMEO_ICON.png'
 
 let wordArray = ['DESIGN STUDIO', 'CREATIVE NETWORK', 'PRODUCTION COMPANY', 'PHOTOGRAPHY AGENCY']
 
@@ -28,6 +29,9 @@ export function Footer () {
           </a>
           <a href='https://www.instagram.com/intergalacticstudio/' target='_blank'>
             <img src={IG_ICON} />
+          </a>
+          <a href='https://vimeo.com/intergalacticstudio' target='_blank'>
+            <img src={VM_ICOM} />
           </a>
         </div>
       </div>
