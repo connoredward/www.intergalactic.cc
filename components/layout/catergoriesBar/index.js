@@ -21,6 +21,11 @@ export function CatergoriesBar () {
           <p>ECT</p>
           <p>ORS</p>
         </div>
+
+        <div className={styles['directors_title_mobile']}>
+          <p>DIRECTORS</p>
+        </div>
+
         <div className={styles.image} style={{ backgroundImage: `url(${IMAGE_0})` }} />
         <div className={styles['video_wrapper']}>
           <video src={VIDEO_1} autoPlay muted loop />
@@ -39,6 +44,11 @@ export function CatergoriesBar () {
             <span><div>T</div></span>
           </div>
         </div>
+
+        <div className={styles['content_title_mobile']}>
+          <p>CONTENT</p>
+        </div>
+
         <div className={styles.image} style={{ backgroundImage: `url(${IMAGE_1})` }} />
         <div className={styles['video_wrapper']}>
           <video src={VIDEO_0} autoPlay muted loop />
@@ -65,6 +75,10 @@ export function CatergoriesBar () {
           </div>
         </div>
 
+        <div className={styles['music_videos_title_mobile']}>
+          <p>MUSIC VIDEOS</p>
+        </div>
+
         <div className={styles.image} style={{ backgroundImage: `url(${IMAGE_2})` }} />
         <div className={styles['video_wrapper']}>
           <video src={VIDEO_2} autoPlay muted loop />
@@ -82,6 +96,10 @@ export function CatergoriesBar () {
           <span><div>I</div></span>
           <span><div>V</div></span>
           <span><div>E</div></span>
+        </div>
+
+        <div className={styles['narrative_title_mobile']}>
+          <p>NARRATIVE</p>
         </div>
         <div className={styles.image} style={{ backgroundImage: `url(${IMAGE_3})` }} />
         <div className={styles['video_wrapper']}>

@@ -11,6 +11,13 @@
     .catergory_wrapper {
       height: 250px !important;
     }
+    .directors_title, .music_videos_title, .narrative_title, .content_title {
+      display: none !important;
+    }
+    .directors_title_mobile, .music_videos_title_mobile, .narrative_title_mobile, .content_title_mobile {
+      display: block !important;
+      z-index: 99;
+    }
   }
   .catergory_wrapper {
     height: 100%;
@@ -103,6 +110,7 @@
         }
       }
     }
+
     .directors_title {
       position: absolute;
       left: 50%;
@@ -122,6 +130,7 @@
         }
       }
     }
+
     .music_videos_title {
       position: absolute;
       left: 50%;
@@ -169,6 +178,7 @@
         }
       }
     }
+
     .narrative_title {
       position: absolute;
       left: 50%;
@@ -214,4 +224,12 @@
     background-size: cover;
     height: 100%;
   }
+}
+
+.directors_title_mobile, .music_videos_title_mobile, .content_title_mobile, .narrative_title_mobile {
+  position: absolute;
+  display: none;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
