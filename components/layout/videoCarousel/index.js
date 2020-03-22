@@ -12,10 +12,10 @@ import VIDEO_3 from '~/static/videos/homeCarousel/POLKA_DOTS.mp4'
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md'
 
 let videoArray = [
-  {src: VIDEO_0, title: 'BAD HONEY', desc: (<><span style={{ fontFamily: 'Black Grotesk' }}>"Easily"</span> by TOM RINGSBY</>)},
-  {src: VIDEO_1, title: 'LIL SILVA', desc: (<><span style={{ fontFamily: 'Black Grotesk' }}>"Do Ja"</span> by MATT HALSALL</>)},
-  {src: VIDEO_2, title: 'YASHA', desc: (<><span style={{ fontFamily: 'Black Grotesk' }}>"Max 95, Donnin"</span> by SIMON HALSALL</>)},
-  {src: VIDEO_3, title: 'BITE THE BUFFALO', desc: (<><span style={{ fontFamily: 'Black Grotesk' }}>"Polka Dots"</span> by RHORY DANNIELLS</>)}
+  {src: VIDEO_0, title: 'BAD HONEY', desc: '"Easily" by TOM RINGSBY'},
+  {src: VIDEO_1, title: 'LIL SILVA', desc: '"Do Ja" by MATT HALSALL'},
+  {src: VIDEO_2, title: 'YASHA', desc: '"Max 95, Donnin" by SIMON HALSALL'},
+  {src: VIDEO_3, title: 'BITE THE BUFFALO', desc: '"Polka Dots" by RHORY DANNIELLS'}
 ]
 
 export function VideoCarousel () {

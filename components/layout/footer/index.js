@@ -37,7 +37,7 @@ export function Footer () {
       </div>
 
       <div className={styles['footer_bottom_row']}>
-        <span>HELLO@INTERGALACTIC.COM</span>
+        <span className={styles.email}><span style={{ fontWeight: 600 }}>HELLO</span>@INTERGALACTIC.COM</span>
         <span className={styles.address}>326a New Cross Road, SE14 6AG</span>
       </div>
     </div>

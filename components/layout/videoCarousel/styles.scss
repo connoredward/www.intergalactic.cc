@@ -77,12 +77,14 @@
   }
   >h1 {
     font-size: 65px; 
+    line-height: 58px;
     font-weight: 600;
     font-family: 'AQCT';
   }
   >h2 {
-    font-family: 'Gotham';
+    font-family: 'Black Grotesk';
     font-weight: 600;
+    letter-spacing: 1px;
   }
   @media all and (max-width: 900px) {
     >h1 {
