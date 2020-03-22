@@ -1,6 +1,5 @@
 import { useEffect } from 'react'
 
-import Link from 'next/link'
 import fetch from 'isomorphic-unfetch'
 
 import NavigationBar from '~/components/layout/navigationBar'
@@ -23,9 +22,6 @@ export default function MainPage() {
   return (
     <div>
       <NavigationBar />
-      <Link href="/product/espresso">
-        <a>espresso product</a>
-      </Link>
     </div>
   )
 }

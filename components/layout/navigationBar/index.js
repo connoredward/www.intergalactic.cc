@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 
+import Link from 'next/link'
 import classNames from 'classnames'
 
 import styles from './styles.scss'
@@ -15,10 +16,27 @@ export function NavigationBar () {
       <img src={LOGO} />
       <div className={classNames(styles['menu_bar'], styles[menuActive ? 'active' : undefined])}>
         <ul>
-          <li><a>DIRECTORS</a></li>
-          <li><a>MUSIC VIDEOS</a></li>
-          <li><a>BRANDED</a></li>
-          <li><a>NARRATIVE</a></li>
+          <li>
+            <Link href='/directors'>
+              <a>DIRECTORS</a>
+            </Link>
+          </li>
+          <li>
+            <Link href='/music_videos'>
+              <a>MUSIC VIDEOS</a>
+            </Link>
+          </li>
+          <li>
+            <Link href='/branded'>
+              <a>BRANDED</a>
+            </Link>
+          </li>
+          <li>
+            <Link href='/narrative'>
+              <a>NARRATIVE</a>
+            </Link>
+          </li>
+
           <li><a>CONTACT</a></li>
         </ul>
       </div>
