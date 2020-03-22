@@ -28,7 +28,7 @@ export function VideoCarousel () {
   }, [])
 
   function previousVideo() {
-    let index = currentVideo <= 0 ? 3 : currentVideo - 1
+    const index = currentVideo <= 0 ? 3 : currentVideo - 1
     videoArrayRefs.current[index].current.currentTime = 0
     videoArrayRefs.current[index].current.pause()
     videoArrayRefs.current[index].current.load()
@@ -36,7 +36,7 @@ export function VideoCarousel () {
   }
 
   function nextVideo() {
-    let index = currentVideo >= videoArray.length - 1 ? 0 : currentVideo + 1
+    const index = currentVideo >= videoArray.length - 1 ? 0 : currentVideo + 1
     videoArrayRefs.current[index].current.pause()
     videoArrayRefs.current[index].current.currentTime = 0
     videoArrayRefs.current[index].current.load()
@@ -67,7 +67,7 @@ export function VideoCarousel () {
             style={{ transform: `translateX(-${100/videoArray.length*currentVideo}%)`, width: `${videoArray.length}00%` }}
           >
             {videoArray.map(({src, title, desc}, index) => 
-              <div className={styles['slide_wrapper']}>
+              <div className={styles['slide_wrapper']} key={index}>
                 <div className={styles['slide_content']}>
                   <h1>{title}</h1>
                   <h1>{desc}</h1>
