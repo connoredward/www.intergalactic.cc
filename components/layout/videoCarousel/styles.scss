@@ -73,11 +73,15 @@
     margin: 0;
     color: white;
     text-align: center;
-    font-family: 'Gotham';
     white-space: nowrap ;
   }
   >h1 {
     font-size: 65px; 
+    font-weight: 600;
+    font-family: 'AQCT';
+  }
+  >h2 {
+    font-family: 'Gotham';
     font-weight: 600;
   }
   @media all and (max-width: 900px) {
