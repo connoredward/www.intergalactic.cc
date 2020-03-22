@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 import fetch from 'isomorphic-unfetch'
 
 import PageWrapper from '~/components/layout/pageWrapper'
+import VideoCorousel from '~/components/layout/videoCarousel'
 
 import React from 'react' 
 
@@ -21,7 +22,7 @@ export default function MainPage() {
 
   return (
     <PageWrapper>
-      test
+      <VideoCorousel />
     </PageWrapper>
   )
 }
