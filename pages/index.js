@@ -4,6 +4,7 @@ import fetch from 'isomorphic-unfetch'
 
 import PageWrapper from '~/components/layout/pageWrapper'
 import VideoCorousel from '~/components/layout/videoCarousel'
+import CatergoriesBar from '~/components/layout/catergoriesBar'
 
 import React from 'react' 
 
@@ -23,6 +24,7 @@ export default function MainPage() {
   return (
     <PageWrapper>
       <VideoCorousel />
+      <CatergoriesBar />
     </PageWrapper>
   )
 }
