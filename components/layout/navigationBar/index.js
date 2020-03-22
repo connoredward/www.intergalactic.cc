@@ -29,8 +29,8 @@ export function NavigationBar () {
             </Link>
           </li>
           <li>
-            <Link href='/branded'>
-              <a>BRANDED</a>
+            <Link href='/content'>
+              <a>CONTENT</a>
             </Link>
           </li>
           <li>
@@ -38,11 +38,16 @@ export function NavigationBar () {
               <a>NARRATIVE</a>
             </Link>
           </li>
-
-          <li><a>CONTACT</a></li>
+          <li>
+            <a onClick={() => window.scrollTo(0,document.body.scrollHeight)}>CONTACT</a>
+          </li>
         </ul>
       </div>
-      <HamburgerElastic isActive={menuActive} onClick={() => setMenuActive(!menuActive)} />
+      <HamburgerElastic 
+        className={styles[menuActive ? 'active' : undefined]} 
+        isActive={menuActive} 
+        onClick={() => setMenuActive(!menuActive)} 
+      />
     </div>
   )
 }
