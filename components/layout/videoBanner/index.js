@@ -3,8 +3,7 @@ import styles from './styles.scss'
 export function VideoBanner (props) {
   const {
     src, 
-    title = '',
-    width = ''
+    title = ''
   } = props
   return (
     <div className={styles.main}>
@@ -12,8 +11,7 @@ export function VideoBanner (props) {
         <h1>{title}</h1>
       </div>
       {src && (
-        <video 
-          width={width}
+        <video
           src={src}
           autoPlay
           muted
