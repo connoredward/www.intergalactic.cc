@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 
 import fetch from 'isomorphic-unfetch'
 
-import NavigationBar from '~/components/layout/navigationBar'
+import PageWrapper from '~/components/layout/pageWrapper'
 
 import React from 'react' 
 
@@ -20,9 +20,9 @@ export default function MainPage() {
   }
 
   return (
-    <div>
-      <NavigationBar />
-    </div>
+    <PageWrapper>
+      test
+    </PageWrapper>
   )
 }
 

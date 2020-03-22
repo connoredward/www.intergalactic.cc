@@ -13,7 +13,9 @@ export function NavigationBar () {
   const [menuActive, setMenuActive] = useState(false)
   return (
     <div className={styles.main}>
-      <img src={LOGO} />
+      <Link href='/'>
+        <img src={LOGO} />
+      </Link>
       <div className={classNames(styles['menu_bar'], styles[menuActive ? 'active' : undefined])}>
         <ul>
           <li>

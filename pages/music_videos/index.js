@@ -1,8 +1,10 @@
+import PageWrapper from '~/components/layout/pageWrapper'
+
 export function MusicVideosPage() {
   return (
-    <div>
-
-    </div>
+    <PageWrapper>
+      videos
+    </PageWrapper>
   )
 }
 

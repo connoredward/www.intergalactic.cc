@@ -1,8 +1,10 @@
+import PageWrapper from '~/components/layout/pageWrapper'
+
 export function NarrativePage() {
   return (
-    <div>
-
-    </div>
+    <PageWrapper>
+      narrative
+    </PageWrapper>
   )
 }
 

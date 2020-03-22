@@ -4,10 +4,13 @@
   min-width: 100%;
   overflow: hidden;
   z-index: 98;
-  >img {
+  img {
     z-index: 999;
     height: 50px;
     margin: 0 10px;
+    &:hover {
+      cursor: pointer;
+    }
   }
   button {
     position: absolute;

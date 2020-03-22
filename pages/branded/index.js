@@ -1,8 +1,10 @@
+import PageWrapper from '~/components/layout/pageWrapper'
+
 export function BrandedPage() {
   return (
-    <div>
-
-    </div>
+    <PageWrapper>
+      branded
+    </PageWrapper>
   )
 }
 

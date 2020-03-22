@@ -1,0 +1,37 @@
+.main {
+  color: white;
+  max-width: 100%;
+  min-height: 10vh;
+  padding: 50px 30px;
+  font-family: 'Gotham';
+  font-size: 12px;
+  .footer_top_row {
+    position: relative;
+    margin: 0 0 40px 0;
+    P {
+      margin: 10px 0 0 0;
+    }
+    .icon_wrapper {
+      position: absolute;
+      right: 0;
+      top: 0;
+      >img {
+        width: 20px;
+        height: auto;
+        margin: 0 5px;
+        &:hover {
+          opacity: .5;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  .footer_bottom_row {
+    position: relative;
+    .address {
+      position: absolute;
+      right: 0;
+    }
+  }
+}
