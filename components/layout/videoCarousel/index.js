@@ -6,8 +6,8 @@ import styles from './styles.scss'
 
 import VIDEO_0 from '~/static/videos/homeCarousel/BAD_HONEY.mp4'
 import VIDEO_1 from '~/static/videos/homeCarousel/DE_JA_LOOP.mp4'
-import VIDEO_2 from '~/static/videos/homeCarousel/POLKA_DOTS.mp4'
-import VIDEO_3 from '~/static/videos/homeCarousel/YASHI.mp4'
+import VIDEO_2 from '~/static/videos/homeCarousel/YASHI.mp4'
+import VIDEO_3 from '~/static/videos/homeCarousel/POLKA_DOTS.mp4'
 
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md'
 
