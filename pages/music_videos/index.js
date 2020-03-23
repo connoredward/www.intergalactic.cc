@@ -1,14 +1,30 @@
+import { useEffect, useState } from 'react'
+
+import Link from 'next/link'
+
 import PageWrapper from '~/components/layout/pageWrapper'
 import VideoBanner from '~/components/layout/videoBanner'
+import MusicVideoCard from '~/components/layout/directorCard'
 
-import VIDEO_2 from '~/static/videos/catergories/MUSIC_VIDEO_THUMBNAIL.mp4'
-
-const data = {src: VIDEO_2, title: 'MUSIC VIDEOS'}
+import { wordpressCardApi, videoBannerApi } from '~/components/modules/wordpressCall'
 
 export function MusicVideosPage() {
+  const [musicVideoList, setMusicVideoList] = useState([])
+  const [bannerVideo, setBannerVideo] = useState({title: ''})
+
+  useEffect(() => {
+    onLoad()
+  }, [])
+
+  async function onLoad() {
+    setBannerVideo({src: await videoBannerApi('music videos'), title: 'MUSIC VIDEOS'})
+  }
+
   return (
     <PageWrapper>
-      <VideoBanner {...data} />
+      <VideoBanner {...bannerVideo}>
+        <h1>{bannerVideo.title}</h1>
+      </VideoBanner>
     </PageWrapper>
   )
 }
