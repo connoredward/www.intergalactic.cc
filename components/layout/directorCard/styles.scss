@@ -11,10 +11,10 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    height: 120%;
-    @media all and (max-width: 700px) {
-      width: 120%;
-      height: auto;
+    width: 120%;
+    @media all and (max-width: 1000px) {
+      height: 120%;
+      width: auto;
     }
   }
   &:hover {
