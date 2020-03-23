@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 import PageWrapper from '~/components/layout/pageWrapper'
 import VideoBanner from '~/components/layout/videoBanner'
 import DirectorCard from '~/components/layout/directorCard'
@@ -29,12 +31,16 @@ export function DirectorsPage() {
       <VideoBanner {...data} />
       <div className={styles['directors_grid']}>
         {directorsData.map((item, index) => 
-          <DirectorCard key={index} {...item}>
-            <div className={styles['card_content']}>
-              <h1>{item.firstName}</h1>
-              <h2>{item.lastName}</h2>
-            </div>
-          </DirectorCard>
+          <Link href={`/directors/${item.firstName}_${item.lastName}`} key={index}>
+            <a>
+              <DirectorCard {...item}>
+                <div className={styles['card_content']}>
+                  <h1>{item.firstName}</h1>
+                  <h2>{item.lastName}</h2>
+                </div>
+              </DirectorCard>
+            </a>
+          </Link>
         )}
       </div>
     </PageWrapper>
