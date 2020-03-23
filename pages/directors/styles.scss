@@ -32,8 +32,13 @@
   }
   >div {
     grid-column: span 2;
+    .video {
+      height: 110%;
+      width: auto;
+    }
     &:nth-child(1), &:nth-child(2) {
       grid-column: span 3;
+      width: 100%;
     }
   }
   .card_content {

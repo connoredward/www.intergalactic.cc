@@ -36,7 +36,7 @@ export function SubDirectorPage ({ slug }) {
       </VideoBanner>
       <div className={styles['sub_director_grid']}>
         {directorsData.map((item, index) => 
-          <DirectorCard {...item} key={index}>
+          <DirectorCard {...item} key={index} className={styles.video}>
             <div className={styles['card_content']}>
               <h1>{item.title}</h1>
               <h2>{item.desc}</h2>
