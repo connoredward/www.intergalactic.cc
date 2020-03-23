@@ -1,6 +1,10 @@
+import { useEffect, useState } from 'react'
+
 import PageWrapper from '~/components/layout/pageWrapper'
 import VideoBanner from '~/components/layout/videoBanner'
 import DirectorCard from '~/components/layout/directorCard'
+
+import fetch from 'isomorphic-unfetch'
 
 import IMAGE_0 from '~/static/images/catergories/COURTESY_ZOOM.jpg'
 import IMAGE_1 from '~/static/images/catergories/NOVELIST.jpg'

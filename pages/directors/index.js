@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react'
+
 import Link from 'next/link'
 
 import PageWrapper from '~/components/layout/pageWrapper'
@@ -26,13 +28,59 @@ const directorsData = [
 ]
 
 export function DirectorsPage() {
+
+  const [directorsList, setDirectorsList] = useState([])
+          
+  useEffect(() => {
+    onLoad()
+  }, [])
+
+  async function onLoad() {
+    const categories = await fetch('https://public-api.wordpress.com/wp/v2/sites/atestdomains.wordpress.com/categories')
+      .then(res => res.json())
+    const catId = categories.find((item) => item.name === 'directors').id
+
+    const tags = await fetch('https://public-api.wordpress.com/wp/v2/sites/atestdomains.wordpress.com/tags')
+      .then(res => res.json())
+    const tagId = tags.find((item) => item.name === 'director').id
+
+    const postArray = await fetch('https://public-api.wordpress.com/wp/v2/sites/atestdomains.wordpress.com/posts')
+      .then(res => res.json())
+
+    const sortedList = postArray.filter((item) => item.categories[0] === catId)
+      .map((item) => {
+        let itemObj = item.content.rendered.split('"')
+        let imgIndex = itemObj.findIndex((i) => i === " data-large-file=") + 1
+        let videoIndex = itemObj.findIndex((i) => i === "video/mp4") + 2
+        return {
+          name: item.title.rendered,
+          imgSrc: itemObj[imgIndex],
+          videoSrc: itemObj[videoIndex]
+        }
+      })
+
+    setDirectorsList(sortedList)
+  }
+
   return (
     <PageWrapper>
       <VideoBanner {...data}>
         <h1>{data.title}</h1>
       </VideoBanner>
       <div className={styles['directors_grid']}>
-        {directorsData.map((item, index) => 
+        {directorsList.map((item,index) => 
+          <Link href={`/directors/${item.name.split(' ')[0].toLowerCase()}-${item.name.split(' ')[1].toLowerCase()}`} key={index}>
+            <a>
+              <DirectorCard {...item}>
+                <div className={styles['card_content']}>
+                  <h1>{item.name.split(' ')[0]}</h1>
+                  <h2>{item.name.split(' ')[1]}</h2>
+                </div>
+              </DirectorCard>
+            </a>
+          </Link>
+        )}
+        {/* {directorsData.map((item, index) => 
           <Link href={`/directors/${item.firstName.toLowerCase()}-${item.lastName.toLowerCase()}`} key={index}>
             <a>
               <DirectorCard {...item}>
@@ -43,7 +91,7 @@ export function DirectorsPage() {
               </DirectorCard>
             </a>
           </Link>
-        )}
+        )} */}
       </div>
     </PageWrapper>
   )
