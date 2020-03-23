@@ -2,10 +2,11 @@ import React, { useState } from 'react'
 
 import Link from 'next/link'
 import classNames from 'classnames'
+import { HamburgerElastic } from 'react-animated-burgers'
+
+import Footer from '~/components/layout/footer'
 
 import styles from './styles.scss'
-
-import { HamburgerElastic } from 'react-animated-burgers'
 
 import LOGO from '~/static/images/INTERGALACTIC_LOGO_WHITE.png'
 
@@ -42,6 +43,7 @@ export function NavigationBar () {
             <a onClick={() => window.scrollTo(0,document.body.scrollHeight)}>CONTACT</a>
           </li>
         </ul>
+        <Footer className={styles['mobile_footer']} />
       </div>
       <HamburgerElastic 
         className={styles[menuActive ? 'active' : undefined]} 

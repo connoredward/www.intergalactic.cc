@@ -35,6 +35,9 @@
 
   .footer_bottom_row {
     position: relative;
+    p {
+      margin: 10px 0 0 0;
+    }
     .email {
       font-weight: normal;
     }
@@ -45,6 +48,24 @@
     .address {
       position: absolute;
       right: 0;
+    }
+  }
+
+  @media all and (max-width: 800px) {
+    padding: 10px;
+    .footer_top_row {
+      margin: 0;
+      >span {
+        display: none;
+      }
+    }
+    .icon_wrapper, .address {
+      position: relative !important;
+    }
+    .icon_wrapper {
+      img {
+        margin: 10px 10px 10px 0 !important;
+      }
     }
   }
 }

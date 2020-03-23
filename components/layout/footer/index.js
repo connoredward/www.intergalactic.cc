@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
+import classNames from 'classnames'
+
 import styles from './styles.scss'
 
 import FB_ICON from '~/static/images/icons/FB_ICON.png'
@@ -8,7 +10,7 @@ import VM_ICOM from '~/static/images/icons/VIMEO_ICON.png'
 
 let wordArray = ['DESIGN STUDIO', 'CREATIVE NETWORK', 'PRODUCTION COMPANY', 'PHOTOGRAPHY AGENCY']
 
-export function Footer () {
+export function Footer ({className}) {
   const [count, setCount] = useState(0)
 
   useEffect(() => {
@@ -18,7 +20,7 @@ export function Footer () {
 
 
   return (
-    <div className={styles.main}>
+    <div className={classNames(styles.main, className)}>
       <div className={styles['footer_top_row']}>
         <span>INTERGALACTIC IS A {wordArray[count]}</span>
         <p>Based in London, available beyond.</p>
@@ -38,7 +40,8 @@ export function Footer () {
 
       <div className={styles['footer_bottom_row']}>
         <span className={styles.email}><span style={{ fontWeight: 600 }}>HELLO</span>@INTERGALACTIC.COM</span>
-        <span className={styles.address}>326a New Cross Road, SE14 6AG</span>
+        <p className={styles.address}>326a New Cross Road, SE14 6AG</p>
+        <p className={styles.number}>+44 7722 052698</p>
       </div>
     </div>
   )
