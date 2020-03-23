@@ -30,6 +30,7 @@ const directorsData = [
 export function DirectorsPage() {
 
   const [directorsList, setDirectorsList] = useState([])
+  const [bannerVideo, setBannerVideo] = useState({title: ''})
           
   useEffect(() => {
     onLoad()
@@ -42,13 +43,20 @@ export function DirectorsPage() {
 
     const tags = await fetch('https://public-api.wordpress.com/wp/v2/sites/atestdomains.wordpress.com/tags')
       .then(res => res.json())
-    const tagId = tags.find((item) => item.name === 'director').id
+    const bannerId = tags.find((item) => item.name === 'banner').id
 
     const postArray = await fetch('https://public-api.wordpress.com/wp/v2/sites/atestdomains.wordpress.com/posts')
       .then(res => res.json())
 
+    const bannerVideoObj = postArray.find(({tags}) => tags[0] === bannerId)
+    const bannerVideoContent = bannerVideoObj.content.rendered.split('"')
+    const bannerVideoId = bannerVideoContent.findIndex((i) => i === "video/mp4") + 2
+    const bannerVideoSrc = bannerVideoContent[bannerVideoId] 
+    setBannerVideo({src: bannerVideoSrc, title: 'DIRECTORS'})
+
     const sortedList = postArray.filter((item) => item.categories[0] === catId)
       .map((item) => {
+        if (item.tags[0] === bannerId) return {}
         let itemObj = item.content.rendered.split('"')
         let imgIndex = itemObj.findIndex((i) => i === " data-large-file=") + 1
         let videoIndex = itemObj.findIndex((i) => i === "video/mp4") + 2
@@ -57,15 +65,15 @@ export function DirectorsPage() {
           imgSrc: itemObj[imgIndex],
           videoSrc: itemObj[videoIndex]
         }
-      })
+      }).filter(value => Object.keys(value).length !== 0)
 
     setDirectorsList(sortedList)
   }
 
   return (
     <PageWrapper>
-      <VideoBanner {...data}>
-        <h1>{data.title}</h1>
+      <VideoBanner {...bannerVideo}>
+        <h1>{bannerVideo.title}</h1>
       </VideoBanner>
       <div className={styles['directors_grid']}>
         {directorsList.map((item,index) => 
