@@ -12,11 +12,19 @@
     top: 50%;
     transform: translate(-50%, -50%);
     z-index: 10;
-    >h1 {
+    >h1, >h2 {
+      margin: 0;
       color: white;
-      font-size: 65px;
       font-family: 'AQCT';
       font-weight: 600;
+      text-align: center;
+    }
+    >h1 {
+      font-size: 65px;
+      line-height: 58px;
+    }
+    >h2 {
+      font-size: 48px;
     }
   }
   video {

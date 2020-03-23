@@ -3,12 +3,12 @@ import styles from './styles.scss'
 export function VideoBanner (props) {
   const {
     src, 
-    title = ''
+    children
   } = props
   return (
     <div className={styles.main}>
       <div className={styles.content}>
-        <h1>{title}</h1>
+        {children}
       </div>
       {src && (
         <video

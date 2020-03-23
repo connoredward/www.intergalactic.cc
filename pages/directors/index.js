@@ -28,10 +28,12 @@ const directorsData = [
 export function DirectorsPage() {
   return (
     <PageWrapper>
-      <VideoBanner {...data} />
+      <VideoBanner {...data}>
+        <h1>{data.title}</h1>
+      </VideoBanner>
       <div className={styles['directors_grid']}>
         {directorsData.map((item, index) => 
-          <Link href={`/directors/${item.firstName}_${item.lastName}`} key={index}>
+          <Link href={`/directors/${item.firstName.toLowerCase()}-${item.lastName.toLowerCase()}`} key={index}>
             <a>
               <DirectorCard {...item}>
                 <div className={styles['card_content']}>
