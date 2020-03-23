@@ -6,6 +6,8 @@ import PageWrapper from '~/components/layout/pageWrapper'
 import VideoBanner from '~/components/layout/videoBanner'
 import DirectorCard from '~/components/layout/directorCard'
 
+import { wordpressCardApi, videoBannerApi } from '~/components/modules/wordpressCall'
+
 import IMAGE_0 from '~/static/images/catergories/COURTESY_ZOOM.jpg'
 import IMAGE_1 from '~/static/images/catergories/NOVELIST.jpg'
 import IMAGE_2 from '~/static/images/catergories/CONTENT_THUMBNAIL.jpg'
@@ -37,37 +39,8 @@ export function DirectorsPage() {
   }, [])
 
   async function onLoad() {
-    const categories = await fetch('https://public-api.wordpress.com/wp/v2/sites/atestdomains.wordpress.com/categories')
-      .then(res => res.json())
-    const catId = categories.find((item) => item.name === 'directors').id
-
-    const tags = await fetch('https://public-api.wordpress.com/wp/v2/sites/atestdomains.wordpress.com/tags')
-      .then(res => res.json())
-    const bannerId = tags.find((item) => item.name === 'banner').id
-
-    const postArray = await fetch('https://public-api.wordpress.com/wp/v2/sites/atestdomains.wordpress.com/posts')
-      .then(res => res.json())
-
-    const bannerVideoObj = postArray.find(({tags}) => tags[0] === bannerId)
-    const bannerVideoContent = bannerVideoObj.content.rendered.split('"')
-    const bannerVideoId = bannerVideoContent.findIndex((i) => i === "video/mp4") + 2
-    const bannerVideoSrc = bannerVideoContent[bannerVideoId] 
-    setBannerVideo({src: bannerVideoSrc, title: 'DIRECTORS'})
-
-    const sortedList = postArray.filter((item) => item.categories[0] === catId)
-      .map((item) => {
-        if (item.tags[0] === bannerId) return {}
-        let itemObj = item.content.rendered.split('"')
-        let imgIndex = itemObj.findIndex((i) => i === " data-large-file=") + 1
-        let videoIndex = itemObj.findIndex((i) => i === "video/mp4") + 2
-        return {
-          name: item.title.rendered,
-          imgSrc: itemObj[imgIndex],
-          videoSrc: itemObj[videoIndex]
-        }
-      }).filter(value => Object.keys(value).length !== 0)
-
-    setDirectorsList(sortedList)
+    setBannerVideo({src: await videoBannerApi('directors'), title: 'DIRECTORS'})
+    setDirectorsList(await wordpressCardApi('directors'))
   }
 
   return (
