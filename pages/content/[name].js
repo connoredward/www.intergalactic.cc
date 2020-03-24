@@ -1,4 +1,4 @@
-export function SubContentPagege ({ slug }) {
+export function SubContentPage ({ slug }) {
   console.log('name', slug)
   return (
     <div>
