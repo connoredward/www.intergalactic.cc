@@ -9,6 +9,7 @@
     border: none;
     font-size: 48px;
     color: rgba(255,255,255,.5);
+    -webkit-tap-highlight-color: transparent;
     &:hover {
       cursor: pointer;
       color: white;
