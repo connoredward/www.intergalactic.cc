@@ -11,6 +11,7 @@ import styles from './styles.scss'
 import LOGO from '~/static/images/INTERGALACTIC_LOGO_WHITE.png'
 
 const links = [
+  {name: 'FEATURED WORK', link: '/featured_work'},
   {name: 'DIRECTORS', link: '/directors'},
   {name: 'MUSIC VIDEOS', link: '/music_videos'},
   {name: 'CONTENT', link: '/content'},
