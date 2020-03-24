@@ -5,6 +5,9 @@
   padding: 40px;
   font-family: 'Gotham';
   font-size: 12px;
+  @media all and (max-width: 350px) {
+    font-size: 10px !important;
+  }
   .footer_top_row {
     position: relative;
     margin: 0 0 40px 0;
