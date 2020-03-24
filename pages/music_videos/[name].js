@@ -1,14 +1,21 @@
-export function SubBrandPage ({ slug }) {
+import { useEffect, useState } from 'react'
+
+import PageWrapper from '~/components/layout/pageWrapper'
+
+export function SubMusicVideoPage ({ slug }) {
   console.log('name', slug)
   return (
-    <div>
-      {slug}
-    </div>
+    <PageWrapper>
+      {/* <VideoBanner {...data}>
+        <>
+        </>
+      </VideoBanner> */}
+    </PageWrapper>
   )
 }
 
-SubBrandPage.getInitialProps = async ({ query }) => {
+SubMusicVideoPage.getInitialProps = async ({ query }) => {
   return { slug: query.name }
 }
 
-export default SubBrandPage
+export default SubMusicVideoPage

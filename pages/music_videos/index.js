@@ -5,6 +5,7 @@ import Link from 'next/link'
 import PageWrapper from '~/components/layout/pageWrapper'
 import VideoBanner from '~/components/layout/videoBanner'
 import MusicVideoCard from '~/components/layout/directorCard'
+import VideoModal from '~/components/layout/videoModal'
 
 import { wordpressCardApi, videoBannerApi } from '~/components/modules/wordpressCall'
 
@@ -35,7 +36,7 @@ export function MusicVideosPage() {
       </VideoBanner>
       <div className={styles['music_videos_grid']}>
         {musicVideoList.map((item, index) => 
-          <MusicVideoCard {...item} onClick={() => openModal()}>
+          <MusicVideoCard {...item} onClick={() => setModalState(true)} key={index}>
             <div className={styles['card_content']}>
               <h1>{item.name}</h1>
               <h2 dangerouslySetInnerHTML={{ __html: item.desc }} />
@@ -43,6 +44,7 @@ export function MusicVideosPage() {
           </MusicVideoCard>
         )}
       </div>
+      <VideoModal openModal={modalState} closeModal={() => setModalState(false)} />
     </PageWrapper>
   )
 }
