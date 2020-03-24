@@ -4,6 +4,8 @@ import PageWrapper from '~/components/layout/pageWrapper'
 import VideoBanner from '~/components/layout/videoBanner'
 import DirectorCard from '~/components/layout/directorCard'
 
+import { getDirector } from '~/components/modules/wordpressCall'
+
 import fetch from 'isomorphic-unfetch'
 
 import IMAGE_0 from '~/static/images/catergories/COURTESY_ZOOM.jpg'
@@ -29,7 +31,12 @@ const directorsData = [
 ]
 
 export function SubDirectorPage ({ slug }) {
-  console.log('name', slug)
+  const [director, setDirector] = useState({})
+
+  useEffect(() => {
+    if (slug) setDirector(getDirector(slug))
+  }, [])
+
   return (
     <PageWrapper>
       <VideoBanner {...data}>

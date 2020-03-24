@@ -48,6 +48,13 @@ export async function wordpressCardApi(page) {
     }).filter(value => Object.keys(value).length !== 0)
 }
 
+export async function getDirector(director) {
+  const posts = await fetch(wordPressUrl + 'posts')
+    .then(res => res.json())
+
+  console.log(posts.find(({slug}) => slug === director))
+}
+
 export default {
   wordpressCardApi,
   videoBannerApi
