@@ -8,9 +8,12 @@ import MusicVideoCard from '~/components/layout/directorCard'
 
 import { wordpressCardApi, videoBannerApi } from '~/components/modules/wordpressCall'
 
+import styles from './styles.scss'
+
 export function MusicVideosPage() {
   const [musicVideoList, setMusicVideoList] = useState([])
   const [bannerVideo, setBannerVideo] = useState({title: ''})
+  const [modalState, setModalState] = useState(false)
 
   useEffect(() => {
     onLoad()
@@ -18,6 +21,11 @@ export function MusicVideosPage() {
 
   async function onLoad() {
     setBannerVideo({src: await videoBannerApi('music videos'), title: 'MUSIC VIDEOS'})
+    setMusicVideoList(await wordpressCardApi('music videos'))
+  }
+
+  function openModal() {
+    console.log(1)
   }
 
   return (
@@ -25,6 +33,16 @@ export function MusicVideosPage() {
       <VideoBanner {...bannerVideo}>
         <h1>{bannerVideo.title}</h1>
       </VideoBanner>
+      <div className={styles['music_videos_grid']}>
+        {musicVideoList.map((item, index) => 
+          <MusicVideoCard {...item} onClick={() => openModal()}>
+            <div className={styles['card_content']}>
+              <h1>{item.name}</h1>
+              <h2 dangerouslySetInnerHTML={{ __html: item.desc }} />
+            </div>
+          </MusicVideoCard>
+        )}
+      </div>
     </PageWrapper>
   )
 }

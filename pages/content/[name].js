@@ -1,4 +1,4 @@
-export function SubBrandPage ({ slug }) {
+export function SubContentPagege ({ slug }) {
   console.log('name', slug)
   return (
     <div>
@@ -7,8 +7,8 @@ export function SubBrandPage ({ slug }) {
   )
 }
 
-SubBrandPage.getInitialProps = async ({ query }) => {
+SubContentPage.getInitialProps = async ({ query }) => {
   return { slug: query.name }
 }
 
-export default SubBrandPage
+export default SubContentPage

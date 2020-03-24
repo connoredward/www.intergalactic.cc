@@ -41,6 +41,7 @@ export async function wordpressCardApi(page) {
       let videoIndex = itemObj.findIndex((i) => i === "video/mp4") + 2
       return {
         name: item.title.rendered,
+        desc: item.excerpt.rendered,
         imgSrc: itemObj[imgIndex],
         videoSrc: itemObj[videoIndex]
       }

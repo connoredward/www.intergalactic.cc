@@ -5,10 +5,15 @@ export function DirectorCard(props) {
     videoSrc,
     imgSrc,
     children,
-    className
+    className,
+    onClick
   } = props
   return (
-    <div className={styles.main} style={{ backgroundImage: `url(${imgSrc})` }}>
+    <div 
+      className={styles.main} 
+      style={{ backgroundImage: `url(${imgSrc})` }}
+      onClick={onClick}
+    >
       {children}
       {videoSrc && (
         <video 

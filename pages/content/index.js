@@ -5,7 +5,7 @@ import VideoBanner from '~/components/layout/videoBanner'
 
 import { wordprocessCardApi, videoBannerApi } from '~/components/modules/wordpressCall'
 
-export function BrandedPage() {
+export function ContentPage() {
   const [contentList, setContentList] = useState([])
   const [bannerVideo, setBannerVideo] = useState({title: ''})
 
@@ -26,4 +26,4 @@ export function BrandedPage() {
   )
 }
 
-export default BrandedPage
+export default ContentPage
