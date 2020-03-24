@@ -30,7 +30,12 @@
 
 .video_slider_wrapper {
   overflow: hidden;
-  height: 100vh;
+  height: -webkit-calc(100vh - 60px);
+  height: -moz-calc(100vh - 60px);
+  height: calc(100vh - 60px);
+  @media all and (max-width: 800px) {
+    height: 100vh;
+  }
   .current_slide {
     display: flex;
     transition-duration: .3s;

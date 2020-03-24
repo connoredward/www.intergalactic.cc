@@ -3,31 +3,25 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 
 import PageWrapper from '~/components/layout/pageWrapper'
-import VideoBanner from '~/components/layout/videoBanner'
 import DirectorCard from '~/components/layout/directorCard'
 
-import { wordpressCardApi, videoBannerApi } from '~/components/modules/wordpressCall'
+import { wordpressCardApi } from '~/components/modules/wordpressCall'
 
 import styles from './styles.scss'
 
 export function DirectorsPage() {
   const [directorsList, setDirectorsList] = useState([])
-  const [bannerVideo, setBannerVideo] = useState({title: ''})
           
   useEffect(() => {
     onLoad()
   }, [])
 
   async function onLoad() {
-    setBannerVideo({src: await videoBannerApi('directors'), title: 'DIRECTORS'})
     setDirectorsList(await wordpressCardApi('directors'))
   }
 
   return (
     <PageWrapper active={'directors'}>
-      <VideoBanner {...bannerVideo}>
-        <h1>{bannerVideo.title}</h1>
-      </VideoBanner>
       <div className={styles['directors_grid']}>
         {directorsList.map((item,index) => 
           <Link href={`/directors/${item.name.split(' ')[0].toLowerCase()}-${item.name.split(' ')[1].toLowerCase()}`} key={index}>
