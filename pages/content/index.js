@@ -18,7 +18,7 @@ export function ContentPage() {
   }
 
   return (
-    <PageWrapper>
+    <PageWrapper active={'content'}>
       <VideoBanner {...bannerVideo}>
         <h1>{bannerVideo.title}</h1>
       </VideoBanner>

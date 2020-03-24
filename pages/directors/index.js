@@ -24,7 +24,7 @@ export function DirectorsPage() {
   }
 
   return (
-    <PageWrapper>
+    <PageWrapper active={'directors'}>
       <VideoBanner {...bannerVideo}>
         <h1>{bannerVideo.title}</h1>
       </VideoBanner>

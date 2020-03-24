@@ -30,7 +30,7 @@ export function MusicVideosPage() {
   }
 
   return (
-    <PageWrapper>
+    <PageWrapper active={'music videos'}>
       <VideoBanner {...bannerVideo}>
         <h1>{bannerVideo.title}</h1>
       </VideoBanner>

@@ -29,10 +29,7 @@
 
 .video_slider_wrapper {
   overflow: hidden;
-  height: 75vh;
-  @media all and (max-width: 700px) {
-    height: 100vh;
-  }
+  height: 100vh;
   .current_slide {
     display: flex;
     transition-duration: .3s;

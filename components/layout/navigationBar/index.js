@@ -10,7 +10,18 @@ import styles from './styles.scss'
 
 import LOGO from '~/static/images/INTERGALACTIC_LOGO_WHITE.png'
 
-export function NavigationBar () {
+const links = [
+  {name: 'DIRECTORS', link: '/directors'},
+  {name: 'MUSIC VIDEOS', link: '/music_videos'},
+  {name: 'CONTENT', link: '/content'},
+  {name: 'NARRATIVE', link: '/narrative'}
+]
+
+export function NavigationBar (props) {
+  const {
+    active = ''
+  } = props
+  console.log(13, active)
   const [menuActive, setMenuActive] = useState(false)
   return (
     <div className={styles.main}>
@@ -19,26 +30,13 @@ export function NavigationBar () {
       </Link>
       <div className={classNames(styles['menu_bar'], styles[menuActive ? 'active' : undefined])}>
         <ul>
-          <li>
-            <Link href='/directors'>
-              <a>DIRECTORS</a>
-            </Link>
-          </li>
-          <li>
-            <Link href='/music_videos'>
-              <a>MUSIC VIDEOS</a>
-            </Link>
-          </li>
-          <li>
-            <Link href='/content'>
-              <a>CONTENT</a>
-            </Link>
-          </li>
-          <li>
-            <Link href='/narrative'>
-              <a>NARRATIVE</a>
-            </Link>
-          </li>
+          {links.map(({name, link}, index) => 
+            <li key={index}>
+              <Link href={link}>
+                <a style={{ color: active === name.toLowerCase() ? 'red' : '' }}>{name}</a>
+              </Link>
+            </li>
+          )}
           <li>
             <a onClick={() => window.scrollTo(0,document.body.scrollHeight)}>CONTACT</a>
           </li>

@@ -17,7 +17,7 @@ export function NarrativePage() {
     setBannerVideo({src: await videoBannerApi('narrative'), title: 'NARRATIVE'})
   }
   return (
-    <PageWrapper>
+    <PageWrapper active={'narrative'}>
       <VideoBanner {...bannerVideo}>
         <h1>{bannerVideo.title}</h1>
       </VideoBanner>

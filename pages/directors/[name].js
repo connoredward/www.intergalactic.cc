@@ -38,7 +38,7 @@ export function SubDirectorPage ({ slug }) {
   }, [])
 
   return (
-    <PageWrapper>
+    <PageWrapper active={'directors'}>
       <VideoBanner {...data}>
         <>
           <h1>{data.fName}</h1>
