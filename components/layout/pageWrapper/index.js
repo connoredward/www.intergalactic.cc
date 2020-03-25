@@ -1,12 +1,14 @@
 import NavigationBar from '~/components/layout/navigationBar'
 import Footer from '~/components/layout/footer'
 
+import classNames from 'classnames'
+
 import styles from './styles.scss'
 
-export function PageWrapper({ children, active }) {
+export function PageWrapper({ children, active, className }) {
   return (
     <>
-      <div className={styles['page_wrapper']}>
+      <div className={classNames(styles['page_wrapper'], className)}>
         <NavigationBar active={active} />
         {children}
       </div>

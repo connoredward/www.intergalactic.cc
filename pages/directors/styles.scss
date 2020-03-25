@@ -27,23 +27,7 @@
 }
 
 
-.sub_director_grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-  @media all and (max-width: 700px) {
-    grid-template-columns: 1fr;
-  }
-  >div {
-    grid-column: span 2;
-    .video {
-      height: 110%;
-      width: auto;
-    }
-    &:nth-child(1), &:nth-child(2) {
-      grid-column: span 3;
-      width: 100%;
-    }
-  }
+.sub_director_page {
   .card_content {
     position: absolute;
     left: 50%;
@@ -51,16 +35,9 @@
     transform: translate(-50%, -50%);
     z-index: 10;
     text-align: center;
-    >h1, >h2 {
-      margin: 0;
-      color: white;
-    }
-    >h1 {
-      font-family: 'Gotham';
-      font-weight: 600;
-    }
-    >h2 {
-      font-family: 'Black Grotesk';
+    width: 100%;
+    img {
+      width: 100%;
     }
   }
 }

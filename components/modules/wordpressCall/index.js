@@ -2,13 +2,22 @@ import fetch from 'isomorphic-unfetch'
 
 const wordPressUrl = 'https://public-api.wordpress.com/wp/v2/sites/atestdomains.wordpress.com/'
 
+function move(array, oldIndex, newIndex) {
+  if (newIndex >= array.length) {
+    newIndex = array.length - 1
+  }
+  array.splice(newIndex, 0, array.splice(oldIndex, 1)[0]) 
+  return array
+}
+
+
 async function getWordpressData() {
   return new Promise(async(res, rej) => {
-    const categories = await fetch(wordPressUrl + 'categories')
+    const categories = await fetch(wordPressUrl + 'categories/?_embed=true')
       .then(res => res.json())
-    const tags = await fetch(wordPressUrl + 'tags')
+    const tags = await fetch(wordPressUrl + 'tags/?_embed=true')
       .then(res => res.json())
-    const posts = await fetch(wordPressUrl + 'posts')
+    const posts = await fetch(wordPressUrl + 'posts/?_embed=true')
       .then(res => res.json())
       res({posts, categories, tags})
   })
@@ -60,10 +69,35 @@ export async function wordpressCardApi(page) {
 }
 
 export async function getDirector(director) {
-  const posts = await fetch(wordPressUrl + 'posts')
-    .then(res => res.json())
 
-  console.log(posts.find(({slug}) => slug === director))
+  console.log(await fetch(wordPressUrl + 'posts/?_embed=true')
+    .then(res => res.json()))
+
+  const {tags, posts} = await getWordpressData()
+  const tagId = tags.find(({name}) => name === director).id
+  const postsFil = posts 
+    .filter(({tags}) => {
+      return tags.includes(tagId)
+    })
+    .map((item) => {
+      let itemObj = item.content.rendered.split('"')
+      let imgIndex = itemObj.findIndex((i) => i === " data-large-file=") + 1
+      let videoIndex = itemObj.findIndex((i) => i === "video/mp4") + 2
+      if (item.tags.find(tagI => tagI !== tagId)) return {
+        name: item.title.rendered,
+        titleImg: item._embedded && item._embedded['wp:featuredmedia'] ? item._embedded['wp:featuredmedia'][0].source_url : undefined, 
+      }
+      return {
+        name: item.title.rendered,
+        desc: item.excerpt.rendered,
+        imgSrc: itemObj[imgIndex],
+        titleImg: item._embedded && item._embedded['wp:featuredmedia'] ? item._embedded['wp:featuredmedia'][0].source_url : undefined, 
+        videoSrc: itemObj[videoIndex]
+      }
+    })
+
+    // ? item._embedded['wp:featuredmedia'][0].source_url : undefined
+  return move(postsFil, postsFil.findIndex((i) => !i.videoSrc), 0)
 }
 
 export default {
