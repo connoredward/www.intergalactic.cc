@@ -4,8 +4,11 @@ import Link from 'next/link'
 
 import PageWrapper from '~/components/layout/pageWrapper'
 import DirectorCard from '~/components/layout/directorCard'
+import VideoGrid from '~/components/layout/videoGrid'
 
-import { wordpressCardApi } from '~/components/modules/wordpressCall'
+import { wordpressCardApi, getGalleryGrid } from '~/components/modules/wordpressCall'
+
+import TITLE from '~/static/TITLES_1.png'
 
 import styles from './styles.scss'
 
@@ -17,25 +20,29 @@ export function DirectorsPage() {
   }, [])
 
   async function onLoad() {
-    setDirectorsList(await wordpressCardApi('directors'))
+    setDirectorsList(await wordpressCardApi('director'))
+    getGalleryGrid()
   }
+
+  console.log(directorsList)
 
   return (
     <PageWrapper active={'directors'}>
-      <div className={styles['directors_grid']}>
+      <VideoGrid gridType={'threeGrid'}>
         {directorsList.map((item,index) => 
           <Link href={`/directors/${item.name.split(' ')[0].toLowerCase()}-${item.name.split(' ')[1].toLowerCase()}`} key={index}>
             <a>
               <DirectorCard {...item}>
                 <div className={styles['card_content']}>
-                  <h1>{item.name.split(' ')[0]}</h1>
-                  <h2>{item.name.split(' ')[1]}</h2>
+                  {/* <h1>{item.name.split(' ')[0]}</h1>
+                  <h2>{item.name.split(' ')[1]}</h2> */}
+                  <img className={styles['title_image']} src={TITLE} />
                 </div>
               </DirectorCard>
             </a>
           </Link>
         )}
-      </div>
+      </VideoGrid>
     </PageWrapper>
   )
 }
