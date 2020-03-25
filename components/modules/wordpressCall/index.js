@@ -63,6 +63,7 @@ export async function wordpressCardApi(page) {
         name: item.title.rendered,
         desc: item.excerpt.rendered,
         imgSrc: itemObj[imgIndex],
+        titleImg: item._embedded && item._embedded['wp:featuredmedia'] ? item._embedded['wp:featuredmedia'][0].source_url : undefined, 
         videoSrc: itemObj[videoIndex]
       }
     }).filter(value => Object.keys(value).length !== 0)
@@ -95,8 +96,6 @@ export async function getDirector(director) {
         videoSrc: itemObj[videoIndex]
       }
     })
-
-    // ? item._embedded['wp:featuredmedia'][0].source_url : undefined
   return move(postsFil, postsFil.findIndex((i) => !i.videoSrc), 0)
 }
 

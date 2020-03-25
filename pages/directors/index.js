@@ -34,9 +34,7 @@ export function DirectorsPage() {
             <a>
               <DirectorCard {...item}>
                 <div className={styles['card_content']}>
-                  {/* <h1>{item.name.split(' ')[0]}</h1>
-                  <h2>{item.name.split(' ')[1]}</h2> */}
-                  <img className={styles['title_image']} src={TITLE} />
+                  <img className={styles['title_image']} src={item.titleImg} />
                 </div>
               </DirectorCard>
             </a>
