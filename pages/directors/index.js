@@ -8,8 +8,6 @@ import VideoGrid from '~/components/layout/videoGrid'
 
 import { wordpressCardApi, getGalleryGrid } from '~/components/modules/wordpressCall'
 
-import TITLE from '~/static/TITLES_1.png'
-
 import styles from './styles.scss'
 
 export function DirectorsPage() {
@@ -21,10 +19,8 @@ export function DirectorsPage() {
 
   async function onLoad() {
     setDirectorsList(await wordpressCardApi('director'))
-    getGalleryGrid()
+    // getGalleryGrid()
   }
-
-  console.log(directorsList)
 
   return (
     <PageWrapper active={'directors'}>

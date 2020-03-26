@@ -1,27 +1,35 @@
 import { useEffect, useState } from 'react'
 
 import PageWrapper from '~/components/layout/pageWrapper'
-import VideoBanner from '~/components/layout/videoBanner'
+import DirectorCard from '~/components/layout/directorCard'
+import VideoGrid from '~/components/layout/videoGrid'
 
-import { wordprocessCardApi, videoBannerApi } from '~/components/modules/wordpressCall'
+import { wordpressCardApi } from '~/components/modules/wordpressCall'
+
+import styles from './styles.scss'
 
 export function ContentPage() {
   const [contentList, setContentList] = useState([])
-  const [bannerVideo, setBannerVideo] = useState({title: ''})
 
   useEffect(() => {
     onLoad()
   }, [])
   
   async function onLoad() {
-    setBannerVideo({src: await videoBannerApi('content'), title: 'CONTENT'})
+    setContentList(await wordpressCardApi('content'))
   }
 
   return (
     <PageWrapper active={'content'}>
-      <VideoBanner {...bannerVideo}>
-        <h1>{bannerVideo.title}</h1>
-      </VideoBanner>
+      <VideoGrid gridType={'flexGrid'}>
+        {contentList.map((item, index) => 
+          <DirectorCard {...item} key={index}>
+            <div className={styles['card_content']}>
+              <img src={item.titleImg} />
+            </div>
+          </DirectorCard>
+        )}
+      </VideoGrid>
     </PageWrapper>
   )
 }

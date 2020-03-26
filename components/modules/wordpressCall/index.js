@@ -52,7 +52,7 @@ export async function wordpressCardApi(page) {
   const {posts, categories, tags} = await getWordpressData()
 
   const catId = categories.find(({name}) => name === page + 's').id
-  const tagId = tags.find(({name}) => name === page).id
+  const tagId = tags.find(({name}) => name === page) ? tags.find(({name}) => name === page).id : undefined
     
   return posts.filter((item) => item.categories[0] === catId || item.tags[0] === tagId)
     .map((item) => {
