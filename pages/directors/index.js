@@ -29,9 +29,7 @@ export function DirectorsPage() {
           <Link href={`/directors/${item.name.split(' ')[0].toLowerCase()}-${item.name.split(' ')[1].toLowerCase()}`} key={index}>
             <a>
               <DirectorCard {...item}>
-                <div className={styles['card_content']}>
-                  <img className={styles['title_image']} src={item.titleImg} />
-                </div>
+                <img className={styles['title_image']} src={item.titleImg} />
               </DirectorCard>
             </a>
           </Link>

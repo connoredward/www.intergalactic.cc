@@ -26,9 +26,7 @@ export function SubDirectorPage ({ slug }) {
       <VideoGrid gridType={'twoGrid'}>
         {director.map((item, index) => 
           <DirectorCard {...item} key={index} className={styles.video}>
-            <div className={styles['card_content']}>
-              <img src={item.titleImg} />
-            </div>
+            <img src={item.titleImg} />
           </DirectorCard>
         )}
       </VideoGrid>

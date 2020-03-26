@@ -32,9 +32,7 @@ export function MusicVideosPage() {
       <VideoGrid gridType={'twoByThreeGrid'}>
         {musicVideoList.map((item, index) => 
           <MusicVideoCard {...item} onClick={() => setModalState(true)} key={index}>
-            <div className={styles['card_content']}>
-              <img src={item.titleImg} />
-            </div>
+            <img src={item.titleImg} />
           </MusicVideoCard>
         )}
       </VideoGrid>

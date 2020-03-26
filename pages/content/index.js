@@ -24,9 +24,7 @@ export function ContentPage() {
       <VideoGrid gridType={'flexGrid'}>
         {contentList.map((item, index) => 
           <DirectorCard {...item} key={index}>
-            <div className={styles['card_content']}>
-              <img src={item.titleImg} />
-            </div>
+            <img src={item.titleImg} />
           </DirectorCard>
         )}
       </VideoGrid>

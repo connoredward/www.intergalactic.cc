@@ -51,8 +51,8 @@ export async function getGalleryGrid(page) {
 export async function wordpressCardApi(page) {
   const {posts, categories, tags} = await getWordpressData()
 
-  const catId = categories.find(({name}) => name === page + 's').id
-  const tagId = tags.find(({name}) => name === page) ? tags.find(({name}) => name === page).id : undefined
+  const catId = categories.find(({name}) => name === page + 's') ? categories.find(({name}) => name === page + 's').id : 'NOT_FOUND'
+  const tagId = tags.find(({name}) => name === page) ? tags.find(({name}) => name === page).id : 'NOT_FOUND'
     
   return posts.filter((item) => item.categories[0] === catId || item.tags[0] === tagId)
     .map((item) => {
