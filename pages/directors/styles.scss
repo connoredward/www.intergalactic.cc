@@ -1,32 +1,3 @@
-.directors_grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  height: -webkit-calc(100% - 60px);
-  height: -moz-calc(100% - 60px);
-  height: calc(100% - 60px);
-  @media all and (max-width: 700px) {
-    grid-template-columns: 1fr;
-  }
-  .card_content {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    z-index: 99;
-  }
-  h1 {
-    font-size: 68px;
-    line-height: 58px;
-  }
-  h1, h2  {
-    font-family: 'AQCT';
-    color: white;
-    margin: 0;
-  }
-}
-
-
 .sub_director_page {
   .card_content {
     position: absolute;
@@ -38,6 +9,7 @@
     width: 100%;
     img {
       width: 100%;
+      max-width: 500px;
     }
   }
 }

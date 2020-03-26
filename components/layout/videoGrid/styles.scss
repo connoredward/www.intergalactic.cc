@@ -7,6 +7,18 @@
   &.threeGrid {
     grid-template-columns: 1fr 1fr 1fr;
   }
+  &.twoByThreeGrid {
+    >div{
+      grid-column: span 2;
+      &:nth-child(5n+1), &:nth-child(5n+2){
+        grid-column: span 3;
+      }
+    }
+  }
+  &.twoGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+
   @media all and (max-width: 700px) {
     grid-template-columns: 1fr !important;
     height: 100%;

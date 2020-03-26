@@ -23,7 +23,7 @@ export function SubDirectorPage ({ slug }) {
 
   return (
     <PageWrapper className={styles['sub_director_page']} active={'directors'}>
-      <VideoGrid gridType={'threeGrid'}>
+      <VideoGrid gridType={'twoGrid'}>
         {director.map((item, index) => 
           <DirectorCard {...item} key={index} className={styles.video}>
             <div className={styles['card_content']}>
