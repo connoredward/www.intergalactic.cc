@@ -1,31 +1,13 @@
-.music_videos_grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  @media all and (max-width: 700px) {
-    grid-template-columns: 1fr;
-  }
+.music_video_grid {
   .card_content {
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
-    z-index: 99;
-  }
-  h1 {
-    font-size: 52px;
-    line-height: 58px;
-    font-family: 'AQCT';
-  }
-  h1, h2  {
-    color: white;
-    margin: 0;
-  }
-  h2 {
-    font-family: 'Black Grotesk';
-    font-size: 26px;
-    p {
-      margin: 0;
+    >img {
+      width: 100%;
+      max-width: 500px;
     }
   }
 }

@@ -28,11 +28,12 @@ export function MusicVideosPage() {
   }
 
   return (
-    <PageWrapper active={'music videos'}>
+    <PageWrapper active={'music videos'} className={styles['music_video_grid']}>
       <VideoGrid gridType={'twoByThreeGrid'}>
         {musicVideoList.map((item, index) => 
           <MusicVideoCard {...item} onClick={() => setModalState(true)} key={index}>
             <div className={styles['card_content']}>
+              <img src={item.titleImg} />
             </div>
           </MusicVideoCard>
         )}
