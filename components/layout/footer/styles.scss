@@ -43,6 +43,12 @@
     }
     .email {
       font-weight: normal;
+      &:hover {
+        cursor: default;
+        span {
+          color: red;
+        }
+      }
     }
     span {
       font-weight: 600;
