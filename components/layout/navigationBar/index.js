@@ -35,7 +35,8 @@ export function NavigationBar (props) {
             {links.map(({name, link}, index) => 
               <li key={index}>
                 <Link href={link}>
-                  <a style={{ color: active === name.toLowerCase() ? 'red' : '' }}>{name}</a>
+                  <a className={styles[active === name.toLowerCase() ? 'active' : undefined]}>{name}</a>
+                  {/* <a style={{ color: active === name.toLowerCase() ? 'red' : '', fontWeight: 600 }}>{name}</a> */}
                 </Link>
               </li>
             )}

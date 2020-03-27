@@ -20,6 +20,7 @@
       font-family: 'Gotham';
       letter-spacing: .5px;
       position: relative;
+      font-weight: 300;
       ul {
         position: absolute;
         right: 0;
@@ -40,6 +41,8 @@
           }
           &:hover {
             cursor: pointer;
+            font-weight: normal;
+            // text-shadow: 0 0 .9px white, 0 0 .9px white, 0 0 .9px white;
           }
           a {
             text-decoration: none;
@@ -47,8 +50,13 @@
             height: 100%;
             display: flex;
             align-items: center;
-            &:hover {
+            margin: 0 auto;
+            &.active {
+              font-weight: normal;
               color: red;
+            }
+            &:hover {
+              // color: red;
             }
           }
         }
