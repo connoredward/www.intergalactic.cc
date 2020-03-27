@@ -89,6 +89,12 @@ export async function getDirector(director) {
   const {tags, posts} = await getWordpressData()
 
   const tagId = tags.find(({name}) => name === director.split('-').join(' ')).id
+  const styleTags = tags.map(item => {
+    const name = item.name
+    if (name === 'big' || name === 'wide' || name === 'tall') return {...item}
+    return {}
+  }).filter(value => Object.keys(value).length !== 0)
+  
   const postsFil = posts 
     .filter(({tags}) => {
       return tags.includes(tagId)
@@ -100,6 +106,7 @@ export async function getDirector(director) {
       if (item.tags.find(tagI => tagI !== tagId)) return {
         name: item.title.rendered,
         titleImg: item._embedded && item._embedded['wp:featuredmedia'] ? item._embedded['wp:featuredmedia'][0].source_url : undefined, 
+        gridStyle: styleTags.filter(o1 => item.tags.some(o2 => o1.id === o2))[0] ? styleTags.filter(o1 => item.tags.some(o2 => o1.id === o2))[0].name : 'NOT_FOUND'
       }
       return {
         name: item.title.rendered,
