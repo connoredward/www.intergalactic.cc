@@ -28,7 +28,7 @@ export function DirectorsPage() {
         {directorsList.map((item,index) => 
           <Link href={`/directors/${item.name.split(' ')[0].toLowerCase()}-${item.name.split(' ')[1].toLowerCase()}`} key={index}>
             <a>
-              <DirectorCard {...item}>
+              <DirectorCard {...item} className={styles[directorsList.length < 4 ? 'video_height' : null]}>
                 <img className={styles['title_image']} src={item.titleImg} />
               </DirectorCard>
             </a>
