@@ -51,11 +51,26 @@ export async function getGalleryGrid(page) {
 export async function wordpressCardApi(page) {
   const {posts, categories, tags} = await getWordpressData()
 
+  // console.log(tags)
+
   const catId = categories.find(({name}) => name === page + 's') ? categories.find(({name}) => name === page + 's').id : 'NOT_FOUND'
   const tagId = tags.find(({name}) => name === page) ? tags.find(({name}) => name === page).id : 'NOT_FOUND'
+
+  const styleTags = tags.map(item => {
+    const name = item.name
+    if (name === 'big' || name === 'wide' || name === 'tall') return {...item}
+    return {}
+  }).filter(value => Object.keys(value).length !== 0)
+
+  // console.log(styleTags)
     
   return posts.filter((item) => item.categories[0] === catId || item.tags[0] === tagId)
     .map((item) => {
+      // console.log(item.tags.find((item) => styleTags.find(({name}) => name === item.name)))
+      // console.log(123, styleTags.filter(o1 => item.tags.some(o2 => o1.id === o2))[0])
+      
+
+
       let itemObj = item.content.rendered.split('"')
       let imgIndex = itemObj.findIndex((i) => i === " data-large-file=") + 1
       let videoIndex = itemObj.findIndex((i) => i === "video/mp4") + 2
@@ -64,7 +79,8 @@ export async function wordpressCardApi(page) {
         desc: item.excerpt.rendered,
         imgSrc: itemObj[imgIndex],
         titleImg: item._embedded && item._embedded['wp:featuredmedia'] ? item._embedded['wp:featuredmedia'][0].source_url : undefined, 
-        videoSrc: itemObj[videoIndex]
+        videoSrc: itemObj[videoIndex],
+        gridStyle: styleTags.filter(o1 => item.tags.some(o2 => o1.id === o2))[0] ? styleTags.filter(o1 => item.tags.some(o2 => o1.id === o2))[0].name : 'NOT_FOUND'
       }
     }).filter(value => Object.keys(value).length !== 0)
 }

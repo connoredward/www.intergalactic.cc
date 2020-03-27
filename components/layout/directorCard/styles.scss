@@ -40,3 +40,14 @@
     }
   }
 }
+
+.big {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+.tall {
+  grid-row: 2;
+}
+.wide {
+  grid-column: 2;
+}
