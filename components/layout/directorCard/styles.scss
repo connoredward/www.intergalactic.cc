@@ -24,7 +24,8 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    height: 120%;
+    // height: 120%;
+    width: 100%;
   }
   &:hover {
     cursor: pointer;
@@ -35,7 +36,7 @@
   @media all and (max-width: 800px) {
     height: 50vh;
     video {
-      height: 120%;
+      height: 100%;
       width: auto;
     }
   }
