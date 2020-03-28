@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react'
 
+import Link from 'next/link'
+import Router, { useRouter } from 'next/router'
+
 import PageWrapper from '~/components/layout/pageWrapper'
 import VideoGrid from '~/components/layout/videoGrid'
 import DirectorCard from '~/components/layout/directorCard'
@@ -13,6 +16,22 @@ export function SubDirectorPage (props) {
     slug, 
     video = ''
   } = props
+  const router = useRouter()
+  // const [page, setPage] = useState()
+
+  // useEffect(() => {
+  //   setPage(slug)
+  //   Router.events.on('routeChangeComplete', (url) => {setPage(url.substring(1))})
+  // }, [slug])
+  
+  function changeRoute(videoSlug) {
+    console.log(Router)
+    // e.preventDefault();
+    // console.log(videoSlug)
+    Router.push(`/directors/${slug}`, `/directors/${slug}?video=${videoSlug}`, { shallow: true })
+    // setPage(slug)
+  }
+
 
   console.log(1, slug, video)
 
@@ -22,7 +41,8 @@ export function SubDirectorPage (props) {
   useEffect(() => {
     if (slug) onLoad()
     if (video) startVideo()
-  }, [])
+    Router.events.on('routeChangeComplete', (url) => {console.log(url)})
+  }, [slug, video])
 
   async function startVideo() {
     setModalState({open: true, src: await getVimeoVideo(video)})
@@ -32,6 +52,10 @@ export function SubDirectorPage (props) {
     setDirector(await getDirector(slug))
   }
 
+  function closeModal() {
+    // router.push(`directors/${slug}?`, `directors/${slug}`, { shallow: true })
+    setModalState({open: false, src: ''})
+  }
 
   return (
     <PageWrapper className={styles['sub_director_page']} active={'directors'}>
@@ -39,8 +63,8 @@ export function SubDirectorPage (props) {
         {director.map((item, index) => 
           <DirectorCard 
             {...item} 
-            onClick={() => setModalState({open: true, src: item.videoLink})} 
-            key={index} 
+            onClick={( )=> changeRoute(item.slug)} key={index}
+            // onClick={() => setModalState({open: true, src: item.videoLink})} 
             className={styles['sub_director_card_wrapper']}
           >
             {item.name 
@@ -50,7 +74,7 @@ export function SubDirectorPage (props) {
           </DirectorCard>
         )}
       </VideoGrid>
-      <VideoModal openModal={modalState} closeModal={() => setModalState({open: false, src: ''})} />
+      <VideoModal openModal={modalState} closeModal={() => closeModal()} />
     </PageWrapper>
   )
 }

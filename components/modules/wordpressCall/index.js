@@ -77,6 +77,7 @@ export async function getDirector(director) {
       }
       return {
         // name: item.title.rendered,
+        slug: item.slug,
         desc: item.excerpt.rendered,
         imgSrc: itemObj[imgIndex],
         titleImg: item._embedded && item._embedded['wp:featuredmedia'] ? item._embedded['wp:featuredmedia'][0].source_url : undefined, 
