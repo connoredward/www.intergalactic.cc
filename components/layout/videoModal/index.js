@@ -16,7 +16,7 @@ export function VideoModal(props) {
 
   useEffect(() => {
     setVideoSrc(openModal.src)
-  }, [openModal])
+  }, [openModal.src])
 
   return (
     <div className={classNames(styles['modal_wrapper'], styles[openModal.open == true ? 'active' : undefined])}>
