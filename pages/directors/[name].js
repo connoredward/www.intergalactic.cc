@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import PageWrapper from '~/components/layout/pageWrapper'
 import VideoGrid from '~/components/layout/videoGrid'
 import DirectorCard from '~/components/layout/directorCard'
-import VideoModal from '~/components/layout/VideoModal'
+import VideoModal from '~/components/layout/videoModal'
 
 import { getDirector } from '~/components/modules/wordpressCall'
 
