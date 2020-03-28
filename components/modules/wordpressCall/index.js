@@ -113,7 +113,8 @@ export async function getDirector(director) {
         desc: item.excerpt.rendered,
         imgSrc: itemObj[imgIndex],
         titleImg: item._embedded && item._embedded['wp:featuredmedia'] ? item._embedded['wp:featuredmedia'][0].source_url : undefined, 
-        videoSrc: itemObj[videoIndex]
+        videoSrc: itemObj[videoIndex],
+        videoLink: item.excerpt.rendered.match(/\bhttps?:\/\/\S+/gi) ? item.excerpt.rendered.match(/\bhttps?:\/\/\S+/gi)[0] : 'NOT_FOUND'
       }
     })
   return move(postsFil, postsFil.findIndex((i) => !i.videoSrc), 0)

@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@u-wave/react-vimeo": "^0.8.2",
     "@zeit/next-css": "^1.0.1",
     "@zeit/next-less": "^1.0.1",
     "@zeit/next-sass": "^1.0.1",
@@ -24,6 +25,7 @@
     "react-bigtext": "^1.0.1",
     "react-dom": "16.13.1",
     "react-icons": "^3.9.0",
+    "react-vimeo": "^2.0.0",
     "sass": "^1.26.3",
     "styled-components": "^5.0.1"
   }
