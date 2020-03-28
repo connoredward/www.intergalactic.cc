@@ -15,7 +15,7 @@ export function VideoModal(props) {
   const [videoSrc, setVideoSrc] = useState()
 
   useEffect(() => {
-    setVideoSrc(openModal.src.replace(/\"/g, ''))
+    setVideoSrc(openModal.src)
   }, [openModal])
 
   return (

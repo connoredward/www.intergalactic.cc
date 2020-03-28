@@ -46,6 +46,7 @@ export async function wordpressCardApi(page) {
         imgSrc: itemObj[imgIndex],
         titleImg: item._embedded && item._embedded['wp:featuredmedia'] ? item._embedded['wp:featuredmedia'][0].source_url : undefined, 
         videoSrc: itemObj[videoIndex],
+        videoLink: item.excerpt.rendered.match(/\bhttps?:\/\/\S+/gi) ? item.excerpt.rendered.match(/\bhttps?:\/\/\S+/gi)[0] : 'NOT_FOUND',
         gridStyle: styleTags.filter(o1 => item.tags.some(o2 => o1.id === o2))[0] ? styleTags.filter(o1 => item.tags.some(o2 => o1.id === o2))[0].name : 'NOT_FOUND'
       }
     }).filter(value => Object.keys(value).length !== 0)
@@ -80,13 +81,19 @@ export async function getDirector(director) {
         imgSrc: itemObj[imgIndex],
         titleImg: item._embedded && item._embedded['wp:featuredmedia'] ? item._embedded['wp:featuredmedia'][0].source_url : undefined, 
         videoSrc: itemObj[videoIndex],
-        videoLink: item.excerpt.rendered.match(/\bhttps?:\/\/\S+/gi) ? item.excerpt.rendered.match(/\bhttps?:\/\/\S+/gi)[0] : 'NOT_FOUND'
+        videoLink: item.excerpt.rendered.match(/\bhttps?:\/\/\S+/gi) ? item.excerpt.rendered.match(/\bhttps?:\/\/\S+/gi)[0].replace(/\"/g, '') : 'NOT_FOUND'
       }
     })
   return move(postsFil, postsFil.findIndex((i) => !i.videoSrc), 0)
 }
 
+export async function getVimeoVideo(slug) {
+  const {posts} = await getWordpressData()
+  return posts.find((item) => item.slug === slug).excerpt.rendered.match(/\bhttps?:\/\/\S+/gi)[0].replace(/\"/g, '')
+}
+
 export default {
   wordpressCardApi,
-  getDirector
+  getDirector,
+  getVimeoVideo
 }

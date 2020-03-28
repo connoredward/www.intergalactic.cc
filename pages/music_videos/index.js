@@ -13,7 +13,7 @@ import styles from './styles.scss'
 
 export function MusicVideosPage() {
   const [musicVideoList, setMusicVideoList] = useState([])
-  const [modalState, setModalState] = useState(false)
+  const [modalState, setModalState] = useState({open: false, src: ''})
 
   useEffect(() => {
     onLoad()
@@ -23,20 +23,16 @@ export function MusicVideosPage() {
     setMusicVideoList(await wordpressCardApi('music video'))
   }
 
-  function openModal() {
-    // console.log(1)
-  }
-
   return (
     <PageWrapper active={'music videos'} className={styles['music_video_grid']}>
       <VideoGrid gridType={'twoByThreeGrid'}>
         {musicVideoList.map((item, index) => 
-          <MusicVideoCard {...item} onClick={() => setModalState(true)} key={index}>
+          <MusicVideoCard onClick={() => setModalState({open:true, src: item.videoLink})} {...item} key={index}>
             <img src={item.titleImg} />
           </MusicVideoCard>
         )}
       </VideoGrid>
-      <VideoModal openModal={modalState} closeModal={() => setModalState(false)} />
+      <VideoModal openModal={modalState} closeModal={() => setModalState({open: false, src: ''})} />
     </PageWrapper>
   )
 }
