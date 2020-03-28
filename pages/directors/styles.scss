@@ -4,3 +4,15 @@
     width: auto !important;
   }
 }
+
+.director_card_wrapper, .sub_director_card_wrapper {
+  h1 {
+    color: white;
+    font-family: 'Gotham';
+    font-weight: 600;
+    // font-size: 68px;
+  }
+}
+.sub_director_card_wrapper {
+  font-size: 35px;
+}

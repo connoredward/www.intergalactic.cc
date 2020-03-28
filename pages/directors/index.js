@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 
 import Link from 'next/link'
+import classNames from 'classnames'
 
 import PageWrapper from '~/components/layout/pageWrapper'
 import DirectorCard from '~/components/layout/directorCard'
@@ -19,7 +20,6 @@ export function DirectorsPage() {
 
   async function onLoad() {
     setDirectorsList(await wordpressCardApi('director'))
-    // getGalleryGrid()
   }
 
   return (
@@ -28,8 +28,9 @@ export function DirectorsPage() {
         {directorsList.map((item,index) => 
           <Link href={`/directors/${item.name.split(' ')[0].toLowerCase()}-${item.name.split(' ')[1].toLowerCase()}`} key={index}>
             <a>
-              <DirectorCard {...item} className={styles[directorsList.length < 4 ? 'video_height' : null]}>
-                <img className={styles['title_image']} src={item.titleImg} />
+              <DirectorCard {...item} className={classNames(styles[directorsList.length < 4 ? 'video_height' : null], styles['director_card_wrapper'])}>
+                {/* <img className={styles['title_image']} src={item.titleImg} /> */}
+                <h1>{item.name}</h1>
               </DirectorCard>
             </a>
           </Link>

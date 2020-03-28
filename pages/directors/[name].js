@@ -25,8 +25,11 @@ export function SubDirectorPage ({ slug }) {
     <PageWrapper className={styles['sub_director_page']} active={'directors'}>
       <VideoGrid gridType={'twoGrid'}>
         {director.map((item, index) => 
-          <DirectorCard onClick={() => setModalState({open: true, src: item.videoLink})} {...item} key={index} className={styles.video}>
-            <img src={item.titleImg} />
+          <DirectorCard onClick={() => setModalState({open: true, src: item.videoLink})} {...item} key={index} className={styles['sub_director_card_wrapper']}>
+            {item.name 
+              ? <h1>{item.name}</h1>
+              : <img src={item.titleImg} />
+            }
           </DirectorCard>
         )}
       </VideoGrid>
