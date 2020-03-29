@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
 import Link from 'next/link'
-import Router, { useRouter } from 'next/router'
+import Router, { useRouter, withRouter } from 'next/router'
 
 import PageWrapper from '~/components/layout/pageWrapper'
 import VideoGrid from '~/components/layout/videoGrid'
@@ -14,38 +14,31 @@ import styles from './styles.scss'
 export function SubDirectorPage (props) {
   const {
     slug, 
-    video = ''
+    v = '',
   } = props
+
+
   const [director, setDirector] = useState([])
   const [modalState, setModalState] = useState({open: false, src: ''})
 
-
-  // const router = useRouter()
-  // const [page, setPage] = useState()
-
-  // useEffect(() => {
-  //   setPage(slug)
-  //   Router.events.on('routeChangeComplete', (url) => {setPage(url.substring(1))})
-  // }, [slug])
-  
-  function changeRoute(videoSlug) {
-    console.log(1, Router)
-    // Router.push(`/directors/${slug}?video=${videoSlug}`, `/directors/${slug}`, { shallow: true })
-    if (window) window.history.replaceState({}, `foo`, `/directors/${slug}?video=${videoSlug}`)
-  }
-
-
-  console.log(1, slug, video)
-
-
   useEffect(() => {
     if (slug) onLoad()
-    if (video) startVideo()
-    Router.events.on('routeChangeComplete', (url) => {console.log(url)})
-  }, [slug, video])
+    if (v) startVideo(v)
+    Router.events.on('routeChangeComplete', (url) => {
+      const videoUrl = url.split('v=')[1]
+      if (videoUrl) startVideo(videoUrl)
+      else setModalState({open: false, src: ''})
+    })
+  }, [slug, v])
+  
+  async function changeRoute(videoSlug) {
+    const href = `/directors/${slug}?v=${videoSlug}`
+    Router.push('/directors/[name]', href, { shallow: true })
+    setModalState({open: true, src: await getVimeoVideo(videoSlug)})
+  }
 
-  async function startVideo() {
-    setModalState({open: true, src: await getVimeoVideo(video)})
+  async function startVideo(videoUrl) {
+    setModalState({open: true, src: await getVimeoVideo(videoUrl)})
   }
 
   async function onLoad() {
@@ -53,7 +46,8 @@ export function SubDirectorPage (props) {
   }
 
   function closeModal() {
-    // router.push(`directors/${slug}?`, `directors/${slug}`, { shallow: true })
+    const href = `/directors/${slug}`
+    Router.push('/directors/[name]', href, { shallow: true })
     setModalState({open: false, src: ''})
   }
 
@@ -80,7 +74,7 @@ export function SubDirectorPage (props) {
 }
 
 SubDirectorPage.getInitialProps = async ({ query }) => {
-  return { slug: query.name, video: query.video }
+  return { slug: query.name, v: query.v }
 }
 
 export default SubDirectorPage
