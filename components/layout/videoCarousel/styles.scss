@@ -38,7 +38,7 @@
   }
   .current_slide {
     display: flex;
-    transition-duration: .3s;
+    transition: .6s ease-in-out; 
     height: 100%;
     .slide_wrapper {
       width: 100%;
