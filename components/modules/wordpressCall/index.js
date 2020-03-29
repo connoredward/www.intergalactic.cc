@@ -23,6 +23,18 @@ async function getWordpressData() {
   })
 }
 
+export async function getHomePageVideos() {
+  const {posts, categories} = await getWordpressData()
+  const catId = categories.find(({name}) => name === 'home').id 
+  return posts.filter(({categories}) => categories.includes(catId))
+    .map((item) => {
+      return {
+        titleImg: item._embedded && item._embedded['wp:featuredmedia'] ? item._embedded['wp:featuredmedia'][0].source_url : undefined,
+        videoSrc: item.content.rendered.match(/\bhttps?:\/\/\S+/gi)[0].split('"')[0]
+      }
+    })
+}
+
 export async function wordpressCardApi(page) {
   const {posts, categories, tags} = await getWordpressData()
 
@@ -35,7 +47,7 @@ export async function wordpressCardApi(page) {
     return {}
   }).filter(value => Object.keys(value).length !== 0)
     
-  return posts.filter((item) => item.categories[0] === catId || item.tags[0] === tagId)
+  return posts.filter(({tags, categories}) => {return categories.includes(catId) || tags.includes(tagId)})
     .map((item) => {
       let itemObj = item.content.rendered.split('"')
       let imgIndex = itemObj.findIndex((i) => i === " data-large-file=") + 1
@@ -96,5 +108,6 @@ export async function getVimeoVideo(slug) {
 export default {
   wordpressCardApi,
   getDirector,
-  getVimeoVideo
+  getVimeoVideo,
+  getHomePageVideos
 }

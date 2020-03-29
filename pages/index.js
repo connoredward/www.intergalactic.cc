@@ -1,29 +1,26 @@
-import { useEffect } from 'react'
-
-import fetch from 'isomorphic-unfetch'
+import { useEffect, useState } from 'react'
 
 import PageWrapper from '~/components/layout/pageWrapper'
 import VideoCorousel from '~/components/layout/videoCarousel'
 
+import { getHomePageVideos } from '~/components/modules/wordpressCall'
+
 export default function MainPage() {
+  const [videoData, setVideoData] = useState()
+
   useEffect(() => {
     onLoad()
   }, [])
 
   async function onLoad() {
-    await fetch('https://public-api.wordpress.com/wp/v2/sites/atestdomains.wordpress.com/posts')
-      .then(res => res.json())
-      .then(sections => {
-        // console.log('sections', sections[0].content.rendered.split('"'))
-        // const imageIndex = sections[0].content.rendered.split('"').findIndex((item) => item === " data-large-file=") + 1
-        // console.log('image url', sections[0].content.rendered.split('"')[imageIndex])
-      }
-      ); 
+    setVideoData(await getHomePageVideos())
   }
 
   return (
     <PageWrapper>
-      <VideoCorousel />
+      {videoData && (
+        <VideoCorousel data={videoData}/>
+      )}
     </PageWrapper>
   )
 }

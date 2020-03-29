@@ -1,27 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react'
 
-import classNames from 'classnames'
-
 import styles from './styles.scss'
-
-import VIDEO_0 from '~/static/videos/homeCarousel/BAD_HONEY.mp4'
-import VIDEO_1 from '~/static/videos/homeCarousel/DE_JA_LOOP.mp4'
-import VIDEO_2 from '~/static/videos/homeCarousel/YASHI.mp4'
-import VIDEO_3 from '~/static/videos/homeCarousel/POLKA_DOTS.mp4'
 
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md'
 
-let videoArray = [
-  {src: VIDEO_0, title: 'BAD HONEY', desc: '"Easily" by TOM RINGSBY'},
-  {src: VIDEO_1, title: 'LIL SILVA', desc: '"Do Ja" by MATT HALSALL'},
-  {src: VIDEO_2, title: 'YASHA', desc: '"Max 95, Donnin" by SIMON HALSALL'},
-  {src: VIDEO_3, title: 'BITE THE BUFFALO', desc: '"Polka Dots" by RHORY DANNIELLS'}
-]
-
-export function VideoCarousel () {
+export function VideoCarousel ({data}) {
   const [currentVideo, setCurrentVideo] = useState()
 
-  const videoArrayRefs = useRef(videoArray.map(() => React.createRef()))
+  const videoArrayRefs = useRef(data.map(() => React.createRef()))
 
   useEffect(() => {
     setCurrentVideo(0)
@@ -36,7 +22,7 @@ export function VideoCarousel () {
   }
 
   function nextVideo() {
-    const index = currentVideo >= videoArray.length - 1 ? 0 : currentVideo + 1
+    const index = currentVideo >= data.length - 1 ? 0 : currentVideo + 1
     videoArrayRefs.current[index].current.pause()
     videoArrayRefs.current[index].current.currentTime = 0
     videoArrayRefs.current[index].current.load()
@@ -64,17 +50,16 @@ export function VideoCarousel () {
         <div className={styles['video_slider_wrapper']}>
           <div 
             className={styles['current_slide']} 
-            style={{ transform: `translateX(-${100/videoArray.length*currentVideo}%)`, width: `${videoArray.length}00%` }}
+            style={{ transform: `translateX(-${100/data.length*currentVideo}%)`, width: `${data.length}00%` }}
           >
-            {videoArray.map(({src, title, desc}, index) => 
+            {data.map(({titleImg, videoSrc}, index) => 
               <div className={styles['slide_wrapper']} key={index}>
                 <div className={styles['slide_content']}>
-                  <h1>{title}</h1>
-                  <h2>{desc}</h2>
+                  <img src={titleImg} />
                 </div>
                 <div className={styles['video_container']}>
                   <video
-                    src={src}
+                    src={videoSrc}
                     autoPlay
                     muted
                     ref={videoArrayRefs.current[index]}

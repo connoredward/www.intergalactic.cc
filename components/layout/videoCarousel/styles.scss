@@ -72,45 +72,8 @@
   transform: translate(-50%, -50%);
   z-index: 10;
   min-width: 300px;
-  >h1, >h2 {
-    margin: 0;
-    color: white;
-    text-align: center;
-    white-space: nowrap ;
-  }
-  >h1 {
-    font-size: 65px; 
-    line-height: 58px;
-    font-weight: 600;
-    font-family: 'AQCT';
-  }
-  >h2 {
-    font-family: 'Black Grotesk';
-    font-weight: 600;
-    letter-spacing: 1px;
-  }
-  @media all and (max-width: 900px) {
-    >h1 {
-      font-size: 52px;
-    }
-    >h2 {
-      font-size: 20px;
-    }
-  }
-  @media all and (max-width: 700px) {
-    >h1 {
-      font-size: 42px;
-    }
-    >h2 {
-      font-size: 16px;
-    }
-  }
-  @media all and (max-width: 500px) {
-    >h1 {
-      font-size: 28px;
-    }
-    >h2 {
-      font-size: 12px;
-    }
+  img {
+    width: 100%;
+    max-width: 700px;
   }
 }

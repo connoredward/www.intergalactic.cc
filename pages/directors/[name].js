@@ -19,9 +19,29 @@ export function SubDirectorPage (props) {
   const [director, setDirector] = useState([])
   const [modalState, setModalState] = useState({open: false, src: ''})
 
+
+  // const router = useRouter()
+  // const [page, setPage] = useState()
+
+  // useEffect(() => {
+  //   setPage(slug)
+  //   Router.events.on('routeChangeComplete', (url) => {setPage(url.substring(1))})
+  // }, [slug])
+  
+  function changeRoute(videoSlug) {
+    console.log(1, Router)
+    // Router.push(`/directors/${slug}?video=${videoSlug}`, `/directors/${slug}`, { shallow: true })
+    if (window) window.history.replaceState({}, `foo`, `/directors/${slug}?video=${videoSlug}`)
+  }
+
+
+  console.log(1, slug, video)
+
+
   useEffect(() => {
     if (slug) onLoad()
     if (video) startVideo()
+    Router.events.on('routeChangeComplete', (url) => {console.log(url)})
   }, [slug, video])
 
   async function startVideo() {
@@ -33,13 +53,8 @@ export function SubDirectorPage (props) {
   }
 
   function closeModal() {
-    if (window) window.history.pushState({}, `/directors/${slug}`, `/directors/${slug}`)
+    // router.push(`directors/${slug}?`, `directors/${slug}`, { shallow: true })
     setModalState({open: false, src: ''})
-  }
-
-  async function changeRoute(videoSlug) {
-    if (window) window.history.pushState({}, `/directors/${slug}`, `/directors/${slug}?video=${videoSlug}`)
-    setModalState({open: true, src: await getVimeoVideo(videoSlug)})
   }
 
   return (
