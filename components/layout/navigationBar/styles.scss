@@ -33,6 +33,14 @@
           margin: 0 20px;
           display: flex;
           align-items: center;
+          position: relative;
+          .link_wrapper {
+            position: relative;
+            display: flex;
+            height: 100%;
+            align-items: center;
+            justify-content: center;
+          }
           @media all and (max-width: 1000px) {
             margin: 0 15px;
           }
@@ -41,19 +49,30 @@
           }
           &:hover {
             cursor: pointer;
-            font-weight: normal;
-            // text-shadow: 0 0 .9px white, 0 0 .9px white, 0 0 .9px white;
+            span {
+              opacity: 0;
+              display: none;
+            }
+            a {
+              opacity: 1;
+            }
           }
-          a {
-            text-decoration: none;
+          span {
             color: white;
             height: 100%;
             display: flex;
             align-items: center;
-            margin: 0 auto;
+            justify-content: center;
+            position: absolute !important;
             &.active {
               font-weight: normal;
             }
+          }
+          a {
+            font-weight: normal;
+            color: white;
+            opacity: 0;
+            z-index: 99;
           }
         }
       }

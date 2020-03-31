@@ -36,17 +36,15 @@ export function NavigationBar (props) {
             {links.map(({name, link}, index) => 
               <li key={index}>
                 <Link href={link}>
-                <a className={styles[active === name.toLowerCase() ? 'active' : undefined]}>{name}</a>
-
-                  {/* <>
-                    <a className={styles[active === name.toLowerCase() ? 'active' : undefined]}>{name}</a>
-                    <span>{name}</span>
-                  </> */}
-                  {/* <a style={{ color: active === name.toLowerCase() ? 'red' : '', fontWeight: 600 }}>{name}</a> */}
+                  <div className={styles['link_wrapper']}>
+                    <a>{name}</a>
+                    <span className={styles[active === name.toLowerCase() ? 'active' : undefined]}>{name}</span>
+                  </div>
                 </Link>
               </li>
             )}
             <li onClick={() => scroll.scrollToBottom()}>
+              <span>CONTACT</span>
               <a>CONTACT</a>
             </li>
           </ul>
