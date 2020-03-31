@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import Link from 'next/link'
 import classNames from 'classnames'
 import { HamburgerElastic } from 'react-animated-burgers'
+import * as Scroll from 'react-scroll'
 
 import Footer from '~/components/layout/footer'
 
@@ -16,6 +17,7 @@ const links = [
   {name: 'CONTENT', link: '/content'},
   {name: 'NARRATIVE', link: '/narrative'}
 ]
+const scroll = Scroll.animateScroll
 
 export function NavigationBar (props) {
   const {
@@ -44,8 +46,8 @@ export function NavigationBar (props) {
                 </Link>
               </li>
             )}
-            <li>
-              <a onClick={() => window.scrollTo(0,document.body.scrollHeight)}>CONTACT</a>
+            <li onClick={() => scroll.scrollToBottom()}>
+              <a>CONTACT</a>
             </li>
           </ul>
         </div>
