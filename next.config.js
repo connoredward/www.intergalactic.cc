@@ -11,7 +11,9 @@ module.exports = withPlugins([
   [withSass, {
     cssModules: true
   }],
-  [withCss],
+  [withCss, {
+    cssModules: true
+  }],
   [withImages],
   [withVideos],
   [withFonts]

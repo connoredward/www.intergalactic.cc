@@ -1,74 +1,77 @@
 import React, { useState, useEffect, useRef } from 'react'
 
+import Slider from 'react-slick'
+import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md'
+import classNames from 'classnames'
+
 import styles from './styles.scss'
 
-import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md'
+const settings = {
+  dots: false,
+  // infinite: true,
+  speed: 500,
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  nextArrow: null,
+  prevArrow: null
+};
+
 
 export function VideoCarousel ({data}) {
   const [currentVideo, setCurrentVideo] = useState()
 
+  const sliderRef = useRef()
   const videoArrayRefs = useRef(data.map(() => React.createRef()))
 
   useEffect(() => {
     setCurrentVideo(0)
   }, [])
 
-  function previousVideo() {
-    const index = currentVideo <= 0 ? 3 : currentVideo - 1
-    videoArrayRefs.current[index].current.currentTime = 0
+  function restartVideo(index) {
     videoArrayRefs.current[index].current.pause()
+    videoArrayRefs.current[index].current.currentTime = 0
     videoArrayRefs.current[index].current.load()
-    setCurrentVideo(index)
   }
 
-  function nextVideo() {
-    const index = currentVideo >= data.length - 1 ? 0 : currentVideo + 1
-    videoArrayRefs.current[index].current.pause()
-    videoArrayRefs.current[index].current.currentTime = 0
-    videoArrayRefs.current[index].current.load()
-    setTimeout(() => {
-      setCurrentVideo(index)
-    }, 10)
+  function nextSlide () {
+    restartVideo(currentVideo >= data.length - 1 ? 0 : currentVideo + 1)
+    sliderRef.current.slickNext()
+  }
+
+  function prevSlide () {
+    restartVideo(currentVideo <= 0 ? data.length - 1 : currentVideo - 1)
+    sliderRef.current.slickPrev()
   }
 
   return (
     <div className={styles.main}> 
       <button 
         className={styles.prev} 
-        onClick={() => previousVideo()}
+        onClick={() => prevSlide()}
       >
         <MdKeyboardArrowLeft />
       </button>
       <button 
         className={styles.next} 
-        onClick={() => nextVideo()}
+        onClick={() => nextSlide()}
       >
         <MdKeyboardArrowRight />
       </button>
-
       {currentVideo >= 0 && (
         <div className={styles['video_slider_wrapper']}>
-          <div 
-            className={styles['current_slide']} 
-            style={{ transform: `translateX(-${100/data.length*currentVideo}%)`, width: `${data.length}00%` }}
-          >
-            {data.map(({titleImg, videoSrc}, index) => 
-              <div className={styles['slide_wrapper']} key={index}>
-                <div className={styles['slide_content']}>
-                  <img src={titleImg} />
-                </div>
-                <div className={styles['video_container']}>
-                  <video
-                    src={videoSrc}
-                    autoPlay
-                    muted
-                    ref={videoArrayRefs.current[index]}
-                    onEnded={() => nextVideo()} 
-                  />
-                </div>
+          <Slider {...settings} ref={sliderRef}>
+            {data.map(({videoSrc, titleImg}, index) => 
+              <div className={styles['slide_content_wrapper']}>
+                <img src={titleImg} />
+                <video 
+                  src={videoSrc} 
+                  ref={videoArrayRefs.current[index]} 
+                  onEnded={() => nextSlide()}
+                  autoPlay muted 
+                />
               </div>
             )}
-          </div>
+          </Slider>
         </div>
       )}
     </div>

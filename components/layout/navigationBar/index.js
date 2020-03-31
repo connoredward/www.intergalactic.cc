@@ -11,7 +11,6 @@ import styles from './styles.scss'
 import LOGO from '~/static/images/INTERGALACTIC_LOGO_WHITE.png'
 
 const links = [
-  {name: 'FEATURED WORK', link: '/featured_work'},
   {name: 'DIRECTORS', link: '/directors'},
   {name: 'MUSIC VIDEOS', link: '/music_videos'},
   {name: 'CONTENT', link: '/content'},
@@ -35,7 +34,12 @@ export function NavigationBar (props) {
             {links.map(({name, link}, index) => 
               <li key={index}>
                 <Link href={link}>
-                  <a className={styles[active === name.toLowerCase() ? 'active' : undefined]}>{name}</a>
+                <a className={styles[active === name.toLowerCase() ? 'active' : undefined]}>{name}</a>
+
+                  {/* <>
+                    <a className={styles[active === name.toLowerCase() ? 'active' : undefined]}>{name}</a>
+                    <span>{name}</span>
+                  </> */}
                   {/* <a style={{ color: active === name.toLowerCase() ? 'red' : '', fontWeight: 600 }}>{name}</a> */}
                 </Link>
               </li>

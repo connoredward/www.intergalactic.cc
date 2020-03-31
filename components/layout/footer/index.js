@@ -29,17 +29,17 @@ export function Footer ({className}) {
           <a href='https://www.facebook.com/studiointergalactic' target='_blank'>
             <img src={FB_ICON} />
           </a>
-          <a href='https://www.instagram.com/intergalacticstudio/' target='_blank'>
+          <a href='https://www.instagram.com/intergalactic.studios/' target='_blank'>
             <img src={IG_ICON} />
           </a>
-          <a href='https://vimeo.com/intergalacticstudio' target='_blank'>
+          <a href='https://vimeo.com/intergalacticstudios' target='_blank'>
             <img src={VM_ICOM} />
           </a>
         </div>
       </div>
 
       <div className={styles['footer_bottom_row']}>
-        <span className={styles.email}><span>HELLO</span>@INTERGALACTICSTUDIOS.COM</span>
+        <a className={styles.email} href="mailto:hello@intergalacticstudios.com"><span>HELLO</span>@INTERGALACTICSTUDIOS.COM</a>
         <p className={styles.address}>326a New Cross Road, SE14 6AG</p>
         <p className={styles.number}>+44 7722 052698</p>
       </div>

@@ -43,10 +43,12 @@
     }
     .email {
       font-weight: normal;
+      text-decoration: none;
+      color: white;
       &:hover {
-        cursor: default;
+        cursor: pointer;
         span {
-          color: red;
+          color: yellow;
         }
       }
     }
