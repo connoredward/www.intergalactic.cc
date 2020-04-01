@@ -18,6 +18,7 @@ export function SubDirectorPage (props) {
   } = props
 
 
+  const [banner, setBanner] = useState({})
   const [director, setDirector] = useState([])
   const [modalState, setModalState] = useState({open: false, src: ''})
 
@@ -42,7 +43,10 @@ export function SubDirectorPage (props) {
   }
 
   async function onLoad() {
-    setDirector(await getDirector(slug))
+    let directorData = await getDirector(slug)
+    setBanner(directorData[0])
+    directorData.shift()
+    setDirector(directorData)
   }
 
   function closeModal() {
@@ -53,18 +57,18 @@ export function SubDirectorPage (props) {
 
   return (
     <PageWrapper className={styles['sub_director_page']} active={'directors'}>
+      <div className={styles['director_banner']}>
+        {banner.name && (
+          <h1>{banner.name}</h1>
+        )}
+      </div>
       <VideoGrid gridType={'twoGrid'}>
         {director.map((item, index) => 
           <DirectorCard 
             {...item} 
             onClick={( )=> changeRoute(item.slug)} key={index}
-            // onClick={() => setModalState({open: true, src: item.videoLink})} 
-            className={styles['sub_director_card_wrapper']}
           >
-            {item.name 
-              ? <h1>{item.name}</h1>
-              : <img src={item.titleImg} />
-            }
+            <img src={item.titleImg} />
           </DirectorCard>
         )}
       </VideoGrid>

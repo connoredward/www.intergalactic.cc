@@ -5,7 +5,7 @@
   }
 }
 
-.director_card_wrapper, .sub_director_card_wrapper {
+.director_card_wrapper {
   h1 {
     color: white;
     font-family: 'Gotham';
@@ -15,4 +15,17 @@
 }
 .sub_director_card_wrapper {
   font-size: 35px;
+}
+
+.director_banner {
+  @media all and (max-width: 800px) {
+    margin: 100px 0 0 0;
+  }
+  h1 {
+    color: white;
+    font-family: 'Gotham';
+    font-weight: 600;
+    font-size: 68px;
+    text-align: center;
+  }
 }

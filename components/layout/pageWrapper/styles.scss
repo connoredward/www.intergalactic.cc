@@ -1,5 +1,5 @@
 .page_wrapper {
-  height: 100vh;
+  min-height: 100vh;
   // display: contents;
   @media all and (max-width: 800px) {
     height: auto;
