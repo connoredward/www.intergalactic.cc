@@ -67,6 +67,7 @@ export async function wordpressCardApi(page) {
 export async function getDirector(director) {
   const {tags, posts} = await getWordpressData()
 
+  const directorTag = tags.find(({name}) => name === 'director')
   const tagId = tags.find(({name}) => name === director.split('-').join(' ')).id
   const styleTags = tags.map(item => {
     const name = item.name
@@ -82,10 +83,9 @@ export async function getDirector(director) {
       let itemObj = item.content.rendered.split('"')
       let imgIndex = itemObj.findIndex((i) => i === " data-large-file=") + 1
       let videoIndex = itemObj.findIndex((i) => i === "video/mp4") + 2
-      if (item.tags.find(tagI => tagI !== tagId)) return {
+      if (item.tags.find(tagI => tagI === directorTag.id)) return {
         name: item.title.rendered,
-        titleImg: item._embedded && item._embedded['wp:featuredmedia'] ? item._embedded['wp:featuredmedia'][0].source_url : undefined, 
-        gridStyle: styleTags.filter(o1 => item.tags.some(o2 => o1.id === o2))[0] ? styleTags.filter(o1 => item.tags.some(o2 => o1.id === o2))[0].name : 'NOT_FOUND'
+        titleImg: item._embedded && item._embedded['wp:featuredmedia'] ? item._embedded['wp:featuredmedia'][0].source_url : undefined
       }
       return {
         // name: item.title.rendered,
@@ -94,7 +94,15 @@ export async function getDirector(director) {
         imgSrc: itemObj[imgIndex],
         titleImg: item._embedded && item._embedded['wp:featuredmedia'] ? item._embedded['wp:featuredmedia'][0].source_url : undefined, 
         videoSrc: itemObj[videoIndex],
-        videoLink: item.excerpt.rendered.match(/\bhttps?:\/\/\S+/gi) ? item.excerpt.rendered.match(/\bhttps?:\/\/\S+/gi)[0].replace(/\"/g, '') : 'NOT_FOUND'
+        videoLink: item.excerpt.rendered
+          .match(/\bhttps?:\/\/\S+/gi) ? item.excerpt.rendered
+          .match(/\bhttps?:\/\/\S+/gi)[0]
+          .replace(/\"/g, '') : 'NOT_FOUND',
+        gridStyle: styleTags
+          .filter(o1 => item.tags
+            .some(o2 => o1.id === o2))[0] ? styleTags
+            .filter(o1 => item.tags
+              .some(o2 => o1.id === o2))[0].name : 'NOT_FOUND'
       }
     })
   return move(postsFil, postsFil.findIndex((i) => !i.videoSrc), 0)
