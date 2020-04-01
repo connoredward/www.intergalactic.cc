@@ -19,12 +19,15 @@ const settings = {
 
 export function VideoCarousel ({data}) {
   const [currentVideo, setCurrentVideo] = useState()
+  const [imgAnim, setImgAnim] = useState()
 
   const sliderRef = useRef()
   const videoArrayRefs = useRef(data.map(() => React.createRef()))
 
   useEffect(() => {
     setCurrentVideo(0)
+    setTimeout(() => setImgAnim(0) , 1000)
+    
   }, [])
 
   function restartVideo(index) {
@@ -59,10 +62,10 @@ export function VideoCarousel ({data}) {
       </button>
       {currentVideo >= 0 && (
         <div className={styles['video_slider_wrapper']}>
-          <Slider {...settings} ref={sliderRef}>
+          <Slider {...settings} ref={sliderRef} afterChange={a => setImgAnim(a)}>
             {data.map(({videoSrc, titleImg}, index) => 
               <div className={styles['slide_content_wrapper']}>
-                <img src={titleImg} />
+                <img className={styles[imgAnim === index ? 'active' : undefined]} src={titleImg} />
                 <video 
                   src={videoSrc} 
                   ref={videoArrayRefs.current[index]} 

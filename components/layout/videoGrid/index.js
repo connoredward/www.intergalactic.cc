@@ -6,13 +6,12 @@ import styles from './styles.scss'
 
 export function VideoGrid(props) {
   const {
-    gridType = '',
     children,
     className
   } = props
 
   return (
-    <div className={classNames(styles.main, styles[gridType], className)}>
+    <div className={classNames(styles.main, className)}>
       {children}
     </div>
   )
