@@ -34,7 +34,8 @@
   height: -moz-calc(100vh - 60px);
   height: calc(100vh - 60px);
   @media all and (max-width: 800px) {
-    height: 100vh;
+    // height: 100vh;
+    margin-top: 60px;
   }
   img {
     width: 100%;
@@ -66,7 +67,7 @@
       top: 50%;
       transform: translate(-50%, -50%);
       width: 150%;
-      @media all and (max-width: 700px) {
+      @media all and (max-width: 1000px) {
         height: 100%;
         width: auto;
       }

@@ -21,10 +21,8 @@ export function VideoModal(props) {
   return (
     <div className={classNames(styles['modal_wrapper'], styles[openModal.open == true ? 'active' : undefined])}>
       <div className={styles['modal_background']} onClick={closeModal} />
-      
-      
+            
       <div className={styles['modal_content']}> 
-
 
         <button onClick={() => closeModal()}>close</button>
       
@@ -35,12 +33,9 @@ export function VideoModal(props) {
             <p>"VERSIONS"</p>
             <p>RHORY DANNIELLS</p>
           </div>
-        </div>
-      
-      
+        </div> 
       
       </div>
-
 
     </div>
   )
