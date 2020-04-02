@@ -21,14 +21,27 @@ export function VideoModal(props) {
   return (
     <div className={classNames(styles['modal_wrapper'], styles[openModal.open == true ? 'active' : undefined])}>
       <div className={styles['modal_background']} onClick={closeModal} />
+      
+      
       <div className={styles['modal_content']}> 
+
+
         <button onClick={() => closeModal()}>close</button>
+      
         <div className={styles['video_wrapper']}>
-          {videoSrc && (
-            <Vimeo video={videoSrc} />
-          )}
+          {videoSrc && (<Vimeo video={videoSrc} />)}
+          <div className={styles['text_wrapper']}>
+            <p>title here</p>
+            <p>"name here"</p>
+            <p>author here</p>
+          </div>
         </div>
+      
+      
+      
       </div>
+
+
     </div>
   )
 }
