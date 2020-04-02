@@ -31,9 +31,9 @@ export function VideoModal(props) {
         <div className={styles['video_wrapper']}>
           {videoSrc && (<Vimeo video={videoSrc} />)}
           <div className={styles['text_wrapper']}>
-            <p>title here</p>
-            <p>"name here"</p>
-            <p>author here</p>
+            <p>DOZENS</p>
+            <p>"VERSIONS"</p>
+            <p>RHORY DANNIELLS</p>
           </div>
         </div>
       
