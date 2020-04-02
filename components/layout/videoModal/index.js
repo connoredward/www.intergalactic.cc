@@ -1,8 +1,8 @@
 import {useEffect, useState} from 'react'
 
-import Vimeo from '@u-wave/react-vimeo';
-
+import Vimeo from '@u-wave/react-vimeo'
 import classNames from 'classnames'
+import { MdClose } from 'react-icons/md'
 
 import  styles from './styles.scss'
 
@@ -24,7 +24,7 @@ export function VideoModal(props) {
             
       <div className={styles['modal_content']}> 
 
-        <button onClick={() => closeModal()}>close</button>
+        <button onClick={() => closeModal()}><MdClose /></button>
       
         <div className={styles['video_wrapper']}>
           {videoSrc && (<Vimeo video={videoSrc} />)}
