@@ -64,7 +64,7 @@ export function VideoCarousel ({data}) {
         <div className={styles['video_slider_wrapper']}>
           <Slider {...settings} ref={sliderRef} afterChange={a => setImgAnim(a)}>
             {data.map(({videoSrc, titleImg}, index) => 
-              <div className={styles['slide_content_wrapper']}>
+              <div className={styles['slide_content_wrapper']} key={index}>
                 <img className={styles[imgAnim === index ? 'active' : undefined]} src={titleImg} />
                 <video 
                   src={videoSrc} 
