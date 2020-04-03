@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 
-import Link from 'next/link'
-import Router, { useRouter, withRouter } from 'next/router'
+import Router from 'next/router'
 
 import PageWrapper from '~/components/layout/pageWrapper'
 import VideoGrid from '~/components/layout/videoGrid'
@@ -16,7 +15,6 @@ export function SubDirectorPage (props) {
     slug, 
     v = '',
   } = props
-
 
   const [banner, setBanner] = useState({})
   const [director, setDirector] = useState([])

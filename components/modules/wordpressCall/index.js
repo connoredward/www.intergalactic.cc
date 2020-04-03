@@ -53,6 +53,7 @@ export async function wordpressCardApi(page) {
         name: item.title.rendered,
         desc: item.excerpt.rendered,
         imgSrc: itemObj[imgIndex],
+        slug: item.slug,
         titleImg: item._embedded && item._embedded['wp:featuredmedia'] ? item._embedded['wp:featuredmedia'][0].source_url : undefined, 
         videoSrc: itemObj[videoIndex],
         videoLink: item.excerpt.rendered.match(/\bhttps?:\/\/\S+/gi) ? item.excerpt.rendered.match(/\bhttps?:\/\/\S+/gi)[0] : 'NOT_FOUND',
