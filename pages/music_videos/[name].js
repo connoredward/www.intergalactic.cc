@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react'
 import PageWrapper from '~/components/layout/pageWrapper'
 
 export function SubMusicVideoPage ({ slug }) {
-  console.log('name', slug)
   return (
     <PageWrapper active={'music videos'}>
       {/* <VideoBanner {...data}>

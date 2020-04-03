@@ -1,5 +1,4 @@
 export function SubContentPage ({ slug }) {
-  console.log('name', slug)
   return (
     <div>
       {slug}

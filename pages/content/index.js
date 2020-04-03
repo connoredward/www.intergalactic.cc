@@ -19,8 +19,6 @@ export function ContentPage() {
     setContentList(await wordpressCardApi('content'))
   }
 
-  console.log(contentList)
-
   return (
     <PageWrapper active={'content'}>
       <VideoGrid gridType={'flexGrid'}>

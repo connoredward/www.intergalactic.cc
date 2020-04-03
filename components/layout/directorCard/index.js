@@ -12,11 +12,12 @@ export function DirectorCard(props) {
     gridStyle
   } = props
 
-  console.log(gridStyle)
+  const {row = 1, column = 1} = gridStyle
+
   return (
     <div 
-      className={classNames(styles.main, className, styles[gridStyle])} 
-      style={{ backgroundImage: `url(${imgSrc})` }}
+      className={classNames(styles.main, className)} 
+      style={{ backgroundImage: `url(${imgSrc})`, gridColumn: `span ${column}`, gridRow: `span ${row}` }}
       onClick={onClick}
       >
       <div className={styles['card_content']}>

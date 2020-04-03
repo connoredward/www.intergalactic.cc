@@ -71,10 +71,9 @@ export async function getDirector(director) {
   const tagId = tags.find(({name}) => name === director.split('-').join(' ')).id
   const styleTags = tags.map(item => {
     const name = item.name
-    if (name === 'big' || name === 'wide' || name === 'tall') return {...item}
+    if (name.includes('row') || name.includes('column')) return {...item}
     return {}
   }).filter(value => Object.keys(value).length !== 0)
-  
   const postsFil = posts 
     .filter(({tags}) => {
       return tags.includes(tagId)
@@ -94,15 +93,19 @@ export async function getDirector(director) {
         imgSrc: itemObj[imgIndex],
         titleImg: item._embedded && item._embedded['wp:featuredmedia'] ? item._embedded['wp:featuredmedia'][0].source_url : undefined, 
         videoSrc: itemObj[videoIndex],
-        videoLink: item.excerpt.rendered
-          .match(/\bhttps?:\/\/\S+/gi) ? item.excerpt.rendered
-          .match(/\bhttps?:\/\/\S+/gi)[0]
-          .replace(/\"/g, '') : 'NOT_FOUND',
-        gridStyle: styleTags
-          .filter(o1 => item.tags
-            .some(o2 => o1.id === o2))[0] ? styleTags
-            .filter(o1 => item.tags
-              .some(o2 => o1.id === o2))[0].name : 'NOT_FOUND'
+        videoLink: item.excerpt.rendered.match(/\bhttps?:\/\/\S+/gi) 
+          ? item.excerpt.rendered.match(/\bhttps?:\/\/\S+/gi)[0].replace(/\"/g, '') 
+          : 'NOT_FOUND',
+        gridStyle: styleTags.filter(o1 => item.tags.some(o2 => o1.id === o2))
+          ? styleTags.filter(o1 => item.tags.some(o2 => o1.id === o2)).map(({name}) => {
+              let val = parseInt(name.replace( /[^\d.]/g, '' ))
+              if (name.includes('row')) return {row: val}
+              else return {column: val}
+            }).reduce(function(acc, x) {
+              for (var key in x) acc[key] = x[key];
+              return acc;
+            }, {})
+          : 'NOT_FOUND'
       }
     })
   return move(postsFil, postsFil.findIndex((i) => !i.videoSrc), 0)
