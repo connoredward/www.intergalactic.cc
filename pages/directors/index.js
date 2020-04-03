@@ -19,7 +19,7 @@ export function DirectorsPage() {
   }, [])
 
   async function onLoad() {
-    setDirectorsList(await wordpressCardApi('director'))
+    setDirectorsList(await wordpressCardApi('directors'))
   }
 
   return (

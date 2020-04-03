@@ -17,13 +17,10 @@ export default function MainPage() {
   async function onLoad() {
     setVideoData(await getHomePageVideos())
   }
-
+  
   return (
     <PageWrapper>
-      {videoData && (
-        <VideoCorousel data={videoData}/>
-        // <InfiniteSlider data={videoData} />
-      )}
+      {videoData && (<VideoCorousel data={videoData}/>)}
     </PageWrapper>
   )
 }

@@ -37,17 +37,14 @@ export async function getHomePageVideos() {
 
 export async function wordpressCardApi(page) {
   const {posts, categories, tags} = await getWordpressData()
-
-  const catId = categories.find(({name}) => name === page + 's') ? categories.find(({name}) => name === page + 's').id : 'NOT_FOUND'
-  const tagId = tags.find(({name}) => name === page) ? tags.find(({name}) => name === page).id : 'NOT_FOUND'
-
+  const catId = categories.find(({name}) => name === page) ? categories.find(({name}) => name === page).id : 'NOT_FOUND'
   const styleTags = tags.map(item => {
     const name = item.name
     if (name === 'big' || name === 'wide' || name === 'tall') return {...item}
     return {}
   }).filter(value => Object.keys(value).length !== 0)
     
-  return posts.filter(({tags, categories}) => {return categories.includes(catId) || tags.includes(tagId)})
+  return posts.filter(({categories}) => {return categories.includes(catId)})
     .map((item) => {
       let itemObj = item.content.rendered.split('"')
       let imgIndex = itemObj.findIndex((i) => i === " data-large-file=") + 1
