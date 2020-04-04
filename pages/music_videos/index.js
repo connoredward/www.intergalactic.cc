@@ -37,8 +37,8 @@ export function MusicVideosPage (props) {
     setModalState({open: true, src: await getVimeoVideo(videoSlug)})
   }
 
-  async function startVideo(videoUrl) {
-    setModalState({open: true, src: await getVimeoVideo(videoUrl)})
+  async function startVideo(videoSlug) {
+    setModalState({open: true, src: await getVimeoVideo(videoSlug)})
   }
 
   function closeModal() {

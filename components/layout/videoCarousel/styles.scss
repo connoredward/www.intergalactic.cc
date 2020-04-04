@@ -58,6 +58,9 @@
     height: -webkit-calc(100vh - 60px);
     height: -moz-calc(100vh - 60px);
     height: calc(100vh - 60px);
+    &:hover {
+      cursor: pointer;
+    }
     @media all and (max-width: 800px) {
       height: 100vh;
     } 

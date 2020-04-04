@@ -29,6 +29,7 @@ export async function getHomePageVideos() {
   return posts.filter(({categories}) => categories.includes(catId))
     .map((item) => {
       return {
+        slug: item.slug,
         titleImg: item._embedded && item._embedded['wp:featuredmedia'] ? item._embedded['wp:featuredmedia'][0].source_url : undefined,
         videoSrc: item.content.rendered.match(/\bhttps?:\/\/\S+/gi)[0].split('"')[0]
       }

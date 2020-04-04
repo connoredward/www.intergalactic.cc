@@ -17,7 +17,7 @@ const settings = {
 };
 
 
-export function VideoCarousel ({data}) {
+export function VideoCarousel ({data, onClick}) {
   const [currentVideo, setCurrentVideo] = useState()
   const [imgAnim, setImgAnim] = useState()
 
@@ -63,8 +63,8 @@ export function VideoCarousel ({data}) {
       {currentVideo >= 0 && (
         <div className={styles['video_slider_wrapper']}>
           <Slider {...settings} ref={sliderRef} afterChange={a => setImgAnim(a)}>
-            {data.map(({videoSrc, titleImg}, index) => 
-              <div className={styles['slide_content_wrapper']} key={index}>
+            {data.map(({videoSrc, titleImg, slug}, index) => 
+              <div className={styles['slide_content_wrapper']} key={index} onClick={() => onClick(slug)}>
                 <img className={styles[imgAnim === index ? 'active' : undefined]} src={titleImg} />
                 <video 
                   src={videoSrc} 
