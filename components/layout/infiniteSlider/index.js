@@ -1,35 +1,42 @@
 import React, { useState, useEffect, useRef } from 'react'
 
-import Slider from 'react-slick'
-
-const settings = {
-  dots: false,
-  infinite: true,
-  speed: 500,
-  slidesToShow: 1,
-  slidesToScroll: 1
-}
+import { Carousel } from 'react-responsive-carousel'
 
 export function InfiniteSlider({data}) {
   const sliderRef = useRef()
   const videoArrayRefs = useRef(data.map(() => React.createRef()))
-
-  function nextSlide() {
-    videoArrayRefs.current[0].current.play()
-    sliderRef.current.slickNext()
-  }
   
-
+  function onChange(index,b,c) {
+    videoArrayRefs.current[0].current.pause()
+    console.log(videoArrayRefs.current[0].current)
+    console.log('index', index)
+    console.log(videoArrayRefs)
+    videoArrayRefs.current[index].current.pause()
+    videoArrayRefs.current[index].current.currentTime = 0
+    videoArrayRefs.current[index].current.load()
+  }
+  function onClickItem(a,b,c) {
+    console.log(a,b,c)
+  }
+  function onClickThumb(a,b,c) {
+    console.log(a,b,c)
+  }
 
   return (
-    <div>
-      <button onClick={() => nextSlide()}>next</button>
-      <Slider {...settings} ref={sliderRef}>
-        <video src={data[0].videoSrc} ref={videoArrayRefs.current[0]} autoPlay muted /> 
-        <video src={data[1].videoSrc} ref={videoArrayRefs.current[1]} autoPlay muted />
-        {/* {data.map(({videoSrc}, index) => <video key={index} src={videoSrc} ref={videoArrayRefs.current[index]} autoPlay muted />)} */}
-      </Slider>
-    </div>
+    <Carousel 
+      showArrows={true} 
+      infiniteLoop={true}
+      onChange={onChange} 
+      showThumbs={false}
+      // onClickItem={onClickItem} 
+      // onClickThumb={onClickThumb}
+    >
+      {data.map(({videoSrc}, index) => 
+        <div key={index}>
+          <video src={videoSrc} autoPlay muted ref={videoArrayRefs.current[index]} />
+        </div>
+      )}
+    </Carousel>
   )
 }
 

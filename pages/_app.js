@@ -3,6 +3,8 @@ import App from 'next/app'
 
 import './global.scss'
 
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+
 class Base extends App {
   render () {
     const { Component, pageProps } = this.props
