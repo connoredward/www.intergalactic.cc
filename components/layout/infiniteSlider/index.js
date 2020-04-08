@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 
 import { Carousel } from 'react-responsive-carousel'
 
-
+import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md'
 
 import styles from './styles.scss'
 
@@ -68,8 +68,8 @@ export function InfiniteSlider({data}) {
     <div>
 
       <div className={styles.container}>
-        <button className={styles.next} onClick={() => nextClick()}>keyboard_arrow_right</button>
-        <button className={styles.prev} onClick={() => prevClick()}>keyboard_arrow_left</button>
+        <button className={styles.prev} onClick={() => prevClick()}><MdKeyboardArrowLeft /></button>
+        <button className={styles.next} onClick={() => nextClick()}><MdKeyboardArrowRight /></button>
         <div className={styles.carousel} style={{ justifyContent: carouselStyling }}>
           <div ref={sliderRef} className={styles.slider} style={{ transform: `translate(${sliderTransform})`, transition: sliderTransition }}>
             {data.map(({videoSrc}, index) => 
