@@ -12,6 +12,7 @@ export function InfiniteSlider({data}) {
   const videoArrayRefs = useRef(data.map(() => React.createRef()))
 
   const [direction, setDirection] = useState(0)
+  const directionRef = useRef(direction)
 
   const [carouselStyling, setCourselStyling] = useState('flex-start')
   const [sliderTransform, setSliderTransform] = useState('0%')
@@ -19,7 +20,6 @@ export function InfiniteSlider({data}) {
 
   const [currentSlide, setCurrentSlide] = useState(0)
 
-  const directionRef = useRef(direction)
 
 
   useEffect(() => {
@@ -40,12 +40,16 @@ export function InfiniteSlider({data}) {
     }
   }, [sliderRef])
 
+  function videoPlayBack(index) {
+    videoArrayRefs.current[index].current.pause()
+    videoArrayRefs.current[index].current.currentTime = 0
+    videoArrayRefs.current[index].current.load()
+  }
+
   function nextClick() {
     const newIndex = currentSlide === 2 ? 0 : currentSlide + 1
     setCurrentSlide(newIndex)
-    videoArrayRefs.current[currentSlide].current.pause()
-    videoArrayRefs.current[currentSlide].current.currentTime = 0
-    videoArrayRefs.current[currentSlide].current.load()
+    videoPlayBack(newIndex)
   
     setDirection(-1)
     directionRef.current = -1
@@ -56,10 +60,7 @@ export function InfiniteSlider({data}) {
   function prevClick() {
     const newIndex = currentSlide === 0 ? 2 : currentSlide - 1
     setCurrentSlide(newIndex)
-    videoArrayRefs.current[currentSlide].current.pause()
-    videoArrayRefs.current[currentSlide].current.currentTime = 0
-    videoArrayRefs.current[currentSlide].current.load()
-    
+    videoPlayBack(newIndex)
     
     if (direction === -1) {
       setDirection(1)
@@ -77,7 +78,9 @@ export function InfiniteSlider({data}) {
         <button className={styles.prev} onClick={() => prevClick()}><MdKeyboardArrowLeft /></button>
         <button className={styles.next} onClick={() => nextClick()}><MdKeyboardArrowRight /></button>
         <div className={styles.carousel} style={{ justifyContent: carouselStyling }}>
-          <div ref={sliderRef} className={styles.slider} style={{ transform: `translate(${sliderTransform})`, transition: sliderTransition }}>
+          <div ref={sliderRef} className={styles.slider} 
+            style={{ transform: `translate(${sliderTransform})`, transition: sliderTransition, width: `${data.length}00%` }}
+          >
             {data.map(({videoSrc}, index) => 
               <section>
                 <video src={videoSrc} autoPlay muted ref={videoArrayRefs.current[index]}  />
