@@ -32,7 +32,7 @@ export function InfiniteSlider({data}) {
         setTimeout(() => {
           setSliderTransition('all 1s')
         }, 100)
-      })
+      }, false)
     }
   }, [sliderRef])
 
@@ -45,7 +45,7 @@ export function InfiniteSlider({data}) {
   
     setDirection(-1)
     setCourselStyling('flex-start')
-    setSliderTransform('-20%')
+    setSliderTransform('-33%')
   }
 
   function prevClick() {
@@ -54,19 +54,22 @@ export function InfiniteSlider({data}) {
     videoArrayRefs.current[currentSlide].current.pause()
     videoArrayRefs.current[currentSlide].current.currentTime = 0
     videoArrayRefs.current[currentSlide].current.load()
-
+    
+    
     if (direction === -1) {
       setDirection(1)
       sliderRef.current.appendChild(sliderRef.current.firstElementChild)
     }
     setCourselStyling('flex-end')
-    setSliderTransform('20%')
+    setSliderTransform('33%')
   }
 
   return (
     <div>
 
       <div className={styles.container}>
+        <button className={styles.next} onClick={() => nextClick()}>keyboard_arrow_right</button>
+        <button className={styles.prev} onClick={() => prevClick()}>keyboard_arrow_left</button>
         <div className={styles.carousel} style={{ justifyContent: carouselStyling }}>
           <div ref={sliderRef} className={styles.slider} style={{ transform: `translate(${sliderTransform})`, transition: sliderTransition }}>
             {data.map(({videoSrc}, index) => 
@@ -74,10 +77,6 @@ export function InfiniteSlider({data}) {
                 <video src={videoSrc} autoPlay muted ref={videoArrayRefs.current[index]} onEnded={() => nextClick()} />
               </section>
             )}
-          </div>
-          <div className={styles.controls}>
-            <button className={styles.next} onClick={() => nextClick()}>keyboard_arrow_right</button>
-            <button className={styles.prev} onClick={() => prevClick()}>keyboard_arrow_left</button>
           </div>
         </div>
 </div>
