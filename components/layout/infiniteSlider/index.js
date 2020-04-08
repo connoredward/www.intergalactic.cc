@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react'
 
 import { Carousel } from 'react-responsive-carousel'
-
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md'
 
 import styles from './styles.scss'
 
 
 export function InfiniteSlider({data}) {
+  console.log(data)
   const sliderRef = useRef()
   const videoArrayRefs = useRef(data.map(() => React.createRef()))
 
@@ -19,8 +19,6 @@ export function InfiniteSlider({data}) {
   const [sliderTransition, setSliderTransition] = useState('all 1s')
 
   const [currentSlide, setCurrentSlide] = useState(0)
-
-
 
   useEffect(() => {
     if (sliderRef.current) {
@@ -36,7 +34,7 @@ export function InfiniteSlider({data}) {
         setTimeout(() => {
           setSliderTransition('all 1s')
         }, 100)
-      }, false)
+      })
     }
   }, [sliderRef])
 
@@ -48,18 +46,20 @@ export function InfiniteSlider({data}) {
 
   function nextClick() {
     const newIndex = currentSlide === 2 ? 0 : currentSlide + 1
-    setCurrentSlide(newIndex)
+    setTimeout(() => setCurrentSlide(newIndex),1000)
+    
     videoPlayBack(newIndex)
-  
+    
     setDirection(-1)
     directionRef.current = -1
     setCourselStyling('flex-start')
     setSliderTransform(`-${100 / data.length}%`)
+    
   }
 
   function prevClick() {
     const newIndex = currentSlide === 0 ? 2 : currentSlide - 1
-    setCurrentSlide(newIndex)
+    setTimeout(() => setCurrentSlide(newIndex),1000)
     videoPlayBack(newIndex)
     
     if (direction === -1) {
@@ -81,10 +81,10 @@ export function InfiniteSlider({data}) {
           <div ref={sliderRef} className={styles.slider} 
             style={{ transform: `translate(${sliderTransform})`, transition: sliderTransition, width: `${data.length}00%` }}
           >
-            {data.map(({videoSrc}, index) => 
-              <section>
-                <video src={videoSrc} autoPlay muted ref={videoArrayRefs.current[index]}  />
-                {/* onEnded={() => nextClick()} */}
+            {data.map(({videoSrc, titleImg}, index) => 
+              <section key={index}>
+                <img src={titleImg} className={styles[currentSlide === index ? 'active' : undefined]} />
+                <video src={videoSrc} autoPlay muted ref={videoArrayRefs.current[index]} onEnded={() => nextClick()} />
               </section>
             )}
           </div>
