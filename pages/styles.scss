@@ -1,0 +1,12 @@
+.desktop_slider {
+  display: block;
+  @media all and (max-width: 800px) {
+    display: none;
+  }
+}
+.mobile_slider {
+  display: none;
+  @media all and (max-width: 800px) {
+    display: block;
+  }
+}

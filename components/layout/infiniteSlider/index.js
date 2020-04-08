@@ -1,13 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react'
 
-import { Carousel } from 'react-responsive-carousel'
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md'
+import classNames from 'classnames'
 
 import styles from './styles.scss'
 
-
-export function InfiniteSlider({data}) {
-  console.log(data)
+export function InfiniteSlider({data, className}) {
   const sliderRef = useRef()
   const videoArrayRefs = useRef(data.map(() => React.createRef()))
 
@@ -72,55 +70,21 @@ export function InfiniteSlider({data}) {
   }
 
   return (
-    <div>
-
-      <div className={styles.container}>
-        <button className={styles.prev} onClick={() => prevClick()}><MdKeyboardArrowLeft /></button>
-        <button className={styles.next} onClick={() => nextClick()}><MdKeyboardArrowRight /></button>
-        <div className={styles.carousel} style={{ justifyContent: carouselStyling }}>
-          <div ref={sliderRef} className={styles.slider} 
-            style={{ transform: `translate(${sliderTransform})`, transition: sliderTransition, width: `${data.length}00%` }}
-          >
-            {data.map(({videoSrc, titleImg}, index) => 
-              <section key={index}>
-                <img src={titleImg} className={styles[currentSlide === index ? 'active' : undefined]} />
-                <video src={videoSrc} autoPlay muted ref={videoArrayRefs.current[index]} onEnded={() => nextClick()} />
-              </section>
-            )}
-          </div>
+    <div className={classNames(styles.container, className)}>
+      <button className={styles.prev} onClick={() => prevClick()}><MdKeyboardArrowLeft /></button>
+      <button className={styles.next} onClick={() => nextClick()}><MdKeyboardArrowRight /></button>
+      <div className={styles.carousel} style={{ justifyContent: carouselStyling }}>
+        <div ref={sliderRef} className={styles.slider} 
+          style={{ transform: `translate(${sliderTransform})`, transition: sliderTransition, width: `${data.length}00%` }}
+        >
+          {data.map(({videoSrc, titleImg}, index) => 
+            <section key={index}>
+              <img src={titleImg} className={styles[currentSlide === index ? 'active' : undefined]} />
+              <video src={videoSrc} autoPlay muted ref={videoArrayRefs.current[index]} onEnded={() => nextClick()} />
+            </section>
+          )}
         </div>
-</div>
-
-
-
-      {/* <Carousel 
-        className={styles['desktop_carousel']}
-        ref={sliderRef}
-        showArrows={true} 
-        infiniteLoop={true}
-        onChange={onChange} 
-        showThumbs={false}
-        transitionTime={speed}
-        dots={false}
-      >
-        {data.map(({videoSrc}, index) => 
-          <div className={styles['slide_wrapper']} key={index}>
-            <video src={videoSrc} autoPlay muted ref={videoArrayRefs.current[index]} onEnded={() => nextSlide(index)} />
-          </div>
-        )}
-      </Carousel> */}
-
-      {/* <Carousel 
-        axis="vertical" 
-        verticalSwipe="natural" 
-        emulateTouch
-      >
-        {data.map(({videoSrc}, index) => 
-          <div className={styles['slide_wrapper']} key={index}>
-            <video src={videoSrc} autoPlay muted ref={videoArrayRefs.current[index]} />
-          </div>
-        )}
-      </Carousel> */}
+      </div>
     </div>
   )
 }

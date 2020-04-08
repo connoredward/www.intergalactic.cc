@@ -5,11 +5,14 @@ import Router from 'next/router'
 import PageWrapper from '~/components/layout/pageWrapper'
 import VideoCorousel from '~/components/layout/videoCarousel'
 import InfiniteSlider from '~/components/layout/infiniteSlider'
+import MobileSlider from '~/components/layout/mobileSlider'
 
 
 import VideoModal from '~/components/layout/videoModal'
 
 import { getHomePageVideos, getVimeoVideo } from '~/components/modules/wordpressCall'
+
+import styles from './styles.scss'
 
 export function MainPage(props) {
   const {v = ''} = props
@@ -50,8 +53,11 @@ export function MainPage(props) {
   return (
     <PageWrapper>
       {videoData && (
-        // <VideoCorousel onClick={url => changeRoute(url)} data={videoData}/>
-        <InfiniteSlider data={videoData} />
+        <>
+        {/* <VideoCorousel onClick={url => changeRoute(url)} data={videoData}/> */}
+          <InfiniteSlider className={styles['desktop_slider']} data={videoData} />
+          <MobileSlider className={styles['mobile_slider']} data={videoData} />
+        </>
       )}
       <VideoModal openModal={modalState} closeModal={() => closeModal()} />
     </PageWrapper>
