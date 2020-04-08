@@ -1,0 +1,91 @@
+.desktop_carousel {
+  @media all and (max-width: 800px) {
+    display: none;
+  }
+  video {
+    width: 150%;
+    height: auto !important;
+  }
+}
+
+.mobile_coursel {
+  display: none;
+  @media all and (max-width: 800px) {
+    display: block !important;
+  }
+}
+
+.slide_wrapper {
+  position: relative;
+  overflow: hidden;
+  height: -webkit-calc(100vh - 60px);
+  height: -moz-calc(100vh - 60px);
+  height: calc(100vh - 60px);
+  video {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    height: 100%;
+  }
+}
+
+
+
+
+
+.container {
+
+}
+.carousel {
+  width: 100%;
+  height: calc(100vh - 60px);
+  display: flex;
+  overflow: hidden;
+  position: relative;
+}
+.slider {
+  display: flex;
+  height: 100%;
+  width: 500%;
+  flex-shrink: 0;
+}
+section {
+  flex-basis: 20%;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  position: relative;
+  overflow: hidden;
+  video {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%)
+  } 
+}
+.controls button.next {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  color: #c058dc;
+}
+.controls button.prev {
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  color: #c058dc;
+}
+.controls button i {
+  font-size: 50px;
+}
