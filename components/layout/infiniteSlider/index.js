@@ -11,7 +11,7 @@ export function InfiniteSlider({data}) {
   const sliderRef = useRef()
   const videoArrayRefs = useRef(data.map(() => React.createRef()))
 
-  const [direction, setDirection] = useState()
+  const [direction, setDirection] = useState(0)
 
   const [carouselStyling, setCourselStyling] = useState('flex-start')
   const [sliderTransform, setSliderTransform] = useState('0%')
@@ -19,10 +19,14 @@ export function InfiniteSlider({data}) {
 
   const [currentSlide, setCurrentSlide] = useState(0)
 
+  const directionRef = useRef(direction)
+
+
   useEffect(() => {
     if (sliderRef.current) {
       sliderRef.current.addEventListener('transitionend', function () {
-        if (direction === 1) {
+        const {current} = directionRef
+        if (current === 1) {
           sliderRef.current.prepend(sliderRef.current.lastElementChild)
         } else {
           sliderRef.current.appendChild(sliderRef.current.firstElementChild)
@@ -44,8 +48,9 @@ export function InfiniteSlider({data}) {
     videoArrayRefs.current[currentSlide].current.load()
   
     setDirection(-1)
+    directionRef.current = -1
     setCourselStyling('flex-start')
-    setSliderTransform('-33%')
+    setSliderTransform(`-${100 / data.length}%`)
   }
 
   function prevClick() {
@@ -58,10 +63,11 @@ export function InfiniteSlider({data}) {
     
     if (direction === -1) {
       setDirection(1)
+      directionRef.current = 1
       sliderRef.current.appendChild(sliderRef.current.firstElementChild)
     }
     setCourselStyling('flex-end')
-    setSliderTransform('33%')
+    setSliderTransform(`${100 / data.length}%`)
   }
 
   return (
@@ -74,7 +80,8 @@ export function InfiniteSlider({data}) {
           <div ref={sliderRef} className={styles.slider} style={{ transform: `translate(${sliderTransform})`, transition: sliderTransition }}>
             {data.map(({videoSrc}, index) => 
               <section>
-                <video src={videoSrc} autoPlay muted ref={videoArrayRefs.current[index]} onEnded={() => nextClick()} />
+                <video src={videoSrc} autoPlay muted ref={videoArrayRefs.current[index]}  />
+                {/* onEnded={() => nextClick()} */}
               </section>
             )}
           </div>
