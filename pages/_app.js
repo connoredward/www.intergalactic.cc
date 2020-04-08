@@ -4,6 +4,8 @@ import App from 'next/app'
 import './global.scss'
 
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import 'pure-react-carousel/dist/react-carousel.es.css';
+
 
 class Base extends App {
   render () {
