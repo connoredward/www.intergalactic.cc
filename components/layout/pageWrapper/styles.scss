@@ -2,6 +2,7 @@
   min-height: 100vh;
   // display: contents;
   @media all and (max-width: 800px) {
+    min-height: auto;
     height: auto;
   }
 }

@@ -12,7 +12,7 @@ export function PageWrapper({ children, active, className }) {
         <NavigationBar active={active} />
         {children}
       </div>
-      <Footer />
+      <Footer className={styles['mobile_footer']} />
     </>
   )
 }
