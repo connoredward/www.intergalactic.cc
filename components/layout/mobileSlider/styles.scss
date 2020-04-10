@@ -16,5 +16,30 @@
       transform: translate(-50%, -50%);
       height: 100%;
     }
+    img {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      min-width: 300px;
+      z-index: 99;
+      opacity: 0;
+      &.active {
+        animation-name: fadeInOpacity;
+        animation-fill-mode: forwards;
+        animation-duration: .5s;
+      }
+    }
+  }
+}
+
+
+@keyframes fadeInOpacity {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }

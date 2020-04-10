@@ -5,29 +5,34 @@ import classNames from 'classnames'
 
 import styles from './styles.scss'
 
-const settings = {
-  dots: false,
-  infinite: true,
-  slidesToShow: 1,
-  slidesToScroll: 1,
-  vertical: true,
-  verticalSwiping: true,
-  arrows: false,
-  beforeChange: (currentSlide,  nextSlide) => {
-    console.log(currentSlide, nextSlide)
-  },
-  afterChange: (currentSlide) => {
-    console.log(currentSlide)
-  }
-}
 
 export function MobileSlider({data, className}) {
-  const sliderRef = useRef()
+  const [currentSlide, setCurrentSlide] = useState(0)
+
+  const settings = {
+    dots: false,
+    infinite: true,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    vertical: true,
+    verticalSwiping: true,
+    arrows: false,
+    beforeChange: beforeChange,
+    afterChange: afterChange
+  }
+
+  function beforeChange(currentSlide, nextSlide) {
+  }
+
+  function afterChange(currentSlide) {
+    setCurrentSlide(currentSlide)
+  }
 
   return (
     <Slider {...settings} className={classNames(styles['slider_wrapper'], className)}>
-      {data.map(({videoSrc}, index) => 
+      {data.map(({videoSrc, titleImg}, index) => 
         <div key={index} className={styles['slide_content']}>
+          <img src={titleImg} className={styles[currentSlide === index ? 'active' : undefined]} />
           <video src={videoSrc} autoPlay muted />
         </div>
       )}
