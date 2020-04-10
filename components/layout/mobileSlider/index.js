@@ -33,7 +33,9 @@ export function MobileSlider({data, className}) {
       {data.map(({videoSrc, titleImg}, index) => 
         <div key={index} className={styles['slide_content']}>
           <img src={titleImg} className={styles[currentSlide === index ? 'active' : undefined]} />
-          <video src={videoSrc} autoPlay loop muted playsInline />
+          <video autoPlay loop muted playsInline>
+            <source src={videoSrc} type="video/mp4" />
+          </video>
         </div>
       )}
     </Slider>
