@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react'
 import Router from 'next/router'
 
 import PageWrapper from '~/components/layout/pageWrapper'
-import VideoCorousel from '~/components/layout/videoCarousel'
 import InfiniteSlider from '~/components/layout/infiniteSlider'
 import MobileSlider from '~/components/layout/mobileSlider'
 
@@ -54,9 +53,8 @@ export function MainPage(props) {
     <PageWrapper>
       {videoData && (
         <>
-        {/* <VideoCorousel onClick={url => changeRoute(url)} data={videoData}/> */}
-          <InfiniteSlider className={styles['desktop_slider']} data={videoData} />
-          <MobileSlider className={styles['mobile_slider']} data={videoData} />
+          <InfiniteSlider onClick={url => changeRoute(url)} className={styles['desktop_slider']} data={videoData} />
+          <MobileSlider onClick={url => changeRoute(url)} className={styles['mobile_slider']} data={videoData} />
         </>
       )}
       <VideoModal openModal={modalState} closeModal={() => closeModal()} />

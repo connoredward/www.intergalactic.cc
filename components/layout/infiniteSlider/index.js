@@ -5,7 +5,7 @@ import classNames from 'classnames'
 
 import styles from './styles.scss'
 
-export function InfiniteSlider({data, className}) {
+export function InfiniteSlider({data, className, onClick}) {
   const sliderRef = useRef()
   const videoArrayRefs = useRef(data.map(() => React.createRef()))
 
@@ -77,8 +77,8 @@ export function InfiniteSlider({data, className}) {
         <div ref={sliderRef} className={styles.slider} 
           style={{ transform: `translate(${sliderTransform})`, transition: sliderTransition, width: `${data.length}00%` }}
         >
-          {data.map(({videoSrc, titleImg}, index) => 
-            <section key={index}>
+          {data.map(({videoSrc, titleImg, slug}, index) => 
+            <section key={index} onClick={() => onClick(slug)}>
               <img src={titleImg} className={styles[currentSlide === index ? 'active' : undefined]} />
               <video src={videoSrc} autoPlay muted ref={videoArrayRefs.current[index]} onEnded={() => nextClick()} />
             </section>
