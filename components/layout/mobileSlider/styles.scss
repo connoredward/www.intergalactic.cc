@@ -1,12 +1,20 @@
-.slide_wrapper {
-  position: relative;
-  overflow: hidden;
-  height: calc(100vh - 60px);
-  video {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    height: 100%;
+.slider_wrapper {
+  :global {
+    .slick-list {
+      height: calc(100vh - 60px) !important;
+    }
+  }
+  .slide_content {
+    position: relative;
+    overflow: hidden;
+    height: calc(100vh - 60px);
+    width: 100%;
+    video {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      height: 100%;
+    }
   }
 }
