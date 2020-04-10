@@ -18,6 +18,8 @@ export function InfiniteSlider({data, className, onClick}) {
 
   const [currentSlide, setCurrentSlide] = useState(0)
 
+  const [blockNext, setBlockNext] = useState(false)
+
   useEffect(() => {
     if (sliderRef.current) {
       sliderRef.current.addEventListener('transitionend', function () {
@@ -27,11 +29,11 @@ export function InfiniteSlider({data, className, onClick}) {
         } else {
           sliderRef.current.appendChild(sliderRef.current.firstElementChild)
         }
+        setBlockNext(true)
         setSliderTransition('none')
         setSliderTransform('0%')
-        setTimeout(() => {
-          setSliderTransition('all 1s')
-        }, 100)
+        setTimeout(() => setSliderTransition('all 1s'), 100)
+        setTimeout(() => setBlockNext(false) ,1000)
       })
     }
   }, [sliderRef])
@@ -43,30 +45,32 @@ export function InfiniteSlider({data, className, onClick}) {
   }
 
   function nextClick() {
-    const newIndex = currentSlide === 2 ? 0 : currentSlide + 1
-    setTimeout(() => setCurrentSlide(newIndex),1000)
-    
-    videoPlayBack(newIndex)
-    
-    setDirection(-1)
-    directionRef.current = -1
-    setCourselStyling('flex-start')
-    setSliderTransform(`-${100 / data.length}%`)
-    
+    if (!blockNext) {
+      const newIndex = currentSlide === 2 ? 0 : currentSlide + 1
+      setTimeout(() => setCurrentSlide(newIndex),1000)
+      videoPlayBack(newIndex)
+      
+      setDirection(-1)
+      directionRef.current = -1
+      setCourselStyling('flex-start')
+      setSliderTransform(`-${100 / data.length}%`)
+    }
   }
 
   function prevClick() {
-    const newIndex = currentSlide === 0 ? 2 : currentSlide - 1
-    setTimeout(() => setCurrentSlide(newIndex),1000)
-    videoPlayBack(newIndex)
-    
-    if (direction === -1) {
-      setDirection(1)
-      directionRef.current = 1
-      sliderRef.current.appendChild(sliderRef.current.firstElementChild)
+    if (!blockNext) {
+      const newIndex = currentSlide === 0 ? 2 : currentSlide - 1
+      setTimeout(() => setCurrentSlide(newIndex),1000)
+      videoPlayBack(newIndex)
+      
+      if (direction === -1) {
+        setDirection(1)
+        directionRef.current = 1
+        sliderRef.current.appendChild(sliderRef.current.firstElementChild)
+      }
+      setCourselStyling('flex-end')
+      setSliderTransform(`${100 / data.length}%`)
     }
-    setCourselStyling('flex-end')
-    setSliderTransform(`${100 / data.length}%`)
   }
 
   return (
