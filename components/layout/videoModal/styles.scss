@@ -31,6 +31,7 @@
       width: 100vw;
       height: 100vh;
       min-width: 320px;
+      background: black;
       button {
         display: flex;
         position: absolute;
@@ -41,6 +42,7 @@
         border: transparent;
         font-size: 42px;
         color: white;
+        z-index: 99;
         &:focus {
           outline: transparent;
         }
@@ -60,7 +62,9 @@
   iframe {
     width: 100%;
     margin: 80px 0 0 0;
-    height: 420px;
+    max-height: 420px;
+    height: 70vw;
+    min-height: 240px;
   }
   .text_wrapper {
     width: 90%;
@@ -69,6 +73,9 @@
     max-height: 100%;
     width: 100%;
     padding: 15px 0;
+    @media all and (max-width: 800px) {
+      padding: 0;
+    }
     p {
       color: white;
       text-align: left;
