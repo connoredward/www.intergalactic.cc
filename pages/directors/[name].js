@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 
 import Router from 'next/router'
+import { Textfit } from 'react-textfit'
 
 import PageWrapper from '~/components/layout/pageWrapper'
 import VideoGrid from '~/components/layout/videoGrid'
@@ -57,7 +58,7 @@ export function SubDirectorPage (props) {
     <PageWrapper className={styles['sub_director_page']} active={'directors'}>
       <div className={styles['director_banner']}>
         {banner.name && (
-          <h1>{banner.name}</h1>
+          <Textfit className={styles.h1} mode="single">{banner.name}</Textfit>
         )}
       </div>
       <VideoGrid gridType={'twoGrid'}>

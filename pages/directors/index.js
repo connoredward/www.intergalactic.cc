@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 
 import Link from 'next/link'
 import classNames from 'classnames'
+import { Textfit } from 'react-textfit'
 
 import PageWrapper from '~/components/layout/pageWrapper'
 import DirectorCard from '~/components/layout/directorCard'
@@ -29,7 +30,7 @@ export function DirectorsPage() {
           <Link href={`/directors/${item.name.split(' ')[0].toLowerCase()}-${item.name.split(' ')[1].toLowerCase()}`} key={index}>
             <a>
               <DirectorCard {...item} className={classNames(styles[directorsList.length < 4 ? 'video_height' : null], styles['director_card_wrapper'])}>
-                <h1>{item.name}</h1>
+                <Textfit className={styles.h1} mode="single">{item.name}</Textfit>
               </DirectorCard>
             </a>
           </Link>
