@@ -6,4 +6,7 @@ body {
   font-family: 'Roboto' !important;
   background: black;
   background-color: black !important;
+  @media all and (max-width: 800px) {
+    padding: 60px 0 0 0;
+  }
 }

@@ -6,7 +6,6 @@
 }
 .mobile_slider {
   display: none;
-  margin: 60px 0 0 0;
   @media all and (max-width: 800px) {
     display: block;
   }
