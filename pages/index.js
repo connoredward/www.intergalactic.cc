@@ -6,7 +6,6 @@ import PageWrapper from '~/components/layout/pageWrapper'
 import InfiniteSlider from '~/components/layout/infiniteSlider'
 import MobileSlider from '~/components/layout/mobileSlider'
 
-
 import VideoModal from '~/components/layout/videoModal'
 
 import { getHomePageVideos, getVimeoVideo } from '~/components/modules/wordpressCall'
