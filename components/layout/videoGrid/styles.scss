@@ -5,30 +5,8 @@
   min-height: -moz-calc(1000vh - 60px);
   min-height: calc(100vh - 60px);
   grid-auto-flow: dense;
-  // grid-template-rows: 25vh;
   grid-auto-rows: 25vh; 
-  >div {
-    &.big {
-      grid-column: span 2;
-      grid-row: span 2;
-    }
-    &.tall {
-      grid-row: 2;
-    }
-    &.wide {
-      grid-column: 2;
-    }
-  }
-  @media all and (max-width: 1000px) {
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  }
-  @media all and (max-width: 900px) {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-  }
   @media all and (max-width: 800px) {
-    grid-template-columns: 1fr 1fr 1fr;
-  }
-  @media all and (max-width: 700px) {
     grid-template-columns: 1fr !important;
     height: 100%;
   }
