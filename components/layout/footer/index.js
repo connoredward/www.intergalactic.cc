@@ -26,11 +26,11 @@ export function Footer ({className}) {
         <p>Based in London, available beyond.</p>
 
         <div className={styles['icon_wrapper']}>
-          <a href='https://www.facebook.com/studiointergalactic' target='_blank'>
-            <img src={FB_ICON} />
-          </a>
           <a href='https://www.instagram.com/intergalactic.studios/' target='_blank'>
             <img src={IG_ICON} />
+          </a>
+          <a href='https://www.facebook.com/studiointergalactic' target='_blank'>
+            <img src={FB_ICON} />
           </a>
           <a href='https://vimeo.com/intergalacticstudios' target='_blank'>
             <img src={VM_ICOM} />
