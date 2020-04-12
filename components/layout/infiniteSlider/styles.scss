@@ -82,6 +82,9 @@ section {
   width: 100vw;
   position: relative;
   overflow: hidden;
+  &:hover {
+    cursor: pointer;
+  }
   video {
     width: 150%;
     position: absolute;
