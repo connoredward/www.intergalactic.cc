@@ -8,6 +8,7 @@ import styles from './styles.scss'
 
 export function MobileSlider({data, className, onClick}) {
   const [currentSlide, setCurrentSlide] = useState(0)
+  const [vhResize, setVhResize] = useState()
 
   const settings = {
     dots: false,
@@ -17,21 +18,29 @@ export function MobileSlider({data, className, onClick}) {
     vertical: true,
     verticalSwiping: true,
     arrows: false,
-    beforeChange: beforeChange,
     afterChange: afterChange
   }
 
-  function beforeChange(currentSlide, nextSlide) {
-  }
+  useEffect(() => {
+    if (window) {
+      console.log(window)
+      window.addEventListener('resize', () => {
+        // console.log(window.innerHeight)
+        setVhResize(window.innerHeight)
+      })
+    }
+  }, [window])
 
   function afterChange(currentSlide) {
     setCurrentSlide(currentSlide)
   }
 
+  console.log(1, vhResize)
+
   return (
     <Slider {...settings} className={classNames(styles['slider_wrapper'], className)}>
       {data.map(({videoSrc, titleImg, slug}, index) => 
-        <div key={index} className={styles['slide_content']} onClick={() => onClick(slug)}>
+        <div key={index} className={styles['slide_content']} onClick={() => onClick(slug)} style={{ height: `${vhResize}px` }}>
           <img src={titleImg} className={styles[currentSlide === index ? 'active' : undefined]} />
           <video src={videoSrc} autoPlay muted />
         </div>
