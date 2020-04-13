@@ -68,11 +68,15 @@
   }
   .text_wrapper {
     width: 90%;
-    margin: 0 auto;
-    max-width: 795px;    
     max-height: 100%;
     width: 100%;
     padding: 0;
+    margin: 10px auto;
+    max-width: 890px;
+    @media all and (max-width: 1600px) {
+      margin: -15px auto 0;
+      max-width: 795px;    
+    }
     @media all and (max-width: 800px) {
       display: none;
     }
