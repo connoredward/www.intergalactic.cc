@@ -49,9 +49,13 @@
   .mobile_grid {
     display: none;
   }
+  .desktop_grid {
+    padding-top: calc(60px + 150px);
+  }
   @media all and (max-width: 800px) {
     .mobile_grid {
       display: block;
+      padding-top: calc(60px + 150px);
     }
     .desktop_grid {
       display: none;
