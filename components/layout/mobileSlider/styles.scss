@@ -1,12 +1,14 @@
 .slider_wrapper {
   :global {
     .slick-list {
-      // height: calc(100vh - 60px) !important;
+      min-height: calc(100vh - 60px);
+      height: calc(100vh - 60px) !important;
     }
   }
   .slide_content {
     position: relative;
     overflow: hidden;
+    min-height: calc(100vh - 60px);
     height: calc(100vh - 60px);
     width: 100%;
     video {
