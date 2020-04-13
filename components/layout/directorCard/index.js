@@ -1,6 +1,8 @@
-import styles from './styles.scss'
+import { useRef } from 'react'
 
 import classNames from 'classnames'
+
+import styles from './styles.scss'
 
 export function DirectorCard(props) {
   const {
@@ -14,8 +16,17 @@ export function DirectorCard(props) {
 
   const {row = 1, column = 1} = gridStyle
 
+  const videoRef = useRef()
+
+  function resetVideo() {
+    videoRef.current.pause()
+    videoRef.current.currentTime = 0
+    videoRef.current.load()
+  }
+
   return (
     <div 
+      onMouseLeave={() => resetVideo()}
       className={classNames(styles.main, className)} 
       style={{ backgroundImage: `url(${imgSrc})`, gridColumn: `span ${column}`, gridRow: `span ${row}` }}
       onClick={onClick}
@@ -25,6 +36,7 @@ export function DirectorCard(props) {
       </div>
       {videoSrc && (
         <video 
+          ref={videoRef}
           src={videoSrc}
           autoPlay
           muted
