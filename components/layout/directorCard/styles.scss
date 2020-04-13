@@ -43,8 +43,9 @@
   @media all and (max-width: 800px) {
     height: 50vh;
     video {
-      height: 100%;
-      width: auto;
+      // height: 100%;
+      // width: auto;
+      display: none;
     }
   }
 }

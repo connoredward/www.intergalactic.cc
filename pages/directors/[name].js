@@ -96,7 +96,7 @@ export function SubDirectorPage (props) {
               {...item}
               onClick={() => changeRoute(item.slug)} key={index}
             >
-              <img sc={item.titleImg} />
+              <img src={item.titleImg} />
             </DirectorCard>
           )}
         </InfiniteScroll>
