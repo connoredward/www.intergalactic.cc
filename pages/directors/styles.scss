@@ -19,6 +19,18 @@
 }
 
 .director_banner {
+  position: fixed;
+  top: 60px;
+  z-index: 99;
+  width: 100%;
+  background: black;
+  &.active {
+    .h1 {
+      @media all and (max-width: 800px) {
+        margin: 10px auto;
+      }
+    }
+  }
   .h1 {
     color: white;
     font-family: 'Gotham';

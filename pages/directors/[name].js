@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 
 import Router from 'next/router'
 import { Textfit } from 'react-textfit'
 import InfiniteScroll from 'react-infinite-scroller'
+import classNames from 'classnames'
 
 import PageWrapper from '~/components/layout/pageWrapper'
 import VideoGrid from '~/components/layout/videoGrid'
@@ -20,6 +21,9 @@ export function SubDirectorPage (props) {
 
   const [banner, setBanner] = useState({})
 
+  const [scrollPos, setScrollPos] = useState(0)
+  const scrollPosition = useRef(scrollPos)
+
   const [originalDirectorList, setOriginalDirectorList] = useState([])
 
   const [director, setDirector] = useState([])
@@ -34,6 +38,11 @@ export function SubDirectorPage (props) {
       const videoUrl = url.split('v=')[1]
       if (videoUrl) startVideo(videoUrl)
       else setModalState({open: false, src: ''})
+    })
+    window.addEventListener('scroll', () => {
+      console.log(window.scrollY)
+      setScrollPos(window.scrollY)
+      scrollPosition.current = window.scrollY
     })
   }, [slug, v])
   
@@ -68,9 +77,9 @@ export function SubDirectorPage (props) {
 
   return (
     <PageWrapper className={styles['sub_director_page']} active={'directors'}>
-      <div className={styles['director_banner']}>
+      <div className={classNames(styles['director_banner'], styles[scrollPos > 100 ? 'active' : undefined])}>
         {banner.name && (
-          <Textfit className={styles.h1} mode="single">{banner.name}</Textfit>
+          <Textfit className={styles.h1} mode="single" max={scrollPos > 100 ? 30 : 100}>{banner.name}</Textfit>
         )}
       </div>
 
