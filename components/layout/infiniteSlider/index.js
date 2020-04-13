@@ -82,8 +82,8 @@ export function InfiniteSlider({data, className, onClick}) {
           style={{ transform: `translate(${sliderTransform})`, transition: sliderTransition, width: `${data.length}00%` }}
         >
           {data.map(({videoSrc, titleImg, slug}, index) => 
-            <section key={index} onClick={() => onClick(slug)}>
-              <img src={titleImg} className={styles[currentSlide === index ? 'active' : undefined]} />
+            <section key={index}>
+              <img src={titleImg} className={styles[currentSlide === index ? 'active' : undefined]} onClick={() => onClick(slug)} />
               <video src={videoSrc} autoPlay muted ref={videoArrayRefs.current[index]} onEnded={() => nextClick()} />
             </section>
           )}
