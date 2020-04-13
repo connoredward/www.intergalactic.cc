@@ -32,3 +32,17 @@
     }
   }
 }
+
+.sub_director_page {
+  .mobile_grid {
+    display: none;
+  }
+  @media all and (max-width: 800px) {
+    .mobile_grid {
+      display: block;
+    }
+    .desktop_grid {
+      display: none;
+    }
+  }
+}

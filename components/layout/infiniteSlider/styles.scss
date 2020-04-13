@@ -91,6 +91,10 @@ section {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+    @media all and (max-width: 1000px) {
+      width: auto;
+      height: 100%;
+    }
   }
   img {
     position: absolute;

@@ -21,13 +21,14 @@ const scroll = Scroll.animateScroll
 
 export function NavigationBar (props) {
   const {
-    active = ''
+    active
   } = props
+
   const [menuActive, setMenuActive] = useState(false)
   return (
     <div className={styles.main}>
       {/* desktop navigation */}
-      <div className={styles['menu_bar_desktop']}>
+      <div className={styles['menu_bar_desktop']} style={{ position: active ? 'fixed' : 'relative' }}>
         <Link href='/'>
           <img src={LOGO} />
         </Link>

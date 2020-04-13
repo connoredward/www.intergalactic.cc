@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 
 import Router from 'next/router'
 import { Textfit } from 'react-textfit'
+import InfiniteScroll from 'react-infinite-scroller'
 
 import PageWrapper from '~/components/layout/pageWrapper'
 import VideoGrid from '~/components/layout/videoGrid'
@@ -18,8 +19,13 @@ export function SubDirectorPage (props) {
   } = props
 
   const [banner, setBanner] = useState({})
+
+  const [originalDirectorList, setOriginalDirectorList] = useState([])
+
   const [director, setDirector] = useState([])
   const [modalState, setModalState] = useState({open: false, src: ''})
+
+  const [loadingMore, setLoadingMore] = useState(false)
 
   useEffect(() => {
     if (slug) onLoad()
@@ -45,13 +51,19 @@ export function SubDirectorPage (props) {
     let directorData = await getDirector(slug)
     setBanner(directorData[0])
     directorData.shift()
+    setOriginalDirectorList(directorData)
     setDirector(directorData)
+    setLoadingMore(true)
   }
 
   function closeModal() {
     const href = `/directors/${slug}`
     Router.push('/directors/[name]', href, { shallow: true })
     setModalState({open: false, src: ''})
+  }
+
+  function loadFunc() {
+    setDirector([...director, ...originalDirectorList])
   }
 
   return (
@@ -61,16 +73,37 @@ export function SubDirectorPage (props) {
           <Textfit className={styles.h1} mode="single">{banner.name}</Textfit>
         )}
       </div>
-      <VideoGrid gridType={'twoGrid'}>
+
+      <VideoGrid className={styles['desktop_grid']}>
         {director.map((item, index) => 
           <DirectorCard 
             {...item} 
-            onClick={( )=> changeRoute(item.slug)} key={index}
+            onClick={() => changeRoute(item.slug)} key={index}
           >
             <img src={item.titleImg} />
           </DirectorCard>
         )}
       </VideoGrid>
+
+      <VideoGrid className={styles['mobile_grid']}>
+        <InfiniteScroll
+          pageStart={1}
+          loadMore={() => loadFunc()}
+          hasMore={loadingMore}
+        >
+          {director.map((item, index) => 
+            <DirectorCard
+              {...item}
+              onClick={() => changeRoute(item.slug)} key={index}
+            >
+              <img sc={item.titleImg} />
+            </DirectorCard>
+          )}
+        </InfiniteScroll>
+      </VideoGrid>
+
+
+
       <VideoModal openModal={modalState} closeModal={() => closeModal()} />
     </PageWrapper>
   )

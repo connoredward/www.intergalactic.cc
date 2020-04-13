@@ -6,8 +6,10 @@
   min-height: calc(100vh - 60px);
   grid-auto-flow: dense;
   grid-auto-rows: 25vh; 
+  padding: 60px 0 0 0;
   @media all and (max-width: 800px) {
     grid-template-columns: 1fr !important;
     height: 100%;
+    padding: 0;
   }
 }
