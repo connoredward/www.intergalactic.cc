@@ -36,6 +36,10 @@
     &.height {
       height: 100%;
     }
+    @media all and (max-width: 1350px) {
+      height: 100% !important;
+      width: auto !important;
+    }
   }
   &:hover {
     cursor: pointer;

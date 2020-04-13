@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState } from 'react'
 
 import Router from 'next/router'
 import { Textfit } from 'react-textfit'
@@ -22,7 +22,6 @@ export function SubDirectorPage (props) {
   const [banner, setBanner] = useState({})
 
   const [scrollPos, setScrollPos] = useState(0)
-  const scrollPosition = useRef(scrollPos)
 
   const [originalDirectorList, setOriginalDirectorList] = useState([])
 
@@ -40,9 +39,7 @@ export function SubDirectorPage (props) {
       else setModalState({open: false, src: ''})
     })
     window.addEventListener('scroll', () => {
-      console.log(window.scrollY)
       setScrollPos(window.scrollY)
-      scrollPosition.current = window.scrollY
     })
   }, [slug, v])
   
