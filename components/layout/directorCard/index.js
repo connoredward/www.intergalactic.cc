@@ -36,6 +36,7 @@ export function DirectorCard(props) {
       </div>
       {videoSrc && (
         <video 
+          className={styles[column > row ? 'width' : 'height']}
           ref={videoRef}
           src={videoSrc}
           autoPlay
