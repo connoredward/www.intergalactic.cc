@@ -54,7 +54,7 @@ export function NavigationBar (props) {
 
 
       {/* mobile navigation */}
-      <div className={styles['menu_bar_mobile']} style={{ position: active ? 'fixed' : 'relative' }}>
+      <div className={styles['menu_bar_mobile']}>
         <Link href='/'>
           <img src={LOGO} />
         </Link>
