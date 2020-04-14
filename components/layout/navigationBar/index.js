@@ -14,7 +14,7 @@ import LOGO from '~/static/images/INTERGALACTIC_LOGO_WHITE.png'
 const links = [
   {name: 'DIRECTORS', link: '/directors'},
   {name: 'MUSIC VIDEOS', link: '/music_videos'},
-  {name: 'CONTENT', link: '/content'},
+  {name: 'BRANDED', link: '/branded'},
   {name: 'NARRATIVE', link: '/narrative'}
 ]
 const scroll = Scroll.animateScroll

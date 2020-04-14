@@ -10,23 +10,23 @@ import { wordpressCardApi } from '~/components/modules/wordpressCall'
 
 import styles from './styles.scss'
 
-export function ContentPage (props) {
+export function BrandedPage (props) {
   const {v = ''} = props
   
-  const [contentList, setContentList] = useState([])
+  const [brandedList, setBrandedList] = useState([])
 
   useEffect(() => {
     onLoad()
   }, [])
   
   async function onLoad() {
-    setContentList(await wordpressCardApi('content'))
+    setBrandedList(await wordpressCardApi('branded'))
   }
 
   return (
-    <PageWrapper active={'content'}>
+    <PageWrapper active={'branded'}>
       <VideoGrid gridType={'flexGrid'}>
-        {contentList.map((item, index) => 
+        {brandedList.map((item, index) => 
           <DirectorCard {...item} key={index}>
             <img src={item.titleImg} />
           </DirectorCard>
@@ -36,8 +36,8 @@ export function ContentPage (props) {
   )
 }
 
-ContentPage.getInitialProps = async ({ query }) => {
+BrandedPage.getInitialProps = async ({ query }) => {
   return { v: query.v }
 }
 
-export default ContentPage
+export default BrandedPage
