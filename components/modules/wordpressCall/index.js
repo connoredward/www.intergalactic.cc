@@ -28,10 +28,14 @@ export async function getHomePageVideos() {
   const catId = categories.find(({name}) => name === 'home').id 
   return posts.filter(({categories}) => categories.includes(catId))
     .map((item) => {
+      let itemObj = item.content.rendered.split('"')
+      let imgIndex = itemObj.findIndex((i) => i === " data-large-file=") + 1
+      const allUrls = item.content.rendered.match(/\bhttps?:\/\/\S+/gi)
       return {
         slug: item.slug,
         titleImg: item._embedded && item._embedded['wp:featuredmedia'] ? item._embedded['wp:featuredmedia'][0].source_url : undefined,
-        videoSrc: item.content.rendered.match(/\bhttps?:\/\/\S+/gi)[0].split('"')[0]
+        videoSrc: allUrls[allUrls.length - 1].split('"')[0],
+        imgSrc: itemObj[imgIndex]
       }
     })
 }

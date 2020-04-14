@@ -32,6 +32,8 @@ export function MainPage(props) {
     setVideoData(await getHomePageVideos())
   }
 
+  console.log(videoData)
+
   async function changeRoute(videoSlug) {
     const href = `/?v=${videoSlug}`
     Router.push('/', href, { shallow: true })

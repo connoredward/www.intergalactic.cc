@@ -26,10 +26,10 @@ export function MobileSlider({data, className, onClick}) {
 
   return (
     <Slider {...settings} className={classNames(styles['slider_wrapper'], className)}>
-      {data.map(({videoSrc, titleImg, slug}, index) => 
+      {data.map(({imgSrc, titleImg, slug}, index) =>  
         <div key={index} className={styles['slide_content']} onClick={() => onClick(slug)}>
+          <div className={styles['background_image']} style={{ backgroundImage: `url(${imgSrc})` }} />
           <img src={titleImg} className={styles[currentSlide === index ? 'active' : undefined]} />
-          <video src={videoSrc} autoPlay muted />
         </div>
       )}
     </Slider>
