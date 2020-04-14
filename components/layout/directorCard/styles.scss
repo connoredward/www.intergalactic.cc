@@ -34,7 +34,11 @@
       width: 100%;
     }
     &.height {
-      height: 100%;
+      width: 100%;
+      @media all and (max-width: 2000px) {
+        width: auto;
+        height: 100%;
+      }
     }
     @media all and (max-width: 1350px) {
       height: 100% !important;

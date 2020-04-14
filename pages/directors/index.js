@@ -29,7 +29,7 @@ export function DirectorsPage() {
         {directorsList.map((item,index) => 
           <Link href={`/directors/${item.name.split(' ')[0].toLowerCase()}-${item.name.split(' ')[1].toLowerCase()}`} key={index}>
             <a style={{ gridColumn: `span ${item.column}`, gridRow: `span ${item.row}` }}>
-              <DirectorCard {...item} className={classNames(styles[directorsList.length < 4 ? 'video_height' : null], styles['director_card_wrapper'])}>
+              <DirectorCard {...item} className={styles['director_card_wrapper']}>
                 <Textfit className={styles.h1} mode="single">{item.name}</Textfit>
               </DirectorCard>
             </a>
