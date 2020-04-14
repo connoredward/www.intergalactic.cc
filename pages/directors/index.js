@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 
 import Link from 'next/link'
-import classNames from 'classnames'
 import { Textfit } from 'react-textfit'
 
 import PageWrapper from '~/components/layout/pageWrapper'
