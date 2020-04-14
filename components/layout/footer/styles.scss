@@ -99,6 +99,8 @@
 
   @media all and (max-width: 800px) {
     padding: 10px;
+    position: absolute;
+    bottom: 80px;
     .footer_top_row {
       margin: 0;
     }

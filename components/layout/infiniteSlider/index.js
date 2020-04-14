@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 
-import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md'
+import RightArrow from '~/static/right_arrow.svg'
+import LeftArrow from '~/static/left_arrow.svg'
 import classNames from 'classnames'
 
 import styles from './styles.scss'
@@ -75,8 +76,12 @@ export function InfiniteSlider({data, className, onClick}) {
 
   return (
     <div className={classNames(styles.container, className)}>
-      <button className={styles.prev} onClick={() => prevClick()}><MdKeyboardArrowLeft /></button>
-      <button className={styles.next} onClick={() => nextClick()}><MdKeyboardArrowRight /></button>
+      <button className={styles.prev} onClick={() => prevClick()}>
+        <img src={LeftArrow} style={{ width: '30px', height: '30px' }} />
+      </button>
+      <button className={styles.next} onClick={() => nextClick()}>
+        <img src={RightArrow} style={{ width: '30px', height: '30px' }} />
+      </button>
       <div className={styles.carousel} style={{ justifyContent: carouselStyling }}>
         <div ref={sliderRef} className={styles.slider} 
           style={{ transform: `translate(${sliderTransform})`, transition: sliderTransition, width: `${data.length}00%` }}
