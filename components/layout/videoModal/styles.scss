@@ -54,6 +54,10 @@
 .video_wrapper {
   width: 100%;
   text-align: center;
+  transform: scale(1.15);
+  @media all and (max-width: 1000px) {
+    transform: scale(1);
+  }
   @media all and (max-width: 800px) {
     position: absolute;
     top: 50%;

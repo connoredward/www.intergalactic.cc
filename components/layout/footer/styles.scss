@@ -13,7 +13,12 @@
   }
   .footer_top_row {
     position: relative;
-    margin: 0 0 40px 0;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    @media all and (max-width: 450px) {
+      display: block;
+    }
     span {
       font-weight: 600;
       letter-spacing: 1px;
@@ -24,7 +29,8 @@
     .icon_wrapper {
       position: absolute;
       right: 0;
-      top: 0;
+      top: 50%;
+      transform: translateY(-50%);
       a {
         >img {
           height: auto;
@@ -41,13 +47,28 @@
 
   .footer_bottom_row {
     position: relative;
+    .footer_description {
+      margin: 10px 0;
+      >p {
+        margin: 3px 0;
+      }
+    }
+    .footer_contact_info {
+      >p {
+        margin: 3px 0;
+      }
+    }
     p {
       margin: 10px 0 0 0;
+      font-weight: 300;
     }
     .email {
       font-weight: normal;
       text-decoration: none;
       color: white;
+      font-weight: 300;
+      margin: 10px 0 30px 0;
+      display: flex;
       &:hover {
         cursor: pointer;
         span {
@@ -59,10 +80,6 @@
       font-weight: 600;
       letter-spacing: 1px;
     }
-    .address {
-      position: absolute;
-      right: 0;
-    }
   }
 
   @media all and (max-width: 800px) {
@@ -70,13 +87,15 @@
     .footer_top_row {
       margin: 0;
     }
-    .icon_wrapper, .address {
-      position: relative !important;
-    }
     .icon_wrapper {
       img {
         margin: 10px 10px 10px 0 !important;
       }
+    }
+  }
+  @media all and (max-width: 450px) {
+    .icon_wrapper{
+      position: relative !important;
     }
   }
 }

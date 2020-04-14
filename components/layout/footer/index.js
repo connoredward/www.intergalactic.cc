@@ -23,7 +23,6 @@ export function Footer ({className}) {
     <div className={classNames(styles.main, className)}>
       <div className={styles['footer_top_row']}>
         <span>INTERGALACTIC IS A {wordArray[count]}</span>
-        <p>Based in London, available beyond.</p>
 
         <div className={styles['icon_wrapper']}>
           <a href='https://www.instagram.com/intergalactic.studios/' target='_blank'>
@@ -39,9 +38,20 @@ export function Footer ({className}) {
       </div>
 
       <div className={styles['footer_bottom_row']}>
-        <a className={styles.email} target='_blank' href='mailto:hello@intergalacticstudios.com'><span>HELLO</span>@INTERGALACTICSTUDIOS.COM</a>
-        <p className={styles.address}>326a New Cross Road, SE14 6AG</p>
-        <p className={styles.number}>+44 7722 052698</p>
+        <div className={styles['footer_description']}>
+          <p>We are a team of super creative filmmakers, photographers, designers, animators.</p>
+          <p>We produce eye-popping commercial, music promos, documentaries, narrative fiction.</p>
+          <p>We work on awesome brands, labels, artists, agencies.</p>
+        </div>
+        <br/>
+        <a className={styles.email} target='_blank' href='mailto:hello@intergalacticstudios.com'>Click and say&nbsp;<span>HELLO</span>@INTERGALACTICSTUDIOS.COM</a>
+        <br/>
+        <div className={styles['footer_contact_info']}>
+          <p className={styles.number}>+44 20 8691 5534</p>
+          <p className={styles.address}>326a New Cross Road, SE14 6AG</p>
+          <p style={{ fontWeight: 'bold' }}>Based in London, available beyond.</p>
+          <p>© INTERGALACTIC STUDIOS LTD. 2020</p>
+        </div>
       </div>
     </div>
   )
