@@ -47,7 +47,7 @@ export function Footer ({className}) {
         <a className={styles.email} target='_blank' href='mailto:hello@intergalacticstudios.com'>Click and say&nbsp;<span>HELLO</span>@INTERGALACTICSTUDIOS.COM</a>
         <br/>
         <div className={styles['footer_contact_info']}>
-          <a className={styles.number}>+44 20 8691 5534</a>
+          <a className={styles.number} href="tel:442086915534">+44 20 8691 5534</a>
           <p className={styles.address}>326a New Cross Road, SE14 6AG</p>
           <p style={{ fontWeight: 'bold' }}>Based in London, available beyond.</p>
           <p>© INTERGALACTIC STUDIOS LTD. 2020</p>

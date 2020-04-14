@@ -56,14 +56,14 @@
     .footer_contact_info {
       .number {
         color: inherit !important;
-        text-decoration: none !important;
+        // text-decoration: none !important;
         font-size: inherit !important;
         font-family: inherit !important;
         line-height: inherit !important;
         font-weight: 300;
         a[href^="tel"]{
           color:inherit;
-          text-decoration:none;
+          // text-decoration:none;
         }
       }
       >p {
