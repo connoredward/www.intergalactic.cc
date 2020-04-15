@@ -38,9 +38,6 @@ export function SubDirectorPage (props) {
       if (videoUrl) startVideo(videoUrl)
       else setModalState({open: false, src: ''})
     })
-    window.addEventListener('scroll', () => {
-      setScrollPos(window.scrollY)
-    })
   }, [slug, v])
   
   async function changeRoute(videoSlug) {
@@ -74,9 +71,9 @@ export function SubDirectorPage (props) {
 
   return (
     <PageWrapper className={styles['sub_director_page']} active={'directors'}>
-      <div className={classNames(styles['director_banner'], styles[scrollPos > 100 ? 'active' : undefined])}>
+      <div className={styles['director_banner']}>
         {banner.name && (
-          <Textfit className={styles.h1} mode="single">{banner.name}</Textfit>
+          <Textfit className={styles.h1} mode="single" max={50}>{banner.name}</Textfit>
         )}
       </div>
 

@@ -17,14 +17,8 @@
   z-index: 16;
   width: 100%;
   background: black;
-  &.active {
-    .h1 {
-      @media all and (max-width: 800px) {
-        margin: 10px auto;
-      }
-    }
-  }
   .h1 {
+    width: 500px;
     color: white;
     font-family: 'Gotham';
     font-weight: 600;
@@ -34,6 +28,7 @@
     padding: 20px 15px;
     @media all and (max-width: 800px) {
       margin: 10px auto;
+      width: 100%;
     }
   }
 }
@@ -43,7 +38,7 @@
     display: none;
   }
   .desktop_grid {
-    padding-top: calc(60px + 150px);
+    padding-top: calc(60px + 85px);
   }
   @media all and (max-width: 800px) {
     .mobile_grid {
