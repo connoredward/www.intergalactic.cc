@@ -30,8 +30,8 @@ export function VideoModal(props) {
           {videoSrc && (<Vimeo video={videoSrc} />)}
           <div className={styles['text_wrapper']}>
             <p>DOZENS</p>
-            <p>"VERSIONS"</p>
-            <p>RHORY DANNIELLS</p>
+            <p style={{ fontWeight: '300' }}>"VERSIONS"</p>
+            <p style={{ fontWeight: '300' }}>RHORY DANNIELLS</p>
           </div>
         </div> 
       
