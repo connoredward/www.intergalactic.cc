@@ -30,20 +30,10 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    &.width {
-      width: 100%;
-    }
-    &.height {
-      width: 100%;
-      @media all and (max-width: 2000px) {
-        width: auto;
-        height: 100%;
-      }
-    }
-    @media all and (max-width: 1350px) {
-      height: 130% !important;
-      width: auto !important;
-    }
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
   }
   &:hover {
     cursor: pointer;
