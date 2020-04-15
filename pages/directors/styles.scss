@@ -33,7 +33,7 @@
     margin: 0 auto;
     padding: 20px 15px;
     @media all and (max-width: 800px) {
-      margin: 50px auto;
+      margin: 10px auto;
     }
   }
 }
@@ -48,7 +48,7 @@
   @media all and (max-width: 800px) {
     .mobile_grid {
       display: block;
-      padding-top: calc(60px + 150px);
+      padding-top: 100px;
     }
     .desktop_grid {
       display: none;

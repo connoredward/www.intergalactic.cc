@@ -76,7 +76,7 @@ export function SubDirectorPage (props) {
     <PageWrapper className={styles['sub_director_page']} active={'directors'}>
       <div className={classNames(styles['director_banner'], styles[scrollPos > 100 ? 'active' : undefined])}>
         {banner.name && (
-          <Textfit className={styles.h1} mode="single" max={scrollPos > 100 ? 30 : 100}>{banner.name}</Textfit>
+          <Textfit className={styles.h1} mode="single">{banner.name}</Textfit>
         )}
       </div>
 
