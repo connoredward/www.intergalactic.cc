@@ -1,6 +1,11 @@
 .page_wrapper {
   min-height: 100vh;
   // display: contents;
+  &.no-scroll {
+    height: 100vh;
+    max-height: 100vh;
+    overflow-y: hidden;
+  }
   @media all and (max-width: 800px) {
     min-height: auto;
     height: auto;

@@ -7,16 +7,24 @@ import InfiniteSlider from '~/components/layout/infiniteSlider'
 import MobileSlider from '~/components/layout/mobileSlider'
 
 import VideoModal from '~/components/layout/videoModal'
+import SplashScreen from '~/components/layout/splashScreen'
 
 import { getHomePageVideos, getVimeoVideo } from '~/components/modules/wordpressCall'
 
 import styles from './styles.scss'
+
+const lockScroll = {
+  height: '100vh',
+  overflow: 'hidden'
+}
 
 export function MainPage(props) {
   const {v = ''} = props
 
   const [videoData, setVideoData] = useState()
   const [modalState, setModalState] = useState({open: false, src: ''})
+
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     onLoad()
@@ -30,9 +38,9 @@ export function MainPage(props) {
 
   async function onLoad() {
     setVideoData(await getHomePageVideos())
+    setLoading(true)
   }
 
-  console.log(videoData)
 
   async function changeRoute(videoSlug) {
     const href = `/?v=${videoSlug}`
@@ -51,15 +59,18 @@ export function MainPage(props) {
   }
   
   return (
-    <PageWrapper>
-      {videoData && (
-        <>
-          <InfiniteSlider onClick={url => changeRoute(url)} className={styles['desktop_slider']} data={videoData} />
-          <MobileSlider onClick={url => changeRoute(url)} className={styles['mobile_slider']} data={videoData} />
-        </>
-      )}
-      <VideoModal openModal={modalState} closeModal={() => closeModal()} />
-    </PageWrapper>
+    <div style={loading ? undefined : lockScroll}>
+      <SplashScreen loading={loading} />
+      <PageWrapper>
+        {videoData && (
+          <>
+            <InfiniteSlider onClick={url => changeRoute(url)} className={styles['desktop_slider']} data={videoData} />
+            <MobileSlider onClick={url => changeRoute(url)} className={styles['mobile_slider']} data={videoData} />
+          </>
+        )}
+        <VideoModal openModal={modalState} closeModal={() => closeModal()} />
+      </PageWrapper>
+    </div>
   )
 }
 
