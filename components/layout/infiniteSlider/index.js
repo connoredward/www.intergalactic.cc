@@ -77,10 +77,10 @@ export function InfiniteSlider({data, className, onClick}) {
   return (
     <div className={classNames(styles.container, className)}>
       <button className={styles.prev} onClick={() => prevClick()}>
-        <img src={LeftArrow} style={{ width: '30px', height: '30px' }} />
+        <img src={LeftArrow} style={{ width: '30px', height: '25px' }} />
       </button>
       <button className={styles.next} onClick={() => nextClick()}>
-        <img src={RightArrow} style={{ width: '30px', height: '30px' }} />
+        <img src={RightArrow} style={{ width: '30px', height: '25px' }} />
       </button>
       <div className={styles.carousel} style={{ justifyContent: carouselStyling }}>
         <div ref={sliderRef} className={styles.slider} 
