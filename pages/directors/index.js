@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 
 import Link from 'next/link'
+import Head from 'next/head'
 import { Textfit } from 'react-textfit'
 
 import PageWrapper from '~/components/layout/pageWrapper'
@@ -24,6 +25,9 @@ export function DirectorsPage() {
 
   return (
     <PageWrapper active={'directors'}>
+      <Head>
+        <title>Intergalactic &ndash; Directors</title>
+      </Head>
       <VideoGrid gridType={'threeGrid'}>
         {directorsList.map((item,index) => 
           <Link href={`/directors/${item.name.split(' ')[0].toLowerCase()}-${item.name.split(' ')[1].toLowerCase()}`} key={index}>

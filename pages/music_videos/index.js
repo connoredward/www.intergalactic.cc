@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 
 import Router from 'next/router'
+import Head from 'next/head'
 
 import PageWrapper from '~/components/layout/pageWrapper'
 import VideoGrid from '~/components/layout/videoGrid'
@@ -49,6 +50,9 @@ export function MusicVideosPage (props) {
 
   return (
     <PageWrapper active={'music videos'} className={styles['music_video_grid']}>
+      <Head>
+        <title>Intergalactic &ndash; Music Videos</title>
+      </Head>
       <VideoGrid gridType={'twoByThreeGrid'}>
         {musicVideoList.map((item, index) => 
           <MusicVideoCard onClick={() => changeRoute(item.slug)} {...item} key={index}>

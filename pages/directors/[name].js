@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 
 import Router from 'next/router'
+import Head from 'next/head'
 import { Textfit } from 'react-textfit'
 import InfiniteScroll from 'react-infinite-scroller'
 import classNames from 'classnames'
@@ -71,6 +72,9 @@ export function SubDirectorPage (props) {
 
   return (
     <PageWrapper className={styles['sub_director_page']} active={'directors'}>
+      <Head>
+        <title>Intergalactic &ndash; {banner && banner.name ? banner.name : ''}</title>
+      </Head>
       <div className={styles['director_banner']}>
         {banner.name && (
           <Textfit className={styles.h1} mode="single" max={50}>{banner.name}</Textfit>

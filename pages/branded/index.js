@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 
 import Router from 'next/router'
+import Head from 'next/head'
 
 import PageWrapper from '~/components/layout/pageWrapper'
 import DirectorCard from '~/components/layout/directorCard'
@@ -25,6 +26,9 @@ export function BrandedPage (props) {
 
   return (
     <PageWrapper active={'branded'}>
+      <Head>
+        <title>Intergalactic &ndash; Branded</title>
+      </Head>
       <VideoGrid gridType={'flexGrid'}>
         {brandedList.map((item, index) => 
           <DirectorCard {...item} key={index}>

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 
 import Router from 'next/router'
+import Head from 'next/head'
 
 import PageWrapper from '~/components/layout/pageWrapper'
 import InfiniteSlider from '~/components/layout/infiniteSlider'
@@ -60,6 +61,9 @@ export function MainPage(props) {
   
   return (
     <div style={loading ? undefined : lockScroll}>
+      <Head>
+        <title>Intergalactic &ndash; Home</title>
+      </Head>
       <SplashScreen loading={loading} />
       <PageWrapper>
         {videoData && (

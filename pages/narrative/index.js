@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 
+import Head from 'next/head'
+
 import PageWrapper from '~/components/layout/pageWrapper'
 
 import { wordpressCardApi } from '~/components/modules/wordpressCall'
@@ -17,6 +19,9 @@ export function NarrativePage() {
 
   return (
     <PageWrapper active={'narrative'}>
+      <Head>
+        <title>Intergalactic &ndash; Narrative</title>
+      </Head>
     </PageWrapper>
   )
 }
