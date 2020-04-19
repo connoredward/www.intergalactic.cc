@@ -15,7 +15,8 @@ const links = [
   {name: 'DIRECTORS', link: '/directors'},
   {name: 'MUSIC VIDEOS', link: '/music_videos'},
   {name: 'BRANDED', link: '/branded'},
-  {name: 'NARRATIVE', link: '/narrative'}
+  {name: 'NARRATIVE', link: '/narrative'},
+  {name: 'PHOTOGRAPHERS', link: '/photographers'}
 ]
 const scroll = Scroll.animateScroll
 

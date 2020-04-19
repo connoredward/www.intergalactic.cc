@@ -14,7 +14,7 @@ export function Footer ({className}) {
   const [count, setCount] = useState(0)
 
   useEffect(() => {
-    const id = setInterval(() => setCount(count >= 3 ? 0 : count + 1), 500)
+    const id = setInterval(() => setCount(count >= 3 ? 0 : count + 1), 750)
     return () => clearInterval(id)
   }, [count])
 
