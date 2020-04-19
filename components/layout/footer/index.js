@@ -39,12 +39,14 @@ export function Footer ({className}) {
 
       <div className={styles['footer_bottom_row']}>
         <div className={styles['footer_description']}>
-          <p>We are a team of super creative filmmakers, photographers, designers, animators.</p>
-          <p>We produce eye-popping commercial, music promos, documentaries, narrative fiction.</p>
-          <p>We work on awesome brands, labels, artists, agencies.</p>
+          <p>We collaborate with artists, brands, labels and agencies to create visuals that are out of this world.</p>
         </div>
         <br/>
-        <a className={styles.email} target='_blank' href='mailto:hello@intergalacticstudios.com'>Click and say&nbsp;<span>HELLO</span>@INTERGALACTICSTUDIOS.COM</a>
+        <a className={styles.email} target='_blank' href='mailto:hello@intergalacticstudios.com'>
+          <i>Initiate contact:</i>
+          &nbsp;
+          <span>HELLO</span>@INTERGALACTICSTUDIOS.COM
+        </a>
         <br/>
         <div className={styles['footer_contact_info']}>
           <a className={styles.number} href="tel:442086915534">+44 20 8691 5534</a>

@@ -65,17 +65,19 @@
     .footer_contact_info {
       .number {
         color: inherit !important;
-        // text-decoration: none !important;
+        text-decoration: none;
         font-size: inherit !important;
         font-family: inherit !important;
         line-height: inherit !important;
         font-weight: 300;
-        a[href^="tel"]{
-          color:inherit;
-          // text-decoration:none;
-        }
-        @media all and (max-width: 8000px) {
-          font-weight: normal;
+        @media all and (max-width: 800px) { 
+          text-decoration: underline !important;
+          a[href^="tel"]{
+            color:inherit;
+          }
+          @media all and (max-width: 8000px) {
+            font-weight: normal;
+          }
         }
       }
       >p {
