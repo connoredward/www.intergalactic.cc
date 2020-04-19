@@ -10,6 +10,22 @@ import VM_ICOM from '~/static/images/icons/VIMEO_ICON.png'
 
 let wordArray = ['DESIGN STUDIO', 'CREATIVE NETWORK', 'PRODUCTION COMPANY', 'PHOTOGRAPHY AGENCY']
 
+function Icons({className}) {
+  return (
+    <div className={classNames(styles['icon_wrapper'], className)}>
+      <a href='https://www.instagram.com/intergalactic.studios/' target='_blank'>
+        <img src={IG_ICON} />
+      </a>
+      <a href='https://www.facebook.com/studiointergalactic' target='_blank'>
+        <img src={FB_ICON} />
+      </a>
+      <a href='https://vimeo.com/intergalacticstudios' target='_blank'>
+        <img src={VM_ICOM} />
+      </a>
+    </div>
+  )
+}
+
 export function Footer ({className}) {
   const [count, setCount] = useState(0)
 
@@ -23,18 +39,7 @@ export function Footer ({className}) {
     <div className={classNames(styles.main, className)}>
       <div className={styles['footer_top_row']}>
         <span>INTERGALACTIC IS A {wordArray[count]}</span>
-
-        <div className={styles['icon_wrapper']}>
-          <a href='https://www.instagram.com/intergalactic.studios/' target='_blank'>
-            <img src={IG_ICON} />
-          </a>
-          <a href='https://www.facebook.com/studiointergalactic' target='_blank'>
-            <img src={FB_ICON} />
-          </a>
-          <a href='https://vimeo.com/intergalacticstudios' target='_blank'>
-            <img src={VM_ICOM} />
-          </a>
-        </div>
+        <Icons />
       </div>
 
       <div className={styles['footer_bottom_row']}>
@@ -53,6 +58,7 @@ export function Footer ({className}) {
           <p className={styles.address}>326a New Cross Road, SE14 6AG</p>
           <p style={{ fontWeight: 'bold' }}>Based in London, available beyond.</p>
           <p>© INTERGALACTIC STUDIOS LTD. 2020</p>
+          <Icons className={styles['mobile_icons']} />
         </div>
       </div>
     </div>
