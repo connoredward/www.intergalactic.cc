@@ -10,18 +10,18 @@ import VM_ICOM from '~/static/images/icons/VIMEO_ICON.png'
 
 let wordArray = ['DESIGN STUDIO', 'CREATIVE NETWORK', 'PRODUCTION COMPANY', 'PHOTOGRAPHY AGENCY']
 
+let socialMediaIcons = [
+  { href: 'https://www.instagram.com/intergalactic.studios/', icon: IG_ICON },
+  { href: 'https://www.facebook.com/studiointergalactic', icon: FB_ICON },
+  { href: 'https://vimeo.com/intergalacticstudios', icon: VM_ICOM }
+]
+
 function Icons({className}) {
   return (
     <div className={classNames(styles['icon_wrapper'], className)}>
-      <a href='https://www.instagram.com/intergalactic.studios/' target='_blank'>
-        <img src={IG_ICON} />
-      </a>
-      <a href='https://www.facebook.com/studiointergalactic' target='_blank'>
-        <img src={FB_ICON} />
-      </a>
-      <a href='https://vimeo.com/intergalacticstudios' target='_blank'>
-        <img src={VM_ICOM} />
-      </a>
+      {socialMediaIcons.map(({href, icon}, index) => 
+        <a href={href} target='_blank' key={index}><img src={icon} /></a>
+      )}
     </div>
   )
 }
@@ -33,7 +33,6 @@ export function Footer ({className}) {
     const id = setInterval(() => setCount(count >= 3 ? 0 : count + 1), 750)
     return () => clearInterval(id)
   }, [count])
-
 
   return (
     <div className={classNames(styles.main, className)}>
