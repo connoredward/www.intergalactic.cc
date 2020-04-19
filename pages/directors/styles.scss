@@ -27,6 +27,7 @@
     margin: 0 auto;
     padding: 20px 15px;
     @media all and (max-width: 800px) {
+      padding: 20px 0;
       margin: 10px auto;
       width: 100%;
     }
