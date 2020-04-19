@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState } from 'react'
 
 import Slider from 'react-slick'
 import classNames from 'classnames'
@@ -17,7 +17,10 @@ export function MobileSlider({data, className, onClick}) {
     vertical: true,
     verticalSwiping: true,
     arrows: false,
-    afterChange: afterChange
+    afterChange: afterChange,
+    autoplay: true,
+    autoplaySpeed: 2000,
+    speed: 1000
   }
 
   function afterChange(currentSlide) {
