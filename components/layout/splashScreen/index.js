@@ -15,7 +15,7 @@ export function SplashScreen ({loading}) {
   }, [loading])
   return (
     <div className={classNames(styles.main, styles[anim])}>
-      <img src={LOGO_IMG} />
+      <img src={LOGO_IMG} className={styles[anim]} />
     </div>
   )
 }
