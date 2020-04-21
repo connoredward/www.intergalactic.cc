@@ -22,8 +22,6 @@ export function SubDirectorPage (props) {
 
   const [banner, setBanner] = useState({})
 
-  const [scrollPos, setScrollPos] = useState(0)
-
   const [originalDirectorList, setOriginalDirectorList] = useState([])
 
   const [director, setDirector] = useState([])
@@ -108,9 +106,7 @@ export function SubDirectorPage (props) {
           )}
         </InfiniteScroll>
       </VideoGrid>
-
-
-
+      
       <VideoModal openModal={modalState} closeModal={() => closeModal()} />
     </PageWrapper>
   )

@@ -25,10 +25,8 @@ export function DirectorsPage() {
 
   return (
     <PageWrapper active={'directors'}>
-      <Head>
-        <title>Intergalactic &ndash; Directors</title>
-      </Head>
-      <VideoGrid gridType={'threeGrid'}>
+      <Head><title>Intergalactic &ndash; Directors</title></Head>
+      <VideoGrid>
         {directorsList.map((item,index) => 
           <Link href={`/directors/${item.name.split(' ')[0].toLowerCase()}-${item.name.split(' ')[1].toLowerCase()}`} key={index}>
             <a style={{ gridColumn: `span ${item.column}`, gridRow: `span ${item.row}` }}>

@@ -5,6 +5,8 @@
   padding: 20px;
   font-family: 'Gotham';
   font-size: 12px;
+  background: black;
+  position: relative;
   @media all and (max-width: 800px) {
     display: none;
   }
