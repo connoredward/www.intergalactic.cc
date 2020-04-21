@@ -4,7 +4,7 @@ import Router from 'next/router'
 import Head from 'next/head'
 
 import PageWrapper from '~/components/layout/pageWrapper'
-import HoriScroll from '~/components/layout/horiScroll'
+import HoriScroll from '~/components/layout/HoriScroll'
 
 import styles from './styles.scss'
 
