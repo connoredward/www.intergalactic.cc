@@ -19,9 +19,11 @@ export function DirectorCard(props) {
   const videoRef = useRef()
 
   function resetVideo() {
-    videoRef.current.pause()
-    videoRef.current.currentTime = 0
-    videoRef.current.load()
+    if (videoRef && videoRef.current) {
+      videoRef.current.pause()
+      videoRef.current.currentTime = 0
+      videoRef.current.load()
+    }
   }
 
   return (
