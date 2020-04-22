@@ -154,6 +154,10 @@
           margin: 10px;
           font-weight: 600;
           font-family: 'Gotham';
+          @media all and (max-height: 550px) {
+            font-size: 22px !important;
+            margin: 5px;
+          }
           a {
             text-decoration: none;
             color: white;
@@ -163,12 +167,6 @@
       &.active {
         transform: translateY(0%);
       }
-    }
-  }
-  @media all and (max-height: 550px) {
-    li {
-      font-size: 22px !important;
-      margin: 5px;
     }
   }
 }
