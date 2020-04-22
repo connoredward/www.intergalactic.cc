@@ -102,7 +102,7 @@
     @media all and (max-width: 800px) {
       display: block;
     }
-    > button {
+    >button {
       position: absolute;
       right: 0;
       top: 50%;
@@ -163,6 +163,11 @@
       &.active {
         transform: translateY(0%);
       }
+    }
+  }
+  @media all and (max-height: 650px) {
+    li {
+      font-size: 22px !important;
     }
   }
 }
