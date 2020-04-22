@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 
 import Router from 'next/router'
 import Head from 'next/head'
+import { Textfit } from 'react-textfit'
 
 import PageWrapper from '~/components/layout/pageWrapper'
 import HoriScroll from '~/components/layout/HoriScroll'
@@ -34,6 +35,9 @@ export function SubPhotographerPage (props) {
 
   return (
     <PageWrapper active={'photographers'}> 
+      <div className={styles['photographers_banner']}>
+        <Textfit className={styles.h1} mode='single' max={50}>TOM RINGSBY</Textfit>
+      </div>
       <HoriScroll className={styles['desktop_view']}>
         {array.map(({imgSrc}, index) => <img src={imgSrc} key={index} /> )}
       </HoriScroll>
