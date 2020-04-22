@@ -165,9 +165,10 @@
       }
     }
   }
-  @media all and (max-height: 600px) {
+  @media all and (max-height: 550px) {
     li {
       font-size: 22px !important;
+      margin: 5px;
     }
   }
 }
