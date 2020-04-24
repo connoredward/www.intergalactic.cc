@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 import Slider from 'react-slick'
 import classNames from 'classnames'
@@ -8,6 +8,16 @@ import styles from './styles.scss'
 
 export function MobileSlider({data, className, onClick}) {
   const [currentSlide, setCurrentSlide] = useState(0)
+  const [height, setHeight] = useState()
+
+  useEffect(() => {
+    if (window) {
+      setHeight(window.innerHeight)
+      window.addEventListener('resize', function () {
+        setHeight(window.innerHeight)
+      })
+    }
+  }, [])
 
   const settings = {
     dots: false,
@@ -35,8 +45,10 @@ export function MobileSlider({data, className, onClick}) {
           className={styles['slide_content']} 
           onClick={() => onClick(slug)}
         >
-          <div className={styles['background_image']} style={{ backgroundImage: `url(${imgSrc})` }} />
-          <img src={titleImg} className={styles[currentSlide === index ? 'active' : undefined]} />
+          <div style={{ height: `calc(${height}px - 60px)` }}>
+            <div className={styles['background_image']} style={{ backgroundImage: `url(${imgSrc})` }} />
+            <img src={titleImg} className={styles[currentSlide === index ? 'active' : undefined]} />
+          </div>
         </div>
       )}
     </Slider>

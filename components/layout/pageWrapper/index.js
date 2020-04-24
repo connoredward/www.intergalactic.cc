@@ -1,3 +1,5 @@
+import { useState, useEffect } from 'react'
+
 import NavigationBar from '~/components/layout/navigationBar'
 import Footer from '~/components/layout/footer'
 
@@ -6,9 +8,20 @@ import classNames from 'classnames'
 import styles from './styles.scss'
 
 export function PageWrapper({ children, active, className }) {
+  const [screenHeight, setScreenHeight] = useState()
+
+  useEffect(() => {
+    if (window) {
+      setScreenHeight(window.innerHeight)
+      window.addEventListener('resize', function () {
+        setScreenHeight(window.innerHeight)
+      })
+    }
+  }, [])
+
   return (
     <>
-      <div className={classNames(styles['page_wrapper'], className)}>
+      <div className={classNames(styles['page_wrapper'], className)} style={{ minHeight: `${screenHeight}px` }}>
         <NavigationBar active={active} />
         {children}
       </div>
