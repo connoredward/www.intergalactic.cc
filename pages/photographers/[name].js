@@ -43,7 +43,7 @@ export function SubPhotographerPage (props) {
       </HoriScroll>
       <VideoGrid className={styles['mobile_view']}>
         {array.map((item, index) => 
-          <Card {...item} key={index} />
+          <img key={index} src={item.imgSrc} style={{ width: '100%', height: 'auto', margin: '0 0 -5px 0'}} />
         )}
       </VideoGrid>
     </PageWrapper>  

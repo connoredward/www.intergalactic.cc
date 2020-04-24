@@ -24,30 +24,33 @@ export function MobileSlider({data, className, onClick}) {
     speed: 500
   }
 
-  // useEffect(() => {
-  //   if (window) {
-  //     setMobileHeight(window.innerHeight)
-  //     console.log(window.innerHeight)
-  //   }
-  // }, [])
+  useEffect(() => {
+    if (window) {
+      setMobileHeight(window.innerHeight)
+      window.addEventListener('resive', function () {
+        setMobileHeight(window.innerHeight)
+      })
+      console.log(window.innerHeight)
+    }
+  }, [])
 
   function afterChange(currentSlide) {
     setCurrentSlide(currentSlide)
   }
 
   return (
-    <Slider style={{}} {...settings} className={classNames(styles['slider_wrapper'], className)}>
+    <Slider {...settings} className={classNames(styles['slider_wrapper'], className)}>
       {data.map(({imgSrc, titleImg, slug}, index) =>  
         <div 
-          style={{ height: 'calc(200vh - 60px)', background: 'red' }}
           key={index} 
           className={styles['slide_content']} 
           onClick={() => onClick(slug)}
-          // style={{ minHeight: `calc(90vh - 60px)`, height: `calc(${mobileHeight}px - 60px)`}}
-          // style={{ height: '100px !important' }}
-        >
-          <div className={styles['background_image']} style={{ backgroundImage: `url(${imgSrc})` }} />
-          <img src={titleImg} className={styles[currentSlide === index ? 'active' : undefined]} />
+          >
+          <div style={{ height: `calc(${mobileHeight}px - 60px)` }}>
+            {/* <h1 style={{ color: 'white' }}>{mobileHeight}</h1> */}
+            <div className={styles['background_image']} style={{ backgroundImage: `url(${imgSrc})` }} />
+            <img src={titleImg} className={styles[currentSlide === index ? 'active' : undefined]} />
+          </div>
         </div>
       )}
     </Slider>
