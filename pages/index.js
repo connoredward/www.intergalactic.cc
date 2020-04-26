@@ -10,7 +10,7 @@ import MobileSlider from '~/components/layout/mobileSlider'
 import VideoModal from '~/components/layout/videoModal'
 import SplashScreen from '~/components/layout/splashScreen'
 
-import { getHome, getVimeoModalUrl } from '~/api/wordpress'
+import { getPage, getVimeoModalUrl } from '~/api/wordpress'
 
 import styles from './styles.scss'
 
@@ -38,7 +38,7 @@ export function MainPage(props) {
   }, [])
 
   async function onLoad() {
-    setVideoData(await getHome())
+    setVideoData(await getPage('home'))
     setLoading(true)
   }
 

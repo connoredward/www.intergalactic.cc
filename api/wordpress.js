@@ -25,9 +25,13 @@ export async function getDataTest() {
   console.log('categories', categories)
 }
 
-export async function getHome() {
+export async function getSubPage(props) {
+
+}
+
+export async function getPage(pSlug) {
   const {posts, categories} = await getWordpressData()
-  const categoryId = categories.find(({slug}) => slug === 'home').id
+  const categoryId = categories.find(({slug}) => slug === pSlug).id
   
   return posts
     .filter(({categories}) => categories
@@ -62,6 +66,6 @@ export async function getVimeoModalUrl (slug) {
 
 export default {
   getDataTest,
-  getHome,
+  getPage,
   getVimeoModalUrl
 }

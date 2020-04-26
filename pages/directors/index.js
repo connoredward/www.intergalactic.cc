@@ -8,7 +8,7 @@ import PageWrapper from '~/components/layout/pageWrapper'
 import DirectorCard from '~/components/layout/directorCard'
 import VideoGrid from '~/components/layout/videoGrid'
 
-import { wordpressCardApi } from '~/components/modules/wordpressCall'
+import { getPage } from '~/api/wordpress'
 
 import styles from './styles.scss'
 
@@ -20,18 +20,18 @@ export function DirectorsPage() {
   }, [])
 
   async function onLoad() {
-    setDirectorsList(await wordpressCardApi('directors'))
+    setDirectorsList(await getPage('directors'))
   }
-
+  
   return (
     <PageWrapper active={'directors'}>
       <Head><title>Intergalactic &ndash; Directors</title></Head>
       <VideoGrid>
-        {directorsList.map((item,index) => 
-          <Link href={`/directors/${item.name.split(' ')[0].toLowerCase()}-${item.name.split(' ')[1].toLowerCase()}`} key={index}>
-            <a style={{ gridColumn: `span ${item.column}`, gridRow: `span ${item.row}` }}>
+        {directorsList.map((item, index) => 
+          <Link href={`/directors/${item.slug}`} key={index}>
+            <a style={{ gridColumn: `span ${item.gridColumn}`, gridRow: `span ${item.gridRow}` }}>
               <DirectorCard {...item} className={styles['director_card_wrapper']}>
-                <Textfit className={styles.h1} mode="single">{item.name}</Textfit>
+                <Textfit className={styles.h1} mode="single">{item.title}</Textfit>
               </DirectorCard>
             </a>
           </Link>

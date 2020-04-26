@@ -11,10 +11,9 @@ export function DirectorCard(props) {
     children,
     className,
     onClick,
-    gridStyle
+    gridRow, 
+    gridColumn
   } = props
-
-  const {row = 1, column = 1} = gridStyle
 
   const videoRef = useRef()
 
@@ -30,7 +29,7 @@ export function DirectorCard(props) {
     <div 
       onMouseLeave={() => resetVideo()}
       className={classNames(styles.main, className)} 
-      style={{ backgroundImage: `url(${imgSrc})`, gridColumn: `span ${column}`, gridRow: `span ${row}` }}
+      style={{ backgroundImage: `url(${imgSrc})`, gridColumn: `span ${gridColumn}`, gridRow: `span ${gridRow}` }}
       onClick={onClick}
       >
       <div className={styles['card_content']}>
@@ -38,7 +37,7 @@ export function DirectorCard(props) {
       </div>
       {videoSrc && (
         <video
-          className={styles[column > row ? 'widthAdj' : 'heightAdj' ]} 
+          className={styles[gridColumn > gridRow ? 'widthAdj' : 'heightAdj' ]} 
           ref={videoRef}
           src={videoSrc}
           autoPlay
