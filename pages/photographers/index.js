@@ -8,7 +8,7 @@ import PageWrapper from '~/components/layout/pageWrapper'
 import DirectorCard from '~/components/layout/directorCard'
 import VideoGrid from '~/components/layout/videoGrid'
 
-import { wordpressCardApi } from '~/components/modules/wordpressCall'
+import { getPage } from '~/api/wordpress'
 
 import styles from './styles.scss'
 
@@ -20,7 +20,7 @@ export function PhotographersPage () {
   }, [])
 
   async function onLoad() {
-    setPhotographersList(await wordpressCardApi('photographers'))
+    setPhotographersList(await getPage('photographers'))
   }
 
   return ( 
@@ -28,10 +28,10 @@ export function PhotographersPage () {
       <Head><title>Intergalactic &ndash; Photographers</title></Head>
       <VideoGrid>
         {photographersList.map((item, index) =>
-          <Link href={`/photographers/${item.name.split(' ')[0].toLowerCase()}-${item.name.split(' ')[1].toLowerCase()}`} key={index}>
-            <a style={{ gridColumn: `span ${item.column}`, gridRow: `span ${item.row}`}}>
+          <Link href={`/photographers/${item.slug}`} key={index}>
+            <a style={{ gridColumn: `span ${item.gridColumn}`, gridRow: `span ${item.gridRow}`}}>
               <DirectorCard {...item}>
-                <Textfit className={styles.h1} mode='single'>{item.name}</Textfit>
+                <Textfit className={styles.h1} mode='single'>{item.title}</Textfit>
               </DirectorCard>
             </a>
           </Link>
