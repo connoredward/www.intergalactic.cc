@@ -47,7 +47,7 @@ export function InfiniteSlider({data, className, onClick}) {
 
   function nextClick() {
     if (!blockNext) {
-      const newIndex = currentSlide === 2 ? 0 : currentSlide + 1
+      const newIndex = currentSlide === data.length - 1 ? 0 : currentSlide + 1
       setTimeout(() => setCurrentSlide(newIndex),1000)
       videoPlayBack(newIndex)
       
@@ -60,7 +60,7 @@ export function InfiniteSlider({data, className, onClick}) {
 
   function prevClick() {
     if (!blockNext) {
-      const newIndex = currentSlide === 0 ? 2 : currentSlide - 1
+      const newIndex = currentSlide === 0 ? data.length - 1 : currentSlide - 1
       setTimeout(() => setCurrentSlide(newIndex),1000)
       videoPlayBack(newIndex)
       
@@ -86,9 +86,9 @@ export function InfiniteSlider({data, className, onClick}) {
         <div ref={sliderRef} className={styles.slider} 
           style={{ transform: `translate(${sliderTransform})`, transition: sliderTransition, width: `${data.length}00%` }}
         >
-          {data.map(({videoSrc, titleImg, slug}, index) => 
+          {data.map(({videoSrc, imgTitleSrc, slug}, index) => 
             <section key={index}>
-              <img src={titleImg} className={styles[currentSlide === index ? 'active' : undefined]} onClick={() => onClick(slug)} />
+              <img src={imgTitleSrc} className={styles[currentSlide === index ? 'active' : undefined]} onClick={() => onClick(slug)} />
               <video src={videoSrc} autoPlay muted ref={videoArrayRefs.current[index]} onEnded={() => nextClick()} />
             </section>
           )}

@@ -10,7 +10,7 @@ import MobileSlider from '~/components/layout/mobileSlider'
 import VideoModal from '~/components/layout/videoModal'
 import SplashScreen from '~/components/layout/splashScreen'
 
-import { getHomePageVideos, getVimeoVideo } from '~/components/modules/wordpressCall'
+import { getHome, getVimeoModalUrl } from '~/api/wordpress'
 
 import styles from './styles.scss'
 
@@ -23,7 +23,7 @@ export function MainPage(props) {
   const {v = ''} = props
 
   const [videoData, setVideoData] = useState()
-  const [modalState, setModalState] = useState({open: false, src: ''})
+  const [modalState, setModalState] = useState({open: false, data: {}})
 
   const [loading, setLoading] = useState(false)
 
@@ -33,12 +33,12 @@ export function MainPage(props) {
     Router.events.on('routeChangeComplete', (url) => {
       const videoUrl = url.split('v=')[1]
       if (videoUrl) startVideo(videoUrl)
-      else setModalState({open: false, src: ''})
+      else setModalState({open: false, data: {}})
     })
   }, [])
 
   async function onLoad() {
-    setVideoData(await getHomePageVideos())
+    setVideoData(await getHome())
     setLoading(true)
   }
 
@@ -46,17 +46,17 @@ export function MainPage(props) {
   async function changeRoute(videoSlug) {
     const href = `/?v=${videoSlug}`
     Router.push('/', href, { shallow: true })
-    setModalState({open: true, src: await getVimeoVideo(videoSlug)})
+    setModalState({open: true, data: await getVimeoModalUrl(videoSlug)})
   }
 
   async function startVideo(videoSlug) {
-    setModalState({open: true, src: await getVimeoVideo(videoSlug)})
+    setModalState({open: true, data: await getVimeoModalUrl(videoSlug)})
   }
 
   function closeModal() {
     const href = '/'
     Router.push(href, href, { shallow: true })
-    setModalState({open: false, src: ''})
+    setModalState({open: false, data: {}})
   }
   
   return (

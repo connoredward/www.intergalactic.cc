@@ -29,7 +29,7 @@ export function MobileSlider({data, className, onClick}) {
     arrows: false,
     afterChange: afterChange,
     autoplay: true,
-    autoplaySpeed: 2000,
+    autoplaySpeed: 5000,
     speed: 500
   }
 

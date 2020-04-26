@@ -12,11 +12,13 @@ export function VideoModal(props) {
     closeModal
   } = props
 
+  const { src, projectClient, filmAndDirector, extraInfo } = openModal.data
+
   const [videoSrc, setVideoSrc] = useState()
 
   useEffect(() => {
-    setVideoSrc(openModal.src)
-  }, [openModal.src])
+    setVideoSrc(src)
+  }, [src])
 
   return (
     <div className={classNames(styles['modal_wrapper'], styles[openModal.open == true ? 'active' : undefined])}>
@@ -29,9 +31,9 @@ export function VideoModal(props) {
         <div className={styles['video_wrapper']}>
           {videoSrc && (<Vimeo video={videoSrc} />)}
           <div className={styles['text_wrapper']}>
-            <p>DOZENS</p>
-            <p style={{ fontWeight: '300' }}>"VERSIONS"</p>
-            <p style={{ fontWeight: '300' }}>RHORY DANNIELLS</p>
+            <p>{projectClient}</p>
+            <p style={{ fontWeight: '300' }}>{filmAndDirector}</p>
+            <p style={{ fontWeight: '300' }}>{extraInfo}</p>
           </div>
         </div> 
       
