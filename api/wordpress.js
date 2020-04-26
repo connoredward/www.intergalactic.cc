@@ -8,7 +8,7 @@ async function getWordpressData() {
       .then(res => res.json())
     const tags = await fetch(wordpressUrl + 'tags?per_page=100&_embed=1')
       .then(res => res.json())
-    const posts = await fetch(wordpressUrl + 'posts')
+    const posts = await fetch(wordpressUrl + 'posts?per_page=100&_embed=1')
       .then(res => res.json())
     res({ posts, categories, tags })
   })
@@ -26,7 +26,6 @@ export async function getDataTest() {
 }
 
 export async function getHome() {
-  console.log('getting home...')
   const {posts, categories} = await getWordpressData()
   const categoryId = categories.find(({slug}) => slug === 'home').id
   
