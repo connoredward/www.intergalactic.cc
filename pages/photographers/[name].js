@@ -7,7 +7,7 @@ import PageWrapper from '~/components/layout/pageWrapper'
 import HoriScroll from '~/components/layout/HoriScroll'
 import VideoGrid from '~/components/layout/videoGrid'
 
-import { getSubPage } from '~/api/wordpress'
+import { getPhotos } from '~/api/wordpress'
 
 import styles from './styles.scss'
 
@@ -15,7 +15,7 @@ export function SubPhotographerPage (props) {
   const { slug } = props
 
   const [banner, setBanner] = useState()
-  const [photographer, setPhotographer] = useState([])
+  const [photographer, setPhotographer] = useState()
 
   useEffect(() => {
     if (slug) {
@@ -25,7 +25,7 @@ export function SubPhotographerPage (props) {
   }, [])
   
   async function onLoad() {
-    setPhotographer(await getSubPage(slug))
+    setPhotographer(await getPhotos(slug))
   }
 
   return (
@@ -36,14 +36,18 @@ export function SubPhotographerPage (props) {
           <Textfit className={styles.h1} mode='single' max={50}>{banner}</Textfit>
         )}
       </div>
-      <HoriScroll className={styles['desktop_view']}>
-        {photographer.map(({imgSrc}, index) => <img src={imgSrc} key={index} /> )}
-      </HoriScroll>
-      <VideoGrid className={styles['mobile_view']}>
-        {photographer.map((item, index) => 
-          <img key={index} src={item.imgSrc} style={{ width: '100%', height: 'auto', margin: '0 0 -5px 0'}} />
-        )}
-      </VideoGrid>
+      {photographer && (
+        <>
+          <HoriScroll className={styles['desktop_view']}>
+            {photographer.map((item, index) => <img src={item} key={index} /> )}
+          </HoriScroll>
+          <VideoGrid className={styles['mobile_view']}>
+            {photographer.map((item, index) => 
+              <img key={index} src={item} style={{ width: '100%', height: 'auto', margin: '0 0 -5px 0'}} />
+            )}
+          </VideoGrid>
+        </>
+      )}
     </PageWrapper>  
   )
 }

@@ -49,7 +49,7 @@ export async function getPage(pSlug) {
     .map(item => dataStruc(item))
 }
 
-export async function getVimeoModalUrl (slug) {
+export async function getVimeoModalUrl(slug) {
   const {posts} = await getWordpressData()
   const f = posts.find((item) => item.slug === slug)
   return {
@@ -60,8 +60,25 @@ export async function getVimeoModalUrl (slug) {
   }
 }
 
+async function photoUrl(id) {
+  return new Promise(async(res, rej) => {
+    const url = await fetch(`https://intergalacticcms.wpcomstaging.com/wp-json/wp/v2/media/${id}`)
+      .then(res => res.json())
+      
+    res(url.source_url)
+  })
+}
+
+export async function getPhotos(pSlug) {
+  const {posts} = await getWordpressData()
+  return await Promise.all(
+    posts.find(({slug}) => slug === pSlug)?.x_metadata.gallery.split(',').map((i) => photoUrl(i))
+  )
+}
+
 export default {
   getPage,
   getSubPage,
-  getVimeoModalUrl
+  getVimeoModalUrl,
+  getPhotos
 }
