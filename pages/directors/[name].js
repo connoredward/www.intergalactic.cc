@@ -26,7 +26,10 @@ export function SubDirectorPage (props) {
   const [loadingMore, setLoadingMore] = useState(false)
 
   useEffect(() => {
-    if (slug) onLoad()
+    if (slug) {
+      setBanner(slug.replace(/\-/g, ' ').replace(/[0-9]/g, '').toUpperCase())
+      onLoad()
+    }
     if (v) startVideo(v)
     Router.events.on('routeChangeComplete', (url) => {
       const videoUrl = url.split('v=')[1]
@@ -49,7 +52,6 @@ export function SubDirectorPage (props) {
     const f = await getSubPage(slug)
     setOriginalDirectorList(f)
     setDirector(f)
-    setBanner(slug.replace(/\-/g, ' ').toUpperCase())
     setLoadingMore(true)
   }
 
@@ -65,9 +67,7 @@ export function SubDirectorPage (props) {
 
   return (
     <PageWrapper className={styles['sub_director_page']} active={'directors'}>
-      <Head>
-        <title>Intergalactic &ndash; {banner ? banner : ''}</title>
-      </Head>
+      <Head><title>Intergalactic &ndash; {banner ? banner : ''}</title></Head>
       <div className={styles['director_banner']}>
         {banner && (
           <Textfit className={styles.h1} mode="single" max={50}>{banner}</Textfit>

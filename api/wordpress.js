@@ -15,53 +15,38 @@ async function getWordpressData() {
 }
 
 
-
-
-
-export async function getDataTest() {
-  const {posts, tags, categories} = await getWordpressData()
-  console.log('post', posts)
-  console.log('tags', tags)
-  console.log('categories', categories)
+const dataStruc = ({slug, title, tags, categories, acf}) => {
+  return {
+    slug,
+    title: title.rendered,
+    tags,
+    categories,
+    videoSrc: acf['Video Media'].url,
+    imgSrc: acf['Image Media'].url,
+    imgTitleSrc: acf['Image Title'].url,
+    gridRow: parseInt(acf['Grid Row']),
+    gridColumn: parseInt(acf['Grid Column'])
+  }
 }
 
 export async function getSubPage(dSlug) {
   const newSlug = dSlug.replace(/\-/g, ' ')
+  console.log(newSlug)
   const {posts, tags, categories} = await getWordpressData()
-  const directorTagId = tags.find(({name}) => name === newSlug).id
+  const directorTagId = tags.find(({name}) => name === newSlug)?.id
 
   return posts 
     .filter(({tags}) => tags.includes(directorTagId))
-    .map(({slug, title, tags, categories, acf}) => { return {
-      slug,
-      title: title.rendered,
-      tags,
-      categories,
-      videoSrc: acf['Video Media'].url,
-      imgSrc: acf['Image Media'].url,
-      imgTitleSrc: acf['Image Title'].url,
-      gridRow: parseInt(acf['Grid Row']),
-      gridColumn: parseInt(acf['Grid Column'])
-    }})
+    .map(item => dataStruc(item))
 }
 
 export async function getPage(pSlug) {
   const {posts, categories} = await getWordpressData()
-  const categoryId = categories.find(({slug}) => slug === pSlug).id
+  const categoryId = categories.find(({slug}) => slug === pSlug)?.id
 
   return posts
     .filter(({categories}) => categories.includes(categoryId))
-    .map(({slug, title, tags, categories, acf}) => { return {
-      slug, 
-      title: title.rendered,
-      tags,
-      categories,
-      videoSrc: acf['Video Media'].url,
-      imgSrc: acf['Image Media'].url,
-      imgTitleSrc: acf['Image Title'].url,
-      gridRow: parseInt(acf['Grid Row']),
-      gridColumn: parseInt(acf['Grid Column'])
-    }})
+    .map(item => dataStruc(item))
 }
 
 export async function getVimeoModalUrl (slug) {
@@ -76,7 +61,6 @@ export async function getVimeoModalUrl (slug) {
 }
 
 export default {
-  getDataTest,
   getPage,
   getSubPage,
   getVimeoModalUrl
