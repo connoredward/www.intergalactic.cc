@@ -10,16 +10,13 @@ import VideoGrid from '~/components/layout/videoGrid'
 import DirectorCard from '~/components/layout/directorCard'
 import VideoModal from '~/components/layout/videoModal'
 
-import { getDirector, getVimeoVideo } from '~/components/modules/wordpressCall'
+import { getSubPage, getVimeoModalUrl } from '~/api/wordpress'
 
 import styles from './styles.scss'
 export function SubDirectorPage (props) {
-  const {
-    slug, 
-    v = '',
-  } = props
+  const { slug, v = '' } = props
 
-  const [banner, setBanner] = useState({})
+  const [banner, setBanner] = useState()
 
   const [originalDirectorList, setOriginalDirectorList] = useState([])
 
@@ -41,19 +38,18 @@ export function SubDirectorPage (props) {
   async function changeRoute(videoSlug) {
     const href = `/directors/${slug}?v=${videoSlug}`
     Router.push('/directors/[name]', href, { shallow: true })
-    setModalState({open: true, data: await getVimeoVideo(videoSlug)})
+    setModalState({open: true, data: await getVimeoModalUrl(videoSlug)})
   }
 
   async function startVideo(videoSlug) {
-    setModalState({open: true, data: await getVimeoVideo(videoSlug)})
+    setModalState({open: true, data: await getVimeoModalUrl(videoSlug)})
   }
 
   async function onLoad() {
-    let directorData = await getDirector(slug)
-    setBanner(directorData[0])
-    directorData.shift()
-    setOriginalDirectorList(directorData)
-    setDirector(directorData)
+    const f = await getSubPage(slug)
+    setOriginalDirectorList(f)
+    setDirector(f)
+    setBanner(slug.replace(/\-/g, ' ').toUpperCase())
     setLoadingMore(true)
   }
 
@@ -70,11 +66,11 @@ export function SubDirectorPage (props) {
   return (
     <PageWrapper className={styles['sub_director_page']} active={'directors'}>
       <Head>
-        <title>Intergalactic &ndash; {banner && banner.name ? banner.name : ''}</title>
+        <title>Intergalactic &ndash; {banner ? banner : ''}</title>
       </Head>
       <div className={styles['director_banner']}>
-        {banner.name && (
-          <Textfit className={styles.h1} mode="single" max={50}>{banner.name}</Textfit>
+        {banner && (
+          <Textfit className={styles.h1} mode="single" max={50}>{banner}</Textfit>
         )}
       </div>
 
@@ -84,7 +80,7 @@ export function SubDirectorPage (props) {
             {...item} 
             onClick={() => changeRoute(item.slug)} key={index}
           >
-            <img src={item.titleImg} />
+            <img src={item.imgTitleSrc} />
           </DirectorCard>
         )}
       </VideoGrid>

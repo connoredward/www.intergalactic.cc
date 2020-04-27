@@ -25,9 +25,24 @@ export async function getDataTest() {
   console.log('categories', categories)
 }
 
-export async function getSubPage(props) {
+export async function getSubPage(dSlug) {
+  const newSlug = dSlug.replace(/\-/g, ' ')
   const {posts, tags, categories} = await getWordpressData()
+  const directorTagId = tags.find(({name}) => name === newSlug).id
 
+  return posts 
+    .filter(({tags}) => tags.includes(directorTagId))
+    .map(({slug, title, tags, categories, acf}) => { return {
+      slug,
+      title: title.rendered,
+      tags,
+      categories,
+      videoSrc: acf['Video Media'].url,
+      imgSrc: acf['Image Media'].url,
+      imgTitleSrc: acf['Image Title'].url,
+      gridRow: parseInt(acf['Grid Row']),
+      gridColumn: parseInt(acf['Grid Column'])
+    }})
 }
 
 export async function getPage(pSlug) {
@@ -44,10 +59,6 @@ export async function getPage(pSlug) {
       videoSrc: acf['Video Media'].url,
       imgSrc: acf['Image Media'].url,
       imgTitleSrc: acf['Image Title'].url,
-      vimeoUrl: acf['Vimeo Url'],
-      projectClient: acf['Project Client'],
-      filmAndDirector: acf['Film And Director'],
-      extraInfo: acf['Extra Info'],
       gridRow: parseInt(acf['Grid Row']),
       gridColumn: parseInt(acf['Grid Column'])
     }})
@@ -67,5 +78,6 @@ export async function getVimeoModalUrl (slug) {
 export default {
   getDataTest,
   getPage,
+  getSubPage,
   getVimeoModalUrl
 }
