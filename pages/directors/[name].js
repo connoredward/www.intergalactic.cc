@@ -4,7 +4,6 @@ import Router from 'next/router'
 import Head from 'next/head'
 import { Textfit } from 'react-textfit'
 import InfiniteScroll from 'react-infinite-scroller'
-import classNames from 'classnames'
 
 import PageWrapper from '~/components/layout/pageWrapper'
 import VideoGrid from '~/components/layout/videoGrid'
@@ -25,7 +24,7 @@ export function SubDirectorPage (props) {
   const [originalDirectorList, setOriginalDirectorList] = useState([])
 
   const [director, setDirector] = useState([])
-  const [modalState, setModalState] = useState({open: false, src: ''})
+  const [modalState, setModalState] = useState({open: false, data: {}})
 
   const [loadingMore, setLoadingMore] = useState(false)
 
@@ -35,18 +34,18 @@ export function SubDirectorPage (props) {
     Router.events.on('routeChangeComplete', (url) => {
       const videoUrl = url.split('v=')[1]
       if (videoUrl) startVideo(videoUrl)
-      else setModalState({open: false, src: ''})
+      else setModalState({open: false, data: {}})
     })
   }, [slug, v])
   
   async function changeRoute(videoSlug) {
     const href = `/directors/${slug}?v=${videoSlug}`
     Router.push('/directors/[name]', href, { shallow: true })
-    setModalState({open: true, src: await getVimeoVideo(videoSlug)})
+    setModalState({open: true, data: await getVimeoVideo(videoSlug)})
   }
 
-  async function startVideo(videoUrl) {
-    setModalState({open: true, src: await getVimeoVideo(videoUrl)})
+  async function startVideo(videoSlug) {
+    setModalState({open: true, data: await getVimeoVideo(videoSlug)})
   }
 
   async function onLoad() {
@@ -61,7 +60,7 @@ export function SubDirectorPage (props) {
   function closeModal() {
     const href = `/directors/${slug}`
     Router.push('/directors/[name]', href, { shallow: true })
-    setModalState({open: false, src: ''})
+    setModalState({open: false, data: {}})
   }
 
   function loadFunc() {

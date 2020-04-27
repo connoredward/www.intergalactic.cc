@@ -42,7 +42,6 @@ export function MainPage(props) {
     setLoading(true)
   }
 
-
   async function changeRoute(videoSlug) {
     const href = `/?v=${videoSlug}`
     Router.push('/', href, { shallow: true })

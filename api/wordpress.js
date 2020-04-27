@@ -26,16 +26,16 @@ export async function getDataTest() {
 }
 
 export async function getSubPage(props) {
+  const {posts, tags, categories} = await getWordpressData()
 
 }
 
 export async function getPage(pSlug) {
   const {posts, categories} = await getWordpressData()
   const categoryId = categories.find(({slug}) => slug === pSlug).id
-  
+
   return posts
-    .filter(({categories}) => categories
-    .includes(categoryId))
+    .filter(({categories}) => categories.includes(categoryId))
     .map(({slug, title, tags, categories, acf}) => { return {
       slug, 
       title: title.rendered,
