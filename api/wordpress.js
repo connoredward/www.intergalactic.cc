@@ -31,7 +31,6 @@ const dataStruc = ({slug, title, tags, categories, acf}) => {
 
 export async function getSubPage(dSlug) {
   const newSlug = dSlug.replace(/\-/g, ' ')
-  console.log(newSlug)
   const {posts, tags, categories} = await getWordpressData()
   const directorTagId = tags.find(({name}) => name === newSlug)?.id
 
