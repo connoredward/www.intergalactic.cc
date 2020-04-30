@@ -19,8 +19,10 @@ export function SubDirectorPage (props) {
   const [banner, setBanner] = useState()
 
   const [originalDirectorList, setOriginalDirectorList] = useState([])
+  const [mobileList, setMobileList] = useState([])
 
   const [director, setDirector] = useState([])
+
   const [modalState, setModalState] = useState({open: false, data: {}})
 
   const [loadingMore, setLoadingMore] = useState(false)
@@ -52,6 +54,7 @@ export function SubDirectorPage (props) {
     const f = await getSubPage(slug)
     setOriginalDirectorList(f)
     setDirector(f)
+    setMobileList(f)
     setLoadingMore(true)
   }
 
@@ -62,7 +65,7 @@ export function SubDirectorPage (props) {
   }
 
   function loadFunc() {
-    setDirector([...director, ...originalDirectorList])
+    setMobileList([...mobileList, ...originalDirectorList])
   }
 
   return (
@@ -91,12 +94,12 @@ export function SubDirectorPage (props) {
           loadMore={() => loadFunc()}
           hasMore={loadingMore}
         >
-          {director.map((item, index) => 
+          {mobileList.map((item, index) => 
             <DirectorCard
               {...item}
               onClick={() => changeRoute(item.slug)} key={index}
             >
-              <img src={item.titleImg} />
+              <img src={item.imgTitleSrc} />
             </DirectorCard>
           )}
         </InfiniteScroll>
