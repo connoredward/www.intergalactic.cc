@@ -27,7 +27,7 @@ export function DirectorCard(props) {
       else setVideoSize('widthAdj')
     }
     window.addEventListener('resize', function () {
-      const {clientWidth, clientHeight} = containerRef.current
+      const {clientWidth = 0, clientHeight = 0} = containerRef.current
       if (clientHeight * 1.76 > clientWidth) setVideoSize('heightAdj')
       else setVideoSize('widthAdj')
     })
