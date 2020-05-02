@@ -4,7 +4,7 @@ import classNames from 'classnames'
 
 import styles from './styles.scss'
 
-import LOGO_IMG from '~/static/images/INTERGALACTIC_LOGO_WHITE.png'
+import LOGO_IMG from '~/static/images/CHROME_SILVER_LOGO.png'
 
 export function SplashScreen ({loading}) {
   const [mobileHeight, setMobileHeight] = useState()
