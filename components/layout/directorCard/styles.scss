@@ -35,9 +35,6 @@
     transform: translate(-50%, -50%);
     min-width: 100%;
     min-height: 100%;
-    // width: auto;
-    // height: auto;
-    // object-fit: cover;
     &.heightAdj {
       height: 100%;
       width: auto;
@@ -46,22 +43,6 @@
       width: 100%;
       height: auto;
     }
-    // @media (orientation:landscape) { 
-    //   width: 100% !important;
-    //   height: auto !important;
-    // }
-    @media (max-width: 1350px) and (orientation:landscape) { 
-      height: 100% !important;
-      width: auto !important;
-    }
-    @media (orientation:portrait) { 
-      height: 100% !important;
-      width: auto !important;
-    }
-    // @media (max-width: 1200px) {
-    //   height: 100% !important;
-    //   width: auto !important;
-    // }
   }
   &:hover {
     cursor: pointer;

@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useRef, useEffect, useState } from 'react'
 
 import classNames from 'classnames'
 
@@ -16,6 +16,23 @@ export function DirectorCard(props) {
   } = props
 
   const videoRef = useRef()
+  const containerRef = useRef()
+
+  const [videoSize, setVideoSize] = useState()
+
+  useEffect(() => {
+    if (containerRef && containerRef.current) {
+      const {clientWidth = 0, clientHeight = 0} = containerRef.current
+      if (clientHeight * 1.76 > clientWidth) setVideoSize('heightAdj')
+      else setVideoSize('widthAdj')
+    }
+    window.addEventListener('resize', function () {
+      const {clientWidth, clientHeight} = containerRef.current
+      if (clientHeight * 1.76 > clientWidth) setVideoSize('heightAdj')
+      else setVideoSize('widthAdj')
+    })
+  }, [])
+
 
   function resetVideo() {
     if (videoRef && videoRef.current) {
@@ -31,13 +48,14 @@ export function DirectorCard(props) {
       className={classNames(styles.main, className)} 
       style={{ backgroundImage: `url(${imgSrc})`, gridColumn: `span ${gridColumn}`, gridRow: `span ${gridRow}` }}
       onClick={onClick}
+      ref={containerRef}
       >
       <div className={styles['card_content']}>
         {children}
       </div>
       {videoSrc && (
         <video
-          className={styles[gridColumn > gridRow ? 'widthAdj' : 'heightAdj' ]} 
+          className={styles[videoSize]} 
           ref={videoRef}
           src={videoSrc}
           autoPlay
