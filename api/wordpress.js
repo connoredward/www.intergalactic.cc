@@ -55,7 +55,8 @@ export async function getVimeoModalUrl(slug) {
     src: f.acf['Vimeo Url'],
     projectClient: f.acf['Project Client'],
     filmAndDirector: f.acf['Film And Director'],
-    extraInfo: f.acf['Extra Info']
+    extraInfo: f.acf['Extra Info'],
+    type: f.acf.videoType
   }
 }
 
