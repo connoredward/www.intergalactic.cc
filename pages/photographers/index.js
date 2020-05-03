@@ -30,7 +30,7 @@ export function PhotographersPage () {
         {photographersList.map((item, index) =>
           <Link href={`/photographers/${item.slug}`} key={index}>
             <a style={{ gridColumn: `span ${item.gridColumn}`, gridRow: `span ${item.gridRow}`}}>
-              <DirectorCard {...item}>
+              <DirectorCard {...item} showContent={true}>
                 <Textfit className={styles.h1} mode='single'>{item.title}</Textfit>
               </DirectorCard>
             </a>

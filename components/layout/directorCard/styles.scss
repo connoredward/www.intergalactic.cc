@@ -16,9 +16,9 @@
     text-align: center;
     width: 100%;
     opacity: 0;
-  // @media (orientation:landscape) { 
-  //   top: 100%
-  // }
+    &.show_content {
+      opacity: 1 !important;
+    }
     img {
       width: 100%;
       max-width: 500px;
@@ -51,6 +51,9 @@
     }
     .card_content {
       opacity: 1;
+      &.show_content {
+        opacity: 0 !important;
+      }
     }
   }
   @media all and (max-width: 800px) {

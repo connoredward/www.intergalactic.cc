@@ -12,7 +12,8 @@ export function DirectorCard(props) {
     className,
     onClick,
     gridRow, 
-    gridColumn
+    gridColumn,
+    showContent
   } = props
 
   const videoRef = useRef()
@@ -52,7 +53,7 @@ export function DirectorCard(props) {
       onClick={onClick}
       ref={containerRef}
       >
-      <div className={styles['card_content']}>
+      <div className={classNames(styles['card_content'], styles[showContent ? 'show_content' : undefined])}>
         {children}
       </div>
       {videoSrc && (

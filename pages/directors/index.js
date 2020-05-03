@@ -30,7 +30,7 @@ export function DirectorsPage() {
         {directorsList.map((item, index) => 
           <Link href={`/directors/${item.slug}`} key={index}>
             <a style={{ gridColumn: `span ${item.gridColumn}`, gridRow: `span ${item.gridRow}` }}>
-              <DirectorCard {...item} className={styles['director_card_wrapper']}>
+              <DirectorCard {...item} className={styles['director_card_wrapper']} showContent={true}>
                 <Textfit className={styles.h1} mode="single">{item.title}</Textfit>
               </DirectorCard>
             </a>
