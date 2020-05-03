@@ -33,7 +33,7 @@ export function VideoModal(props) {
       
         <div className={styles['video_wrapper']}>
           {videoSrc && type === 'Vimeo' && (<Vimeo className={styles['vimeo_player']} video={videoSrc} />)}
-          {videoSrc && type === 'Youtube' && (<ReactPlayer className={styles['youtube_player']} url={videoSrc}  />)}
+          {videoSrc && type === 'Youtube' && (<ReactPlayer className={styles['youtube_player']} url={videoSrc} controls />)}
           <div className={classNames(styles['text_wrapper'], styles[type])}>
             <p>{projectClient}</p>
             <p style={{ fontWeight: '300' }}>{filmAndDirector}</p>
