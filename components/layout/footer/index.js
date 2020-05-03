@@ -7,13 +7,15 @@ import styles from './styles.scss'
 import FB_ICON from '~/static/images/icons/FB_ICON.png'
 import IG_ICON from '~/static/images/icons/IG_ICON.png'
 import VM_ICOM from '~/static/images/icons/VIMEO_ICON.png'
+import SPOTIFY_ICON from '~/static/images/icons/SPOTIFY_ICON.png'
 
 let wordArray = ['DESIGN STUDIO', 'CREATIVE NETWORK', 'PRODUCTION COMPANY', 'PHOTOGRAPHY AGENCY']
 
 let socialMediaIcons = [
   { href: 'https://www.instagram.com/intergalactic.studios/', icon: IG_ICON },
   { href: 'https://www.facebook.com/studiointergalactic', icon: FB_ICON },
-  { href: 'https://vimeo.com/intergalacticstudios', icon: VM_ICOM }
+  { href: 'https://vimeo.com/intergalacticstudios', icon: VM_ICOM },
+  { href: 'https://open.spotify.com/playlist/3BXxN58hWM8QHDNAWPExSH?si=Np_2QauNThO_gU9qMgOVWg', icon: SPOTIFY_ICON}
 ]
 
 function Icons({className}) {
