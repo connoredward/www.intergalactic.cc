@@ -31,7 +31,7 @@ export function PhotographersPage () {
           <Link href={`/photographers/${item.slug}`} key={index}>
             <a style={{ gridColumn: `span ${item.gridColumn}`, gridRow: `span ${item.gridRow}`}}>
               <DirectorCard {...item} showContent={true}>
-                <Textfit className={styles.h1} mode='single'>{item.title}</Textfit>
+                <Textfit className={styles.h1} mode='single' max={28}>{item.title}</Textfit>
               </DirectorCard>
             </a>
           </Link>
