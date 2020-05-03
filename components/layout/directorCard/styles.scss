@@ -54,7 +54,7 @@
     }
   }
   @media all and (max-width: 800px) {
-    height: 50vh;
+    grid-area: span 2 / span 1 / auto / auto !important;
     video {
       display: none !important;
     }

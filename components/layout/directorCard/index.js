@@ -26,11 +26,13 @@ export function DirectorCard(props) {
       if (clientHeight * 1.76 > clientWidth) setVideoSize('heightAdj')
       else setVideoSize('widthAdj')
     }
-    window.addEventListener('resize', function () {
-      const {clientWidth = 0, clientHeight = 0} = containerRef.current
-      if (clientHeight * 1.76 > clientWidth) setVideoSize('heightAdj')
-      else setVideoSize('widthAdj')
-    })
+    if (window) {
+      window.addEventListener('resize', function () {
+        const {clientWidth = 0, clientHeight = 0} = containerRef.current
+        if (clientHeight * 1.76 > clientWidth) setVideoSize('heightAdj')
+        else setVideoSize('widthAdj')
+      })
+    }
   }, [])
 
 
