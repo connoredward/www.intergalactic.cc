@@ -2,14 +2,15 @@ import fetch from 'isomorphic-unfetch'
 
 const wordpressUrl = 'https://public-api.wordpress.com/wp/v2/sites/intergalacticcms.wordpress.com/'
 
-async function getWordpressData() {
+async function getWordpressData({pSlug, pTags}) {
   return new Promise(async(res, rej) => {
-    const categories = await fetch(wordpressUrl + 'categories?per_page=100&_embed=1')
+    const categories = await fetch(wordpressUrl + `categories?slug=${pSlug}&per_page=100&_embed=1`)
       .then(res => res.json())
-    const tags = await fetch(wordpressUrl + 'tags?per_page=100&_embed=1')
+    const tags = await fetch(wordpressUrl + `tags?slug=${pTags}&per_page=100&_embed=1`)
       .then(res => res.json())
-    const posts = await fetch(wordpressUrl + 'posts?per_page=100&_embed=1')
+    const posts = await fetch(wordpressUrl + `posts?${!tags[0] ? `categories=${categories[0].id}` : `tags=${tags[0].id}`}&per_page=100&_embed=1`)
       .then(res => res.json())
+
     res({ posts, categories, tags })
   })
 }
@@ -29,34 +30,25 @@ const dataStruc = ({slug, title, tags, categories, acf}) => {
   }
 }
 
-export async function getSubPage(dSlug) {
-  const newSlug = dSlug.replace(/\-/g, ' ')
-  const {posts, tags, categories} = await getWordpressData()
-  const directorTagId = tags.find(({name}) => name === newSlug)?.id
-
-  return posts 
-    .filter(({tags}) => tags.includes(directorTagId))
-    .map(item => dataStruc(item))
+export async function getSubPage(pTags) {
+  const {posts} = await getWordpressData({pTags})
+  return posts .map(item => dataStruc(item))
 }
 
 export async function getPage(pSlug) {
-  const {posts, categories} = await getWordpressData()
-  const categoryId = categories.find(({slug}) => slug === pSlug)?.id
-
-  return posts
-    .filter(({categories}) => categories.includes(categoryId))
-    .map(item => dataStruc(item))
+  const {posts} = await getWordpressData({pSlug})
+  return posts.map(item => dataStruc(item))
 }
 
 export async function getVimeoModalUrl(slug) {
-  const {posts} = await getWordpressData()
-  const f = posts.find((item) => item.slug === slug)
+  const f = await fetch(wordpressUrl + `posts?slug=${slug}`)
+    .then(res => res.json())
   return {
-    src: f.acf['Vimeo Url'],
-    projectClient: f.acf['Project Client'],
-    filmAndDirector: f.acf['Film And Director'],
-    extraInfo: f.acf['Extra Info'],
-    type: f.acf.videoType
+    src: f[0].acf['Vimeo Url'],
+    projectClient: f[0].acf['Project Client'],
+    filmAndDirector: f[0].acf['Film And Director'],
+    extraInfo: f[0].acf['Extra Info'],
+    type: f[0].acf.videoType
   }
 }
 
@@ -70,9 +62,10 @@ async function photoUrl(id) {
 }
 
 export async function getPhotos(pSlug) {
-  const {posts} = await getWordpressData()
+  const post = await fetch(wordpressUrl + `posts?slug=${pSlug}`)
+    .then(res => res.json())
   return await Promise.all(
-    posts.find(({slug}) => slug === pSlug)?.x_metadata.gallery.split(',').map((i) => photoUrl(i))
+    post[0]?.x_metadata.gallery.split(',').map((i) => photoUrl(i))
   )
 }
 

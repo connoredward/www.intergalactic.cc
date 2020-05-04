@@ -22,7 +22,6 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    width: 50%;
     min-width: 800px;
     button {
       display: none;
@@ -68,11 +67,6 @@
     @media all and (max-width: 1000px) {
       transform: scale(1);
     }
-    // @media all and (max-width: 800px) {
-    //   position: absolute;
-    //   top: 50%;
-    //   transform: translateY(-50%);
-    // }
     iframe {
       width: 90vw;
       max-height: 500px;
@@ -95,10 +89,6 @@
         margin: 10px auto !important;
         max-width: 795px;    
       }
-    }
-    @media all and (max-width: 1600px) {
-      margin: -15px auto 0;
-      max-width: 795px;    
     }
     @media all and (max-width: 800px) {
       display: none;
