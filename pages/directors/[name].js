@@ -4,6 +4,7 @@ import Router from 'next/router'
 import Head from 'next/head'
 import { Textfit } from 'react-textfit'
 import InfiniteScroll from 'react-infinite-scroller'
+import ReactGA from 'react-ga'
 
 import PageWrapper from '~/components/layout/pageWrapper'
 import VideoGrid from '~/components/layout/videoGrid'
@@ -28,6 +29,10 @@ export function SubDirectorPage (props) {
   const [loadingMore, setLoadingMore] = useState(false)
 
   useEffect(() => {
+    if (window) {
+      ReactGA.initialize('UA-165426415-1')
+      ReactGA.pageview(window.location.pathname + window.location.search)
+    }
     if (slug) {
       setBanner(slug.replace(/\-/g, ' ').replace(/[0-9]/g, '').toUpperCase())
       onLoad()

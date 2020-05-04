@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Head from 'next/head'
 import { Textfit } from 'react-textfit'
+import ReactGA from 'react-ga'
 
 import PageWrapper from '~/components/layout/pageWrapper'
 import DirectorCard from '~/components/layout/directorCard'
@@ -16,6 +17,10 @@ export function PhotographersPage () {
   const [photographersList, setPhotographersList] = useState([])
 
   useEffect(() => {
+    if (window) {
+      ReactGA.initialize('UA-165426415-1')
+      ReactGA.pageview(window.location.pathname + window.location.search)
+    }
     onLoad()
   }, [])
 

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 
 import Router from 'next/router'
 import Head from 'next/head'
+import ReactGA from 'react-ga'
 
 import PageWrapper from '~/components/layout/pageWrapper'
 import DirectorCard from '~/components/layout/directorCard'
@@ -17,6 +18,10 @@ export function BrandedPage (props) {
   const [modalState, setModalState] = useState({open: false, data: {}})
 
   useEffect(() => {
+    if (window) {
+      ReactGA.initialize('UA-165426415-1')
+      ReactGA.pageview(window.location.pathname + window.location.search)
+    }
     onLoad()
     if (v) startVideo(v)
     Router.events.on('routeChangeComplete', (url) => {

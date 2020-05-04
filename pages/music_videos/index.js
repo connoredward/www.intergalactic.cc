@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 
 import Router from 'next/router'
 import Head from 'next/head'
+import ReactGA from 'react-ga'
 
 import PageWrapper from '~/components/layout/pageWrapper'
 import VideoGrid from '~/components/layout/videoGrid'
@@ -20,6 +21,10 @@ export function MusicVideosPage (props) {
 
   useEffect(() => {
     onLoad()
+    if (window) {
+      ReactGA.initialize('UA-165426415-1')
+      ReactGA.pageview(window.location.pathname + window.location.search)
+    }
     if (v) startVideo(v)
     Router.events.on('routeChangeComplete', (url) => {
       const videoUrl = url.split('v=')[1]
