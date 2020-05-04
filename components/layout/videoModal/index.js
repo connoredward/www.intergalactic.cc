@@ -15,8 +15,6 @@ export function VideoModal(props) {
 
   const { src, projectClient, filmAndDirector, extraInfo, type } = openModal.data
 
-  console.log('type', type)
-
   const [videoSrc, setVideoSrc] = useState()
 
   useEffect(() => {
@@ -33,7 +31,7 @@ export function VideoModal(props) {
       
         <div className={styles['video_wrapper']}>
           {videoSrc && type === 'Vimeo' && (<Vimeo className={styles['vimeo_player']} video={videoSrc} />)}
-          {videoSrc && type === 'Youtube' && (<ReactPlayer className={styles['youtube_player']} url={videoSrc} controls />)}
+          {videoSrc && type === 'Youtube' && (<ReactPlayer className={styles['youtube_player']} url={videoSrc} controls width={`100%`} />)}
           <div className={classNames(styles['text_wrapper'], styles[type])}>
             <p>{projectClient}</p>
             <p style={{ fontWeight: '300' }}>{filmAndDirector}</p>

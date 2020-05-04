@@ -55,24 +55,32 @@
   width: 100%;
   text-align: center;
   transform: scale(1.15);
+  @media all and (max-width: 800px) {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .youtube_player {
+      width: 85% !important;
+    }
+  }
   .vimeo_player {
     @media all and (max-width: 1000px) {
       transform: scale(1);
     }
-    @media all and (max-width: 800px) {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-    }
+    // @media all and (max-width: 800px) {
+    //   position: absolute;
+    //   top: 50%;
+    //   transform: translateY(-50%);
+    // }
     iframe {
-      width: 100%;
+      width: 90vw;
       max-height: 500px;
       height: 70vw;
       min-height: 240px;
     }
   }
   .youtube_player {
-    width: 100% !important;
     height: 400px !important;
   }
 
