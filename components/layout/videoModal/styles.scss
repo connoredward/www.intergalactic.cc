@@ -51,9 +51,9 @@
 }
 
 .video_wrapper {
-  width: 100%;
+  width: 80vw;
   text-align: center;
-  transform: scale(1.15);
+  // transform: scale(1.15);
   @media all and (max-width: 800px) {
     height: 100vh;
     display: flex;
@@ -65,13 +65,15 @@
   }
   .vimeo_player {
     @media all and (max-width: 1000px) {
-      transform: scale(1);
+      // transform: scale(1);
     }
     iframe {
-      width: 90vw;
+      // width: 90vw;
+      width: 100%;
       max-height: 500px;
       height: 70vw;
-      min-height: 240px;
+      min-height: 500px;
+      background: black;
     }
   }
   .youtube_player {
@@ -83,7 +85,7 @@
     width: 100%;
     padding: 0;
     margin: 10px auto;
-    max-width: 890px;
+    // max-width: 890px;
     &.Youtube {
       @media all and (max-width: 1600px) {
         margin: 10px auto !important;
