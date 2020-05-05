@@ -53,6 +53,9 @@
       opacity: 1;
       &.show_content {
         opacity: 0 !important;
+        @media all and (max-width: 800px) {
+          opacity: 1 !important;
+        }
       }
     }
   }
