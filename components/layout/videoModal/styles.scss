@@ -51,33 +51,23 @@
 }
 
 .video_wrapper {
-  width: 80vw;
+  width: 100%;
   text-align: center;
-  // transform: scale(1.15);
   @media all and (max-width: 800px) {
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
     .youtube_player {
       width: 85% !important;
     }
   }
   .vimeo_player {
-    @media all and (max-width: 1000px) {
-      // transform: scale(1);
-    }
     iframe {
-      // width: 90vw;
-      width: 100%;
+      width: 90vw;
       max-height: 500px;
       height: 70vw;
-      min-height: 500px;
-      background: black;
-      @media all and (max-width: 800px) {
-        width: 90vw;
-      }
+      min-height: 240px;
     }
   }
   .youtube_player {
@@ -89,7 +79,7 @@
     width: 100%;
     padding: 0;
     margin: 10px auto;
-    // max-width: 890px;
+    max-width: 890px;
     &.Youtube {
       @media all and (max-width: 1600px) {
         margin: 10px auto !important;
