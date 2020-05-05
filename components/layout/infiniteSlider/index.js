@@ -10,7 +10,7 @@ export function InfiniteSlider({data, className, onClick}) {
   const sliderRef = useRef()
   const videoArrayRefs = useRef(data.map(() => React.createRef()))
 
-  const [direction, setDirection] = useState(0)
+  const [direction, setDirection] = useState(-1)
   const directionRef = useRef(direction)
 
   const [carouselStyling, setCourselStyling] = useState('flex-start')
@@ -50,6 +50,10 @@ export function InfiniteSlider({data, className, onClick}) {
       const newIndex = currentSlide === data.length - 1 ? 0 : currentSlide + 1
       setTimeout(() => setCurrentSlide(newIndex),1000)
       videoPlayBack(newIndex)
+
+      if (direction === 1) {
+        sliderRef.current.prepend(sliderRef.current.lastElementChild)
+      }
       
       setDirection(-1)
       directionRef.current = -1

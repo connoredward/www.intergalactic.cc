@@ -15,7 +15,6 @@ async function getWordpressData({pSlug, pTags}) {
   })
 }
 
-
 const dataStruc = ({slug, title, tags, categories, acf}) => {
   return {
     slug,
