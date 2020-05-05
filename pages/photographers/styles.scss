@@ -2,6 +2,15 @@
   display: none;
 }
 
+.card_links {
+  @media all and (max-width: 800px) {
+    grid-row: span 1 !important;
+    .photographer_card_wrapper {
+      height: 25vh;
+    }
+  }
+}
+
 @media all and (max-width: 800px) {
   .mobile_view {
     padding-top: 165px;

@@ -34,8 +34,8 @@ export function PhotographersPage () {
       <VideoGrid>
         {photographersList.map((item, index) =>
           <Link href={`/photographers/${item.slug}`} key={index}>
-            <a style={{ gridColumn: `span ${item.gridColumn}`, gridRow: `span ${item.gridRow}`}}>
-              <DirectorCard {...item} showContent={true}>
+            <a className={styles['card_links']} style={{ gridColumn: `span ${item.gridColumn}`, gridRow: `span ${item.gridRow}`}}>
+              <DirectorCard {...item} showContent={true} className={styles['photographer_card_wrapper']}>
                 <Textfit className={styles.h1} mode='single' max={28}>{item.title}</Textfit>
               </DirectorCard>
             </a>

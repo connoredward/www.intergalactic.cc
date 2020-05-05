@@ -1,4 +1,13 @@
+.card_links {
+  @media all and (max-width: 800px) {
+    grid-row: span 1 !important;
+  }
+}
+
 .director_card_wrapper {
+  @media all and (max-width: 800px) {
+    height: 25vh;
+  }
   .h1 {
     color: white;
     font-family: 'Gotham';

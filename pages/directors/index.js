@@ -34,7 +34,7 @@ export function DirectorsPage() {
       <VideoGrid>
         {directorsList.map((item, index) => 
           <Link href={`/directors/${item.slug}`} key={index}>
-            <a style={{ gridColumn: `span ${item.gridColumn}`, gridRow: `span ${item.gridRow}` }}>
+            <a className={styles['card_links']} style={{ gridColumn: `span ${item.gridColumn}`, gridRow: `span ${item.gridRow}` }}>
               <DirectorCard {...item} className={styles['director_card_wrapper']} showContent={true}>
                 <Textfit className={styles.h1} mode="single" max={28}>{item.title}</Textfit>
               </DirectorCard>
