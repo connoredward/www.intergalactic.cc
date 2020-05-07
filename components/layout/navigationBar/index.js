@@ -14,6 +14,7 @@ import LOGO from '~/static/images/INTERGALACTIC_LOGO_WHITE.png'
 const links = [
   {name: 'DIRECTORS', link: '/directors'},
   {name: 'MUSIC VIDEOS', link: '/music_videos'},
+  {name: 'LIVE', link: '/live'},
   {name: 'BRANDED', link: '/branded'},
   {name: 'NARRATIVE', link: '/narrative'},
   {name: 'PHOTOGRAPHERS', link: '/photographers'}
