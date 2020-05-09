@@ -75,7 +75,7 @@ export function SubDirectorPage (props) {
 
   async function loadFuncDesktop(pageNumber) {
     const f = await getSubPage({pTags: slug, pageNumber})
-    if (f) setMusicVideoList([...director, ...f])
+    if (f) setDirector([...director, ...f])
     else setLoadingMore(false)
   }
 
