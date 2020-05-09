@@ -43,7 +43,7 @@ export function MainPage(props) {
   }, [])
 
   async function onLoad() {
-    setVideoData(await getPage('home'))
+    setVideoData(await getPage({pSlug: 'home', pageNumber: 1}))
     setLoading(true)
   }
 
