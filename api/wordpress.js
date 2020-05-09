@@ -1,5 +1,4 @@
 import fetch from 'isomorphic-unfetch'
-import { pageview } from 'react-ga'
 
 const wordpressUrl = 'https://public-api.wordpress.com/wp/v2/sites/intergalacticcms.wordpress.com/'
 
