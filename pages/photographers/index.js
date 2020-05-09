@@ -17,7 +17,7 @@ import styles from './styles.scss'
 export function PhotographersPage () {
   const [photographersList, setPhotographersList] = useState([])
 
-  const [loadingMore, setLoadingMore] = useState([])
+  const [loadingMore, setLoadingMore] = useState(false)
 
   useEffect(() => {
     if (window) {
