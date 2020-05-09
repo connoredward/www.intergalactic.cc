@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 
 import Router from 'next/router'
 import Head from 'next/head'
+import InfiniteScroll from 'react-infinite-scroller'
 import ReactGA from 'react-ga'
 
 import PageWrapper from '~/components/layout/pageWrapper'
@@ -16,6 +17,8 @@ export function BrandedPage (props) {
   
   const [brandedList, setBrandedList] = useState([])
   const [modalState, setModalState] = useState({open: false, data: {}})
+
+  const [loadingMore, setLoadingMore] = useState(false)
 
   useEffect(() => {
     if (window) {
@@ -32,7 +35,8 @@ export function BrandedPage (props) {
   }, [])
   
   async function onLoad() {
-    setBrandedList(await getPage('branded'))
+    setBrandedList(await getPage({pSlug: 'branded', pageNumber: 1}))
+    setLoadingMore(true)
   }
 
   async function startVideo(videoSlug) {
@@ -51,16 +55,28 @@ export function BrandedPage (props) {
     setModalState({open: false, data: {}})
   }
 
+  async function loadFunc(pageNumber) {
+    const f = await getPage({pSlug: 'branded', pageNumber})
+    if (f) setBrandedList([...brandedList, ...f])
+    else setLoadingMore(false)
+  }
+
   return (
     <PageWrapper active={'branded'}>
       <Head><title>Intergalactic &ndash; Branded</title></Head>
-      <VideoGrid>
-        {brandedList.map((item, index) => 
-          <DirectorCard {...item} key={index} onClick={() => changeRoute(item.slug)}>
-            <img src={item.imgTitleSrc} />
-          </DirectorCard>
-        )}
-      </VideoGrid>
+      <InfiniteScroll
+        pageStart={1}
+        loadMore={pageNumber => loadFunc(pageNumber)}
+        hasMore={loadingMore}
+      >
+        <VideoGrid>
+          {brandedList.map((item, index) => 
+            <DirectorCard {...item} key={index} onClick={() => changeRoute(item.slug)}>
+              <img src={item.imgTitleSrc} />
+            </DirectorCard>
+          )}
+        </VideoGrid>
+      </InfiniteScroll>
       <VideoModal openModal={modalState} closeModal={() => closeModal()} />
     </PageWrapper>
   )

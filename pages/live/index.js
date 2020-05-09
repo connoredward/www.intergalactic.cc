@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 
 import Router from 'next/router'
 import Head from 'next/head'
+import InfiniteScroll from 'react-infinite-scroller'
 import ReactGA from 'react-ga'
 
 import PageWrapper from '~/components/layout/pageWrapper'
@@ -16,6 +17,8 @@ export function LivePage (props) {
 
   const [liveList, setLiveList] = useState([])
   const [modalState, setModalState] = useState({open: false, data: {}})
+
+  const [loadingMore, setLoadingMore] = useState(false)
 
   useEffect(() => {
     if (window) {
@@ -32,7 +35,8 @@ export function LivePage (props) {
   }, [])
 
   async function onLoad() {
-    setLiveList(await getPage('live'))
+    setLiveList(await getPage({pSlug: 'live', pageNumber: 1}))
+    setLoadingMore(true)
   }
 
   async function startVideo(videoSlug) {
@@ -51,16 +55,28 @@ export function LivePage (props) {
     setModalState({open: false, data: {}})
   }
 
+  async function loadFunc(pageNumber) {
+    const f = await getPage({pSlug: 'live', pageNumber})
+    if (f) setLiveList([...liveList, ...f])
+    else setLoadingMore(false)
+  }
+
   return (
     <PageWrapper active={'live'}>
       <Head><title>Intergalactic &ndash; Live</title></Head>
-      <VideoGrid>
-        {liveList.map((item, index) => 
-          <DirectorCard {...item} key={index} onClick={() => changeRoute(item.slug)}>
-            <img src={item.imgTitleSrc} />
-          </DirectorCard>
-        )}
-      </VideoGrid>
+      <InfiniteScroll
+        pageStart={1}
+        loadMore={pageNumber => loadFunc(pageNumber)}
+        hasMore={loadingMore}
+      >
+        <VideoGrid>
+          {liveList.map((item, index) => 
+            <DirectorCard {...item} key={index} onClick={() => changeRoute(item.slug)}>
+              <img src={item.imgTitleSrc} />
+            </DirectorCard>
+          )}
+        </VideoGrid>
+      </InfiniteScroll>
       <VideoModal openModal={modalState} closeModal={() => closeModal()} />
     </PageWrapper>
   )

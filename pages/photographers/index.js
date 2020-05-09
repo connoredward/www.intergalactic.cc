@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Head from 'next/head'
 import { Textfit } from 'react-textfit'
+import InfiniteScroll from 'react-infinite-scroller'
 import ReactGA from 'react-ga'
 
 import PageWrapper from '~/components/layout/pageWrapper'
@@ -16,6 +17,8 @@ import styles from './styles.scss'
 export function PhotographersPage () {
   const [photographersList, setPhotographersList] = useState([])
 
+  const [loadingMore, setLoadingMore] = useState([])
+
   useEffect(() => {
     if (window) {
       ReactGA.initialize('UA-165426415-1')
@@ -25,23 +28,36 @@ export function PhotographersPage () {
   }, [])
 
   async function onLoad() {
-    setPhotographersList(await getPage('photographers'))
+    setPhotographersList(await getPage({pSlug: 'photographers', pageNumber: 1}))
+    setLoadingMore(true)
+  }
+
+  async function loadFunc(pageNumber) {
+    const f = await getPage({pSlug: 'photographers', pageNumber})
+    if (f) setPhotographersList([...photographersList, ...f])
+    else setLoadingMore(false)
   }
 
   return ( 
     <PageWrapper active={'photographers'}>
       <Head><title>Intergalactic &ndash; Photographers</title></Head>
-      <VideoGrid>
-        {photographersList.map((item, index) =>
-          <Link href={`/photographers/${item.slug}`} key={index}>
-            <a className={styles['card_links']} style={{ gridColumn: `span ${item.gridColumn}`, gridRow: `span ${item.gridRow}`}}>
-              <DirectorCard {...item} showContent={true} className={styles['photographer_card_wrapper']}>
-                <Textfit className={styles.h1} mode='single' max={28}>{item.title}</Textfit>
-              </DirectorCard>
-            </a>
-          </Link>
-        )}
-      </VideoGrid>
+      <InfiniteScroll
+        pageStart={1}
+        loadMore={pageNumber => loadFunc(pageNumber)}
+        hasMore={loadingMore}
+      >
+        <VideoGrid>
+          {photographersList.map((item, index) =>
+            <Link href={`/photographers/${item.slug}`} key={index}>
+              <a className={styles['card_links']} style={{ gridColumn: `span ${item.gridColumn}`, gridRow: `span ${item.gridRow}`}}>
+                <DirectorCard {...item} showContent={true} className={styles['photographer_card_wrapper']}>
+                  <Textfit className={styles.h1} mode='single' max={28}>{item.title}</Textfit>
+                </DirectorCard>
+              </a>
+            </Link>
+          )}
+        </VideoGrid>
+      </InfiniteScroll>
     </PageWrapper>
   )
 }

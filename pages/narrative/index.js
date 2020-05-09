@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 
 import Router from 'next/router'
 import Head from 'next/head'
+import InfiniteScroll from 'react-infinite-scroller'
 import ReactGA from 'react-ga'
 
 import PageWrapper from '~/components/layout/pageWrapper'
@@ -16,6 +17,8 @@ export function NarrativePage(props) {
 
   const [contentList, setContentList] = useState([])
   const [modalState, setModalState] = useState({open: false, data: {}})
+
+  const [loadingMore, setLoadingMore] = useState(false)
 
   useEffect(() => {
     onLoad()
@@ -32,7 +35,9 @@ export function NarrativePage(props) {
   }, [])
   
   async function onLoad() {
-    setContentList(await getPage('narrative'))
+    setContentList(await getPage({pSlug: 'narrative', pageNumber: 1}))
+    setLoadingMore(true)
+
   }
 
   async function startVideo(videoSlug) {
@@ -51,16 +56,28 @@ export function NarrativePage(props) {
     setModalState({open: false, data: {}})
   }
 
+  async function loadFunc(pageNumber) {
+    const f = await getPage({pSlug: 'narrative', pageNumber})
+    if (f) setContentList([...contentList, ...f])
+    else setLoadingMore(false)
+  }
+
   return (
     <PageWrapper active={'narrative'}>
       <Head><title>Intergalactic &ndash; Narrative</title></Head>
-      <VideoGrid>
-        {contentList.map((item, index) => 
-          <DirectorCard {...item} key={index} onClick={() => changeRoute(item.slug)}>
-            <img src={item.imgTitleSrc} />
-          </DirectorCard>
-        )}
-      </VideoGrid>
+      <InfiniteScroll
+        pageStart={1}
+        loadMore={pageNumber => loadFunc(pageNumber)}
+        hasMore={loadingMore}
+      >
+        <VideoGrid>
+          {contentList.map((item, index) => 
+            <DirectorCard {...item} key={index} onClick={() => changeRoute(item.slug)}>
+              <img src={item.imgTitleSrc} />
+            </DirectorCard>
+          )}
+        </VideoGrid>
+      </InfiniteScroll>
       <VideoModal openModal={modalState} closeModal={() => closeModal()} />
     </PageWrapper>
   )

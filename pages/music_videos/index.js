@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 
 import Router from 'next/router'
 import Head from 'next/head'
+import InfiniteScroll from 'react-infinite-scroller'
 import ReactGA from 'react-ga'
 
 import PageWrapper from '~/components/layout/pageWrapper'
@@ -17,7 +18,9 @@ export function MusicVideosPage (props) {
   const {v = ''} = props
 
   const [musicVideoList, setMusicVideoList] = useState([])
-  const [modalState, setModalState] = useState({open: false, data: {}})
+  const [modalState, setModalState] = useState({open: false, data: {}}) 
+
+  const [loadingMore, setLoadingMore] = useState(false)
 
   useEffect(() => {
     onLoad()
@@ -34,7 +37,8 @@ export function MusicVideosPage (props) {
   }, [])
 
   async function onLoad() {
-    setMusicVideoList(await getPage('music_videos'))
+    setMusicVideoList(await getPage({pSlug: 'music_videos', pageNumber: 1}))
+    setLoadingMore(true)
   }
 
   async function changeRoute(videoSlug) {
@@ -52,19 +56,31 @@ export function MusicVideosPage (props) {
     Router.push(href, href, { shallow: true })
     setModalState({open: false, data: {}})
   }
+  
+  async function loadFunc(pageNumber) {
+    const f = await getPage({pSlug: 'music_videos', pageNumber})
+    if (f) setMusicVideoList([...musicVideoList, ...f])
+    else setLoadingMore(false)
+  }
 
   return (
     <PageWrapper active={'music videos'} className={styles['music_video_grid']}>
       <Head>
         <title>Intergalactic &ndash; Music Videos</title>
       </Head>
-      <VideoGrid gridType={'twoByThreeGrid'}>
-        {musicVideoList.map((item, index) => 
-          <MusicVideoCard onClick={() => changeRoute(item.slug)} {...item} key={index}>
-            <img src={item.imgTitleSrc} />
-          </MusicVideoCard>
-        )}
-      </VideoGrid>
+      <InfiniteScroll
+        pageStart={1}
+        loadMore={pageNumber => loadFunc(pageNumber)}
+        hasMore={loadingMore}
+      >
+        <VideoGrid>
+          {musicVideoList.map((item, index) => 
+            <MusicVideoCard onClick={() => changeRoute(item.slug)} {...item} key={index}>
+              <img src={item.imgTitleSrc} />
+            </MusicVideoCard>
+          )}
+        </VideoGrid>
+      </InfiniteScroll>
       <VideoModal openModal={modalState} closeModal={() => closeModal()} />
     </PageWrapper>
   )

@@ -1,14 +1,15 @@
 import fetch from 'isomorphic-unfetch'
+import { pageview } from 'react-ga'
 
 const wordpressUrl = 'https://public-api.wordpress.com/wp/v2/sites/intergalacticcms.wordpress.com/'
 
-async function getWordpressData({pSlug, pTags}) {
+async function getWordpressData({pSlug, pTags, pageNumber}) {
   return new Promise(async(res, rej) => {
     const categories = await fetch(wordpressUrl + `categories?slug=${pSlug}&per_page=100&_embed=1`)
       .then(res => res.json())
     const tags = await fetch(wordpressUrl + `tags?slug=${pTags}&per_page=100&_embed=1`)
       .then(res => res.json())
-    const posts = await fetch(wordpressUrl + `posts?${!tags[0] ? `categories=${categories[0].id}` : `tags=${tags[0].id}`}&per_page=100&_embed=1`)
+    const posts = await fetch(wordpressUrl + `posts?${!tags[0] ? `categories=${categories[0].id}` : `tags=${tags[0].id}`}&page=${pageNumber}&per_page=10&_embed=1`)
       .then(res => res.json())
 
     res({ posts, categories, tags })
@@ -29,13 +30,15 @@ const dataStruc = ({slug, title, tags, categories, acf}) => {
   }
 }
 
-export async function getSubPage(pTags) {
-  const {posts} = await getWordpressData({pTags})
+export async function getSubPage({pTags, pageNumber}) {
+  const {posts} = await getWordpressData({pTags, pageNumber})
+  if (posts.data?.status === 400) return undefined
   return posts .map(item => dataStruc(item))
 }
 
-export async function getPage(pSlug) {
-  const {posts} = await getWordpressData({pSlug})
+export async function getPage({pSlug, pageNumber}) {
+  const {posts} = await getWordpressData({pSlug, pageNumber})
+  if (posts.data?.status === 400) return undefined
   return posts.map(item => dataStruc(item))
 }
 

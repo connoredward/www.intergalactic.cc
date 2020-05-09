@@ -56,7 +56,7 @@ export function SubDirectorPage (props) {
   }
 
   async function onLoad() {
-    const f = await getSubPage(slug)
+    const f = await getSubPage({pTags: slug, pageNumber: 1})
     setOriginalDirectorList(f)
     setDirector(f)
     setMobileList(f)
@@ -73,6 +73,12 @@ export function SubDirectorPage (props) {
     setMobileList([...mobileList, ...originalDirectorList])
   }
 
+  async function loadFuncDesktop(pageNumber) {
+    const f = await getSubPage({pTags: slug, pageNumber})
+    if (f) setMusicVideoList([...director, ...f])
+    else setLoadingMore(false)
+  }
+
   return (
     <PageWrapper className={styles['sub_director_page']} active={'directors'}>
       <Head><title>Intergalactic &ndash; {banner ? banner : ''}</title></Head>
@@ -82,16 +88,22 @@ export function SubDirectorPage (props) {
         )}
       </div>
 
-      <VideoGrid className={styles['desktop_grid']}>
-        {director.map((item, index) => 
-          <DirectorCard 
+      <InfiniteScroll
+        pageStart={1}
+        loadMore={pageNumber => loadFuncDesktop(pageNumber)}
+        hasMore={loadingMore}
+      >
+        <VideoGrid className={styles['desktop_grid']}>
+          {director.map((item, index) => 
+            <DirectorCard 
             {...item} 
             onClick={() => changeRoute(item.slug)} key={index}
-          >
-            <img src={item.imgTitleSrc} />
-          </DirectorCard>
-        )}
-      </VideoGrid>
+            >
+              <img src={item.imgTitleSrc} />
+            </DirectorCard>
+          )}
+        </VideoGrid>
+      </InfiniteScroll>
 
       <VideoGrid className={styles['mobile_grid']}>
         <InfiniteScroll
