@@ -28,15 +28,7 @@ export function MainPage(props) {
 
   const [loading, setLoading] = useState(false)
 
-  const [active, setActive] = useState(false)
-
   useEffect(() => {
-
-    if(navigator?.userAgent.includes('Instagram')){
-      // setActive(true)
-      window.open("https://www.intergalacticstudios.com/","_system");
-    } 
-
     onLoad()
     if (window) {
       ReactGA.initialize('UA-165426415-1')
@@ -77,7 +69,7 @@ export function MainPage(props) {
         <title>Intergalactic &ndash; Home</title>
       </Head>
       <SplashScreen loading={loading} />
-      <PageWrapper active={active}>
+      <PageWrapper>
         {videoData && (
           <>
             <InfiniteSlider onClick={url => changeRoute(url)} className={styles['desktop_slider']} data={videoData} />

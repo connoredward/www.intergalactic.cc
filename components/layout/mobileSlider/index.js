@@ -12,15 +12,14 @@ export function MobileSlider({data, className, onClick}) {
 
   useEffect(() => {
     if (window) {
-      // if(navigator?.userAgent.includes('Instagram')){
-      //     setHeight(`100vh`)
-      // } 
-      // else {
-      setHeight(`calc(${window.innerHeight}px - 60px)`)
-      window.addEventListener('resize', function () {
+      if(navigator?.userAgent.includes('Instagram')){
+          setHeight(`calc(${window.innerHeight}px - 60px)`)
+      } else {
         setHeight(`calc(${window.innerHeight}px - 60px)`)
-      })
-      // }
+        window.addEventListener('resize', function () {
+          setHeight(`calc(${window.innerHeight}px - 60px)`)
+        })
+      }
     }
   }, [])
 
