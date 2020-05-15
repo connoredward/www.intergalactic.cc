@@ -15,9 +15,9 @@ export function MobileSlider({data, className, onClick}) {
       if(navigator?.userAgent.includes('Instagram')){
         setHeight('100vh')
       } else {
-        setHeight(window.innerHeight)
+        setHeight(`calc(${window.innerHeight}px - 60px)`)
         window.addEventListener('resize', function () {
-          setHeight(window.innerHeight)
+          setHeight(`calc(${window.innerHeight}px - 60px)`)
         })
       }
     }
@@ -48,7 +48,7 @@ export function MobileSlider({data, className, onClick}) {
           key={index} 
           className={styles['slide_content']} 
         >
-          <div style={{ height: `calc(${height}px - 60px)` }}>
+          <div style={{ height: height }}>
             <div className={styles['background_image']} style={{ backgroundImage: `url(${imgSrc})` }} />
             <img 
               onClick={() => onClick(slug)}
