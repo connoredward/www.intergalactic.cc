@@ -29,10 +29,6 @@ export function MainPage(props) {
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    if(navigator?.userAgent.includes('Instagram')){
-      // window.location.href = 'https://www.intergalacticstudios.com/'
-    }
-
     onLoad()
     if (window) {
       ReactGA.initialize('UA-165426415-1')

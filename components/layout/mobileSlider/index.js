@@ -12,10 +12,14 @@ export function MobileSlider({data, className, onClick}) {
 
   useEffect(() => {
     if (window) {
-      setHeight(window.innerHeight)
-      window.addEventListener('resize', function () {
+      if(navigator?.userAgent.includes('Instagram')){
+        setHeight('100vh')
+      } else {
         setHeight(window.innerHeight)
-      })
+        window.addEventListener('resize', function () {
+          setHeight(window.innerHeight)
+        })
+      }
     }
   }, [])
 
