@@ -13,8 +13,9 @@ export function MobileSlider({data, className, onClick}) {
   useEffect(() => {
     if (window) {
       if(navigator?.userAgent.includes('Instagram')){
-        setHeight(`${window.innerHeight}px`)
+        // setHeight(`${window.innerHeight}px`)
         // window.location.href = 'https://www.intergalacticstudios.com/'
+        window.open('https://www.intergalacticstudios.com/', '_blank')
       } else {
         setHeight(`calc(${window.innerHeight}px - 60px)`)
         window.addEventListener('resize', function () {
