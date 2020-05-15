@@ -33,7 +33,8 @@ export function MainPage(props) {
   useEffect(() => {
 
     if(navigator?.userAgent.includes('Instagram')){
-      setActive(true)
+      // setActive(true)
+      window.open("https://www.intergalacticstudios.com/","_system");
     } 
 
     onLoad()
