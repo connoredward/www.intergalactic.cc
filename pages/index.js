@@ -27,9 +27,13 @@ export function MainPage(props) {
   const [modalState, setModalState] = useState({open: false, data: {}})
 
   const [loading, setLoading] = useState(false)
+  const [lockedS, setLockedS] = useState(false)
 
   useEffect(() => {
     onLoad()
+    if(navigator?.userAgent.includes('Instagram')){
+      setLockedS(true)
+    }
     if (window) {
       ReactGA.initialize('UA-165426415-1')
       ReactGA.pageview(window.location.pathname + window.location.search)
@@ -64,7 +68,7 @@ export function MainPage(props) {
   }
   
   return (
-    <div style={loading ? undefined : lockScroll}>
+    <div style={loading || lockedS ? undefined : lockScroll}>
       <Head>
         <title>Intergalactic &ndash; Home</title>
       </Head>

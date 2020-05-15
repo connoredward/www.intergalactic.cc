@@ -13,7 +13,7 @@ export function MobileSlider({data, className, onClick}) {
   useEffect(() => {
     if (window) {
       if(navigator?.userAgent.includes('Instagram')){
-          setHeight(`calc(${window.innerHeight}px - 60px)`)
+        setHeight(`calc(${window.innerHeight}px - 60px)`)
       } else {
         setHeight(`calc(${window.innerHeight}px - 60px)`)
         window.addEventListener('resize', function () {
