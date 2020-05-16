@@ -10,13 +10,15 @@ export function MobileSlider({data, className, onClick}) {
   const [currentSlide, setCurrentSlide] = useState(0)
   const [height, setHeight] = useState()
 
+  const [showImage, setShowImage] = useState(false)
+
   useEffect(() => {
     if (window) {
+      setHeight(`calc(${window.innerHeight}px - 60px)`)
       if(navigator?.userAgent.includes('Instagram')){
-        setHeight(`calc(${window.innerHeight}px - 60px)`)
-      } else {
-        setHeight(`calc(${window.innerHeight}px - 60px)`)
-        window.addEventListener('resize', function () {
+        setShowImage(true)
+      } else {  
+        window.addEventListener('resize', () => {
           setHeight(`calc(${window.innerHeight}px - 60px)`)
         })
       }
@@ -53,7 +55,7 @@ export function MobileSlider({data, className, onClick}) {
             <img 
               onClick={() => onClick(slug)}
               src={imgTitleSrc} 
-              className={styles[currentSlide === index ? 'active' : undefined]} 
+              className={styles[currentSlide === index || showImage ? 'active' : undefined]} 
             />
           </div>
         </div>
