@@ -46,7 +46,7 @@ export function DirectorsPage() {
         loadMore={pageNumber => loadFunc(pageNumber)}
         hasMore={loadingMore}
       >
-        <VideoGrid>
+        <VideoGrid className={styles['director_grid_sizing']}>
           {directorsList.map((item, index) => 
             <Link href={`/directors/${item.slug}`} key={index}>
               <a className={styles['card_links']} style={{ gridColumn: `span ${item.gridColumn}`, gridRow: `span ${item.gridRow}` }}>

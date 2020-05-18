@@ -51,3 +51,9 @@
     }
   }
 }
+
+.photographers_grid_sizing {
+  @media all and (max-width: 800px) {
+    grid-auto-rows: 17vh;
+  }
+}

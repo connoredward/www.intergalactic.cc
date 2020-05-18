@@ -46,7 +46,7 @@ export function PhotographersPage () {
         loadMore={pageNumber => loadFunc(pageNumber)}
         hasMore={loadingMore}
       >
-        <VideoGrid>
+        <VideoGrid className={styles['photographers_grid_sizing']}>
           {photographersList.map((item, index) =>
             <Link href={`/photographers/${item.slug}`} key={index}>
               <a className={styles['card_links']} style={{ gridColumn: `span ${item.gridColumn}`, gridRow: `span ${item.gridRow}`}}>
