@@ -7,7 +7,8 @@ import classNames from 'classnames'
 
 import styles from './styles.scss'
 
-export function PageWrapper({ children, active, className }) {
+export function PageWrapper(props) {
+  const { children, active, className, loading = true } = props
   const [screenHeight, setScreenHeight] = useState()
 
   useEffect(() => {
@@ -25,7 +26,7 @@ export function PageWrapper({ children, active, className }) {
         <NavigationBar active={active} />
         {children}
       </div>
-      <Footer className={styles['mobile_footer']} />
+      {loading && (<Footer className={styles['mobile_footer']} />)}
     </>
   )
 }

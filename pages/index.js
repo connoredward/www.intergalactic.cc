@@ -69,7 +69,7 @@ export function MainPage(props) {
         <title>Intergalactic &ndash; Home</title>
       </Head>
       <SplashScreen loading={loading} />
-      <PageWrapper>
+      <PageWrapper loading={loading}>
         {videoData && (
           <>
             <InfiniteSlider onClick={url => changeRoute(url)} className={styles['desktop_slider']} data={videoData} />
