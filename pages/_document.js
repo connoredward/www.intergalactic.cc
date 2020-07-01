@@ -19,6 +19,22 @@ export default class MyDocument extends Document {
           <link rel="icon" type="image/png" sizes="32x32" href="../static/favicon/favicon-32x32.png" />
           <link rel="icon" type="image/png" sizes="16x16" href="../static/favicon/favicon-16x16.png" />
           <link rel="manifest" href="../static/favicon/site.webmanifest"></link>
+
+
+          <meta name="title" content="INTERGALACTIC STUDIOS" />
+
+          <meta property="og:type" content="website" />
+          <meta property="og:url" content="https://www.intergalacticstudios.com/" />
+          <meta property="og:title" content="INTERGALACTIC STUDIOS" />
+          {/* <meta property="og:description" content="" /> */}
+          <meta property="og:image" content="../static/social_preview.jpeg" />
+
+          <meta property="twitter:card" content="summary_large_image" />
+          <meta property="twitter:url" content="https://www.intergalacticstudios.com/" />
+          <meta property="twitter:title" content="INTERGALACTIC STUDIOS" />
+          {/* <meta property="twitter:description" content="" /> */}
+          <meta property="twitter:image" content="../static/social_preview.jpeg"></meta>
+
         </Head>
         <body>
           <Main />
