@@ -27,13 +27,13 @@ export default class MyDocument extends Document {
           <meta property="og:url" content="https://www.intergalacticstudios.com/" />
           <meta property="og:title" content="INTERGALACTIC STUDIOS" />
           {/* <meta property="og:description" content="" /> */}
-          <meta property="og:image" content="../static/social_preview.jpeg" />
+          <meta property="og:image" content="https://www.intergalacticstudios.com/static/social_preview.jpeg" />
 
           <meta property="twitter:card" content="summary_large_image" />
           <meta property="twitter:url" content="https://www.intergalacticstudios.com/" />
           <meta property="twitter:title" content="INTERGALACTIC STUDIOS" />
           {/* <meta property="twitter:description" content="" /> */}
-          <meta property="twitter:image" content="../static/social_preview.jpeg"></meta>
+          <meta property="twitter:image" content="https://www.intergalacticstudios.com/static/social_preview.jpeg"></meta>
 
         </Head>
         <body>
