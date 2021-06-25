@@ -1,28 +1,27 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
 
-import Slider from 'react-slick'
+import Slider from 'react-slick';
 
-import styles from './styles.module.scss'
+import styles from './styles.module.scss';
 
+export function MobileSlider({ data, onClick }) {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [height, setHeight] = useState();
 
-export function MobileSlider({data, onClick}) {
-  const [currentSlide, setCurrentSlide] = useState(0)
-  const [height, setHeight] = useState()
-
-  const [showImage, setShowImage] = useState(false)
+  const [showImage, setShowImage] = useState(false);
 
   useEffect(() => {
     if (window) {
-      setHeight(`calc(${window.innerHeight}px - 60px)`)
-      if(navigator?.userAgent.includes('Instagram')){
-        setShowImage(true)
-      } else {  
+      setHeight(`calc(${window.innerHeight}px - 60px)`);
+      if (navigator?.userAgent.includes('Instagram')) {
+        setShowImage(true);
+      } else {
         window.addEventListener('resize', () => {
-          setHeight(`calc(${window.innerHeight}px - 60px)`)
-        })
+          setHeight(`calc(${window.innerHeight}px - 60px)`);
+        });
       }
     }
-  }, [])
+  }, []);
 
   const settings = {
     dots: false,
@@ -35,32 +34,32 @@ export function MobileSlider({data, onClick}) {
     afterChange: afterChange,
     autoplay: true,
     autoplaySpeed: 5000,
-    speed: 500
-  }
+    speed: 500,
+  };
 
   function afterChange(currentSlide) {
-    setCurrentSlide(currentSlide)
+    setCurrentSlide(currentSlide);
   }
 
   return (
     <Slider {...settings} className={styles['slider_wrapper']}>
-      {data.map(({imgSrc, imgTitleSrc, slug}, index) =>  
-        <div 
-          key={index} 
-          className={styles['slide_content']} 
-        >
+      {data.map(({ imgSrc, imgTitleSrc, slug }, index) => (
+        <div key={index} className={styles['slide_content']}>
           <div style={{ height: height }}>
-            <div className={styles['background_image']} style={{ backgroundImage: `url(${imgSrc})` }} />
-            <img 
+            <div
+              className={styles['background_image']}
+              style={{ backgroundImage: `url(${imgSrc})` }}
+            />
+            <img
               onClick={() => onClick(slug)}
-              src={imgTitleSrc} 
-              className={styles[currentSlide === index || showImage ? 'active' : undefined]} 
+              src={imgTitleSrc}
+              className={styles[currentSlide === index || showImage ? 'active' : undefined]}
             />
           </div>
         </div>
-      )}
+      ))}
     </Slider>
-  )
+  );
 }
 
-export default MobileSlider
+export default MobileSlider;

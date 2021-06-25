@@ -1,34 +1,37 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
 
-import NavigationBar from '~/components/layout/navigationBar'
-import Footer from '~/components/layout/footer'
+import NavigationBar from '~/components/layout/navigationBar';
+import Footer from '~/components/layout/footer';
 
-import classNames from 'classnames'
+import classNames from 'classnames';
 
-import styles from './styles.module.scss'
+import styles from './styles.module.scss';
 
 export function PageWrapper(props) {
-  const { children, active, className, loading = true } = props
-  const [screenHeight, setScreenHeight] = useState()
+  const { children, active, className, loading = true } = props;
+  const [screenHeight, setScreenHeight] = useState();
 
   useEffect(() => {
     if (window) {
-      setScreenHeight(window.innerHeight)
+      setScreenHeight(window.innerHeight);
       window.addEventListener('resize', () => {
-        setScreenHeight(window.innerHeight)
-      })
+        setScreenHeight(window.innerHeight);
+      });
     }
-  }, [])
+  }, []);
 
   return (
     <>
-      <div className={classNames(styles['page_wrapper'], className)} style={{ minHeight: `${screenHeight}px` }}>
+      <div
+        className={classNames(styles['page_wrapper'], className)}
+        style={{ minHeight: `${screenHeight}px` }}
+      >
         <NavigationBar active={active} />
         {children}
       </div>
-      {loading && (<Footer className={styles['mobile_footer']} />)}
+      {loading && <Footer className={styles['mobile_footer']} />}
     </>
-  )
+  );
 }
 
-export default PageWrapper
+export default PageWrapper;

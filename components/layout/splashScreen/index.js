@@ -1,33 +1,33 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
 
-import classNames from 'classnames'
+import classNames from 'classnames';
 
-import styles from './styles.module.scss'
+import styles from './styles.module.scss';
 
-import LOGO_IMG from '~/static/images/CHROME_SILVER_LOGO.png'
+import LOGO_IMG from '~/static/images/CHROME_SILVER_LOGO.png';
 
-export function SplashScreen ({loading}) {
-  const [mobileHeight, setMobileHeight] = useState()
-  const [anim, setAnim] = useState()
+export function SplashScreen({ loading }) {
+  const [mobileHeight, setMobileHeight] = useState();
+  const [anim, setAnim] = useState();
 
   useEffect(() => {
     if (window) {
-      setMobileHeight(window.innerHeight)
+      setMobileHeight(window.innerHeight);
       window.addEventListener('resize', function () {
-        setMobileHeight(window.innerHeight)
-      })
+        setMobileHeight(window.innerHeight);
+      });
     }
     if (loading) {
-      setAnim('fade')
-      setTimeout(() => setAnim('hide'), 1000)
+      setAnim('fade');
+      setTimeout(() => setAnim('hide'), 1000);
     }
-  }, [loading])
-  
+  }, [loading]);
+
   return (
     <div className={classNames(styles.main, styles[anim])} style={{ height: `${mobileHeight}px` }}>
       <img src={LOGO_IMG} className={styles[anim]} />
     </div>
-  )
+  );
 }
 
-export default SplashScreen
+export default SplashScreen;
