@@ -1,12 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react'
+import {useState, useEffect, useRef} from 'react'
 
 import RightArrow from '~/static/right_arrow.svg'
 import LeftArrow from '~/static/left_arrow.svg'
-import classNames from 'classnames'
 
 import styles from './styles.scss'
 
-export function InfiniteSlider({data, className, onClick}) {
+export function InfiniteSlider({data, onClick}) {
   const sliderRef = useRef()
   const videoArrayRefs = useRef(data.map(() => React.createRef()))
 
@@ -23,7 +22,7 @@ export function InfiniteSlider({data, className, onClick}) {
 
   useEffect(() => {
     if (sliderRef.current) {
-      sliderRef.current.addEventListener('transitionend', function () {
+      sliderRef.current.addEventListener('transitionend', () => {
         const {current} = directionRef
         if (current === 1) {
           sliderRef.current.prepend(sliderRef.current.lastElementChild)
@@ -79,11 +78,11 @@ export function InfiniteSlider({data, className, onClick}) {
   }
 
   return (
-    <div className={classNames(styles.container, className)}>
-      <button className={styles.prev} onClick={() => prevClick()}>
+    <div className={styles.container}>
+      <button className={styles.prev} onClick={prevClick}>
         <img src={LeftArrow} style={{ width: '30px', height: '25px' }} />
       </button>
-      <button className={styles.next} onClick={() => nextClick()}>
+      <button className={styles.next} onClick={nextClick}>
         <img src={RightArrow} style={{ width: '30px', height: '25px' }} />
       </button>
       <div className={styles.carousel} style={{ justifyContent: carouselStyling }}>
@@ -93,7 +92,7 @@ export function InfiniteSlider({data, className, onClick}) {
           {data.map(({videoSrc, imgTitleSrc, slug}, index) => 
             <section key={index}>
               <img src={imgTitleSrc} className={styles[currentSlide === index ? 'active' : undefined]} onClick={() => onClick(slug)} />
-              <video src={videoSrc} autoPlay muted ref={videoArrayRefs.current[index]} onEnded={() => nextClick()} />
+              <video src={videoSrc} autoPlay muted ref={videoArrayRefs.current[index]} onEnded={nextClick} />
             </section>
           )}
         </div>

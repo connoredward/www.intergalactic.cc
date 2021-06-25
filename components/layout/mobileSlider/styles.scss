@@ -1,6 +1,9 @@
 .slider_wrapper {
+  display: none;
+  @media all and (max-width: 800px) {
+    display: block;
+  }
   :global {
-
     .slick-slide {
       border: none;
     }

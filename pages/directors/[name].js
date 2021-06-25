@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react'
+import {useEffect, useState, useContext} from 'react'
 
 import Router from 'next/router'
 import Head from 'next/head'
-import { Textfit } from 'react-textfit'
+import {Textfit} from 'react-textfit'
 import InfiniteScroll from 'react-infinite-scroller'
 import ReactGA from 'react-ga'
 
@@ -11,22 +11,18 @@ import VideoGrid from '~/components/layout/videoGrid'
 import DirectorCard from '~/components/layout/directorCard'
 import VideoModal from '~/components/layout/videoModal'
 
-import { getSubPage, getVimeoModalUrl } from '~/api/wordpress'
+import {getSubPage} from '~/api/wordpress'
+import {Context as ModalContext} from '~/store/modal'
 
 import styles from './styles.scss'
-export function SubDirectorPage (props) {
-  const { slug, v = '' } = props
-
+export function SubDirectorPage ({slug, v}) {
   const [banner, setBanner] = useState()
-
   const [originalDirectorList, setOriginalDirectorList] = useState([])
   const [mobileList, setMobileList] = useState([])
-
   const [director, setDirector] = useState([])
-
-  const [modalState, setModalState] = useState({open: false, data: {}})
-
   const [loadingMore, setLoadingMore] = useState(false)
+
+  const {directorModalRoute, loadVideo, emptyModal} = useContext(ModalContext)
 
   useEffect(() => {
     if (window) {
@@ -37,23 +33,13 @@ export function SubDirectorPage (props) {
       setBanner(slug.replace(/\-/g, ' ').replace(/[0-9]/g, '').toUpperCase())
       onLoad()
     }
-    if (v) startVideo(v)
+    if (v) loadVideo(v)
     Router.events.on('routeChangeComplete', (url) => {
       const videoUrl = url.split('v=')[1]
-      if (videoUrl) startVideo(videoUrl)
-      else setModalState({open: false, data: {}})
+      if (videoUrl) loadVideo(videoUrl)
+      else emptyModal()
     })
   }, [slug, v])
-  
-  async function changeRoute(videoSlug) {
-    const href = `/directors/${slug}?v=${videoSlug}`
-    Router.push('/directors/[name]', href, { shallow: true })
-    setModalState({open: true, data: await getVimeoModalUrl(videoSlug)})
-  }
-
-  async function startVideo(videoSlug) {
-    setModalState({open: true, data: await getVimeoModalUrl(videoSlug)})
-  }
 
   async function onLoad() {
     const f = await getSubPage({pTags: slug, pageNumber: 1})
@@ -61,12 +47,6 @@ export function SubDirectorPage (props) {
     setDirector(f)
     setMobileList(f)
     setLoadingMore(true)
-  }
-
-  function closeModal() {
-    const href = `/directors/${slug}`
-    Router.push('/directors/[name]', href, { shallow: true })
-    setModalState({open: false, data: {}})
   }
 
   function loadFunc() {
@@ -81,11 +61,9 @@ export function SubDirectorPage (props) {
 
   return (
     <PageWrapper className={styles['sub_director_page']} active={'directors'}>
-      <Head><title>Intergalactic &ndash; {banner ? banner : ''}</title></Head>
+      <Head><title>Intergalactic &ndash; {banner && (banner)}</title></Head>
       <div className={styles['director_banner']}>
-        {banner && (
-          <Textfit className={styles.h1} mode="single" max={50}>{banner}</Textfit>
-        )}
+        {banner && (<Textfit className={styles.h1} mode="single" max={50}>{banner}</Textfit>)}
       </div>
 
       <InfiniteScroll
@@ -95,9 +73,8 @@ export function SubDirectorPage (props) {
       >
         <VideoGrid className={styles['desktop_grid']}>
           {director.map((item, index) => 
-            <DirectorCard 
-            {...item} 
-            onClick={() => changeRoute(item.slug)} key={index}
+            <DirectorCard {...item} 
+              onClick={() => directorModalRoute({pageSlug: slug, videoSlug: item.slug})} key={index}
             >
               <img src={item.imgTitleSrc} />
             </DirectorCard>
@@ -108,21 +85,19 @@ export function SubDirectorPage (props) {
       <VideoGrid className={styles['mobile_grid']}>
         <InfiniteScroll
           pageStart={1}
-          loadMore={() => loadFunc()}
+          loadMore={loadFunc}
           hasMore={loadingMore}
         >
           {mobileList.map((item, index) => 
-            <DirectorCard
-              {...item}
-              onClick={() => changeRoute(item.slug)} key={index}
+            <DirectorCard {...item}
+              onClick={() => directorModalRoute({pageSlug: slug, videoSlug: item.slug})} key={index}
             >
               <img src={item.imgTitleSrc} />
             </DirectorCard>
           )}
         </InfiniteScroll>
       </VideoGrid>
-      
-      <VideoModal openModal={modalState} closeModal={() => closeModal()} />
+      <VideoModal slug={slug}/>
     </PageWrapper>
   )
 }

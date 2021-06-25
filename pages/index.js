@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 
 import Router from 'next/router'
 import Head from 'next/head'
@@ -7,26 +7,22 @@ import ReactGA from 'react-ga'
 import PageWrapper from '~/components/layout/pageWrapper'
 import InfiniteSlider from '~/components/layout/infiniteSlider'
 import MobileSlider from '~/components/layout/mobileSlider'
-
 import VideoModal from '~/components/layout/videoModal'
 import SplashScreen from '~/components/layout/splashScreen'
 
-import { getPage, getVimeoModalUrl } from '~/api/wordpress'
-
-import styles from './styles.scss'
+import {getPage} from '~/api/wordpress'
+import {Context as ModalContext} from '~/store/modal'
 
 const lockScroll = {
   height: '100vh',
   overflow: 'hidden'
 }
 
-export function MainPage(props) {
-  const {v = ''} = props
-
+export function MainPage({v}) {
   const [videoData, setVideoData] = useState()
-  const [modalState, setModalState] = useState({open: false, data: {}})
-
   const [loading, setLoading] = useState(false)
+
+  const {modalRoute, loadVideo, emptyModal} = useContext(ModalContext)
 
   useEffect(() => {
     onLoad()
@@ -34,11 +30,11 @@ export function MainPage(props) {
       ReactGA.initialize('UA-165426415-1')
       ReactGA.pageview(window.location.pathname + window.location.search)
     }
-    if (v) startVideo(v)
+    if (v) loadVideo(v)
     Router.events.on('routeChangeComplete', (url) => {
       const videoUrl = url.split('v=')[1]
-      if (videoUrl) startVideo(videoUrl)
-      else setModalState({open: false, data: {}})
+      if (videoUrl) loadVideo(videoUrl)
+      else emptyModal()
     })
   }, [])
 
@@ -46,37 +42,19 @@ export function MainPage(props) {
     setVideoData(await getPage({pSlug: 'home', pageNumber: 1}))
     setLoading(true)
   }
-
-  async function changeRoute(videoSlug) {
-    const href = `/?v=${videoSlug}`
-    Router.push('/', href, { shallow: true })
-    setModalState({open: true, data: await getVimeoModalUrl(videoSlug)})
-  }
-
-  async function startVideo(videoSlug) {
-    setModalState({open: true, data: await getVimeoModalUrl(videoSlug)})
-  }
-
-  function closeModal() {
-    const href = '/'
-    Router.push(href, href, { shallow: true })
-    setModalState({open: false, data: {}})
-  }
   
   return (
     <div style={loading ? undefined : lockScroll}>
-      <Head>
-        <title>Intergalactic &ndash; Home</title>
-      </Head>
+      <Head><title>Intergalactic &ndash; Home</title></Head>
       <SplashScreen loading={loading} />
       <PageWrapper loading={loading}>
         {videoData && (
           <>
-            <InfiniteSlider onClick={url => changeRoute(url)} className={styles['desktop_slider']} data={videoData} />
-            <MobileSlider onClick={url => changeRoute(url)} className={styles['mobile_slider']} data={videoData} />
+            <InfiniteSlider onClick={url => modalRoute('/', `/?v=${url}`)} data={videoData} />
+            <MobileSlider onClick={url => modalRoute('/', `/?v=${url}`)} data={videoData} />
           </>
         )}
-        <VideoModal openModal={modalState} closeModal={() => closeModal()} />
+        <VideoModal />
       </PageWrapper>
     </div>
   )

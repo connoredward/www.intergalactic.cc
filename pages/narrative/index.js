@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import {useEffect, useState, useContext} from 'react'
 
 import Router from 'next/router'
 import Head from 'next/head'
@@ -10,15 +10,14 @@ import DirectorCard from '~/components/layout/directorCard'
 import VideoGrid from '~/components/layout/videoGrid'
 import VideoModal from '~/components/layout/videoModal'
 
-import { getPage, getVimeoModalUrl } from '~/api/wordpress'
+import {getPage} from '~/api/wordpress'
+import {Context as ModalContext} from '~/store/modal'
 
-export function NarrativePage(props) {
-  const {v = ''} = props
-
+export function NarrativePage({v}) {
   const [contentList, setContentList] = useState([])
-  const [modalState, setModalState] = useState({open: false, data: {}})
-
   const [loadingMore, setLoadingMore] = useState(false)
+
+  const {modalRoute, loadVideo, emptyModal} = useContext(ModalContext)
 
   useEffect(() => {
     onLoad()
@@ -26,34 +25,17 @@ export function NarrativePage(props) {
       ReactGA.initialize('UA-165426415-1')
       ReactGA.pageview(window.location.pathname + window.location.search)
     }
-    if (v) startVideo(v)
+    if (v) loadVideo(v)
     Router.events.on('routeChangeComplete', (url) => {
       const videoUrl = url.split('v=')[1]
-      if (videoUrl) startVideo(videoUrl)
-      else setModalState({open: false, data: {}})
+      if (videoUrl) loadVideo(videoUrl)
+      else emptyModal()
     })
   }, [])
   
   async function onLoad() {
     setContentList(await getPage({pSlug: 'narrative', pageNumber: 1}))
     setLoadingMore(true)
-
-  }
-
-  async function startVideo(videoSlug) {
-    setModalState({open: true, data: await getVimeoModalUrl(videoSlug)})
-  }
-
-  async function changeRoute(videoSlug) {
-    const href = `/narrative?v=${videoSlug}`
-    Router.push('/narrative', href, { shallow: true })
-    setModalState({open: true, data: await getVimeoModalUrl(videoSlug)})
-  }
-
-  function closeModal() {
-    const href = '/narrative'
-    Router.push(href, href, { shallow: true })
-    setModalState({open: false, data: {}})
   }
 
   async function loadFunc(pageNumber) {
@@ -72,13 +54,15 @@ export function NarrativePage(props) {
       >
         <VideoGrid>
           {contentList.map((item, index) => 
-            <DirectorCard {...item} key={index} onClick={() => changeRoute(item.slug)}>
+            <DirectorCard {...item} key={index} 
+              onClick={() => modalRoute('/narrative', `/narrative?v=${item.slug}`)}
+            >
               <img src={item.imgTitleSrc} />
             </DirectorCard>
           )}
         </VideoGrid>
       </InfiniteScroll>
-      <VideoModal openModal={modalState} closeModal={() => closeModal()} />
+      <VideoModal />
     </PageWrapper>
   )
 }

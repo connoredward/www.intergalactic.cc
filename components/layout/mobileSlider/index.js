@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react'
 
 import Slider from 'react-slick'
-import classNames from 'classnames'
 
 import styles from './styles.scss'
 
 
-export function MobileSlider({data, className, onClick}) {
+export function MobileSlider({data, onClick}) {
   const [currentSlide, setCurrentSlide] = useState(0)
   const [height, setHeight] = useState()
 
@@ -44,7 +43,7 @@ export function MobileSlider({data, className, onClick}) {
   }
 
   return (
-    <Slider {...settings} className={classNames(styles['slider_wrapper'], className)}>
+    <Slider {...settings} className={styles['slider_wrapper']}>
       {data.map(({imgSrc, imgTitleSrc, slug}, index) =>  
         <div 
           key={index} 

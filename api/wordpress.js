@@ -32,7 +32,7 @@ const dataStruc = ({slug, title, tags, categories, acf}) => {
 export async function getSubPage({pTags, pageNumber}) {
   const {posts} = await getWordpressData({pTags, pageNumber})
   if (posts.data?.status === 400) return undefined
-  return posts .map(item => dataStruc(item))
+  return posts.map(item => dataStruc(item))
 }
 
 export async function getPage({pSlug, pageNumber}) {

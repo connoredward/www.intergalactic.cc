@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import {useEffect, useState, useContext} from 'react'
 
 import Router from 'next/router'
 import Head from 'next/head'
@@ -10,49 +10,32 @@ import DirectorCard from '~/components/layout/directorCard'
 import VideoGrid from '~/components/layout/videoGrid'
 import VideoModal from '~/components/layout/videoModal'
 
-import { getPage, getVimeoModalUrl } from '~/api/wordpress'
+import {getPage} from '~/api/wordpress'
+import {Context as ModalContext} from '~/store/modal'
 
-export function BrandedPage (props) {
-  const {v = ''} = props
-  
+export function BrandedPage ({v}) {
   const [brandedList, setBrandedList] = useState([])
-  const [modalState, setModalState] = useState({open: false, data: {}})
-
   const [loadingMore, setLoadingMore] = useState(false)
 
+  const {modalRoute, loadVideo, emptyModal} = useContext(ModalContext)
+
   useEffect(() => {
+    onLoad()
     if (window) {
       ReactGA.initialize('UA-165426415-1')
       ReactGA.pageview(window.location.pathname + window.location.search)
     }
-    onLoad()
-    if (v) startVideo(v)
+    if (v) loadVideo(v)
     Router.events.on('routeChangeComplete', (url) => {
       const videoUrl = url.split('v=')[1]
-      if (videoUrl) startVideo(videoUrl)
-      else setModalState({open: false, data: {}})
+      if (videoUrl) loadVideo(videoUrl)
+      else emptyModal()
     })
-  }, [])
+  }, [v])
   
   async function onLoad() {
     setBrandedList(await getPage({pSlug: 'branded', pageNumber: 1}))
     setLoadingMore(true)
-  }
-
-  async function startVideo(videoSlug) {
-    setModalState({open: true, data: await getVimeoModalUrl(videoSlug)})
-  }
-
-  async function changeRoute(videoSlug) {
-    const href = `/branded?v=${videoSlug}`
-    Router.push('/branded', href, { shallow: true })
-    setModalState({open: true, data: await getVimeoModalUrl(videoSlug)})
-  }
-
-  function closeModal() {
-    const href = '/branded'
-    Router.push(href, href, { shallow: true })
-    setModalState({open: false, data: {}})
   }
 
   async function loadFunc(pageNumber) {
@@ -71,13 +54,15 @@ export function BrandedPage (props) {
       >
         <VideoGrid>
           {brandedList.map((item, index) => 
-            <DirectorCard {...item} key={index} onClick={() => changeRoute(item.slug)}>
+            <DirectorCard {...item} key={index} 
+              onClick={() => modalRoute('/branded', `/branded?v=${item.slug}`)}
+            >  
               <img src={item.imgTitleSrc} />
             </DirectorCard>
           )}
         </VideoGrid>
       </InfiniteScroll>
-      <VideoModal openModal={modalState} closeModal={() => closeModal()} />
+      <VideoModal />
     </PageWrapper>
   )
 }

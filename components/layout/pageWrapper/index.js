@@ -14,7 +14,7 @@ export function PageWrapper(props) {
   useEffect(() => {
     if (window) {
       setScreenHeight(window.innerHeight)
-      window.addEventListener('resize', function () {
+      window.addEventListener('resize', () => {
         setScreenHeight(window.innerHeight)
       })
     }
