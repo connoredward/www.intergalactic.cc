@@ -13,7 +13,7 @@ import VideoModal from '~/components/layout/videoModal'
 import {getPage} from '~/api/wordpress'
 import {Context as ModalContext} from '~/store/modal'
 
-import styles from './styles.scss'
+import styles from './styles.module.scss'
 
 export function MusicVideosPage ({v}) {
   const [musicVideoList, setMusicVideoList] = useState([])

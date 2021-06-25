@@ -1,9 +1,9 @@
-import {useState, useEffect, useRef} from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 
 import RightArrow from '~/static/right_arrow.svg'
 import LeftArrow from '~/static/left_arrow.svg'
 
-import styles from './styles.scss'
+import styles from './styles.module.scss'
 
 export function InfiniteSlider({data, onClick}) {
   const sliderRef = useRef()
@@ -90,10 +90,10 @@ export function InfiniteSlider({data, onClick}) {
           style={{ transform: `translate(${sliderTransform})`, transition: sliderTransition, width: `${data.length}00%` }}
         >
           {data.map(({videoSrc, imgTitleSrc, slug}, index) => 
-            <section key={index}>
+            <div className={styles['slide']} key={index}>
               <img src={imgTitleSrc} className={styles[currentSlide === index ? 'active' : undefined]} onClick={() => onClick(slug)} />
               <video src={videoSrc} autoPlay muted ref={videoArrayRefs.current[index]} onEnded={nextClick} />
-            </section>
+            </div>
           )}
         </div>
       </div>

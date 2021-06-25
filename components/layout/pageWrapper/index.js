@@ -5,7 +5,7 @@ import Footer from '~/components/layout/footer'
 
 import classNames from 'classnames'
 
-import styles from './styles.scss'
+import styles from './styles.module.scss'
 
 export function PageWrapper(props) {
   const { children, active, className, loading = true } = props

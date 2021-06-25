@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 
 import classNames from 'classnames'
 
-import styles from './styles.scss'
+import styles from './styles.module.scss'
 
 import LOGO_IMG from '~/static/images/CHROME_SILVER_LOGO.png'
 

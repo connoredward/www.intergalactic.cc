@@ -8,7 +8,7 @@ import {MdClose} from 'react-icons/md'
 
 import {Context as ModalContext} from '~/store/modal'
 
-import  styles from './styles.scss'
+import  styles from './styles.module.scss'
 
 export function VideoModal({slug}) {
   const {modalState, modalContent, closeModal} = useContext(ModalContext)

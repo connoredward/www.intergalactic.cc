@@ -2,7 +2,7 @@ import { useRef, useEffect, useState } from 'react'
 
 import classNames from 'classnames'
 
-import styles from './styles.scss'
+import styles from './styles.module.scss'
 
 export function DirectorCard(props) {
   const {

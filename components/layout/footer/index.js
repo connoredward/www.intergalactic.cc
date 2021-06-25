@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 
 import classNames from 'classnames'
 
-import styles from './styles.scss'
+import styles from './styles.module.scss'
 
 import FB_ICON from '~/static/images/icons/FB_ICON.png'
 import IG_ICON from '~/static/images/icons/IG_ICON.png'

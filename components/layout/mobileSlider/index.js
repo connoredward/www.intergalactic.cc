@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 
 import Slider from 'react-slick'
 
-import styles from './styles.scss'
+import styles from './styles.module.scss'
 
 
 export function MobileSlider({data, onClick}) {

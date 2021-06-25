@@ -7,7 +7,7 @@ import * as Scroll from 'react-scroll'
 
 import Footer from '~/components/layout/footer'
 
-import styles from './styles.scss'
+import styles from './styles.module.scss'
 
 import LOGO from '~/static/images/INTERGALACTIC_LOGO_WHITE.png'
 

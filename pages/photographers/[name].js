@@ -10,7 +10,7 @@ import VideoGrid from '~/components/layout/videoGrid'
 
 import { getPhotos } from '~/api/wordpress'
 
-import styles from './styles.scss'
+import styles from './styles.module.scss'
 
 export function SubPhotographerPage (props) {
   const { slug } = props

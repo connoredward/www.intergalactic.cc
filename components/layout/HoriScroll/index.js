@@ -2,7 +2,7 @@ import classNames from 'classnames'
 
 import HorizontalScroll from 'react-scroll-horizontal'
 
-import styles from './styles.scss'
+import styles from './styles.module.scss'
 
 export function HoriScroll ({ children, className }) {
   return (

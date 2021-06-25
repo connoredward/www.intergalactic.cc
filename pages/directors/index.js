@@ -12,7 +12,7 @@ import VideoGrid from '~/components/layout/videoGrid'
 
 import { getPage } from '~/api/wordpress'
 
-import styles from './styles.scss'
+import styles from './styles.module.scss'
 
 export function DirectorsPage() {
   const [directorsList, setDirectorsList] = useState([])

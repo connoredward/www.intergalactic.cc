@@ -14,7 +14,7 @@ import VideoModal from '~/components/layout/videoModal'
 import {getSubPage} from '~/api/wordpress'
 import {Context as ModalContext} from '~/store/modal'
 
-import styles from './styles.scss'
+import styles from './styles.module.scss'
 export function SubDirectorPage ({slug, v}) {
   const [banner, setBanner] = useState()
   const [originalDirectorList, setOriginalDirectorList] = useState([])
